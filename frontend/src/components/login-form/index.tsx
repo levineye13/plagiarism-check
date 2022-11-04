@@ -14,8 +14,12 @@ const LoginForm: FC = () => {
         <Input type="email" required placeholder="Почта" />
         <Input type="password" required placeholder="Пароль" />
       </AuthFormElements>
-      <Link to={ROUTES.register}>Не зарегистрированы?</Link>
-      <Link to={''}>Забыли пароль?</Link>
+      <Link to={ROUTES.register} className={styles.link}>
+        Не зарегистрированы?
+      </Link>
+      <Link to={''} className={styles.link}>
+        Забыли пароль?
+      </Link>
     </form>
   );
 };

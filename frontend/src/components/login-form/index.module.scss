@@ -1,0 +1,20 @@
+.form {
+  box-sizing: border-box;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+  }
+
+  .link {
+    text-decoration: none;
+
+    &:not(:first-of-type) {
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import Form from '../../components/login-form';
 import styles from './index.module.scss';
 
-const Login = () => {
+const Login: FC = () => {
   return (
-    <section>
+    <section className={styles.section}>
       <Form />
     </section>
   );

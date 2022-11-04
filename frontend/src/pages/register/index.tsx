@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import Form from '../../components/register-form';
 import styles from './index.module.scss';
 
-const Register = () => {
+const Register: FC = () => {
   return (
     <section>
       <Form />
