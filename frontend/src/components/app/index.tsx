@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { ROUTES } from '../../utils/constants';
 import styles from './index.module.scss';
+import 'normalize.css';
 
 import Login from '../../pages/login';
 import Register from '../../pages/register';
