@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 
 const Register: FC = () => {
   return (
-    <section>
+    <section className={styles.section}>
       <Form />
     </section>
   );
