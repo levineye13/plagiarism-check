@@ -24,6 +24,7 @@ const Input: FC<IInput> = ({
         placeholder={placeholder}
         value={value}
       />
+      <span className={styles.error}></span>
     </label>
   );
 };
