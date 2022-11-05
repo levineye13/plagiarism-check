@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { FCWithChildren } from '../../utils/types';
+import styles from './index.module.scss';
 
 const Submit: FCWithChildren = ({ children }) => {
-  return <button>{children}</button>;
+  return <button className={styles.button}>{children}</button>;
 };
 
 export default Submit;
