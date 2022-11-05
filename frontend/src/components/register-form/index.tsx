@@ -11,12 +11,14 @@ const RegisterForm: FC = () => {
     <form name="register" className={styles.form}>
       <h2 className={styles.title}>Регистрация</h2>
       <AuthFormElements buttonText="Зарегистрироваться">
-        <Input type="email" required placeholder="Почта" />
+        <Input type="email" required placeholder="Email" />
         <Input type="text" required placeholder="Логин" />
         <Input type="password" required placeholder="Пароль" />
         <Input type="password" required placeholder="Подтвердите пароль" />
       </AuthFormElements>
-      <Link to={ROUTES.login}>Уже зарегистрированы?</Link>
+      <Link to={ROUTES.login} className={styles.link}>
+        Уже зарегистрированы?
+      </Link>
     </form>
   );
 };

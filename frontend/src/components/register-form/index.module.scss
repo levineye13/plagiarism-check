@@ -1,0 +1,33 @@
+@import '../../styles/vars.scss';
+
+.form {
+  box-sizing: border-box;
+  width: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $dark-theme-font;
+  font-family: $font-family;
+  border: 1px solid $light-theme;
+  border-radius: $border-radius;
+
+  .title {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 30px;
+  }
+
+  .link {
+    text-decoration: none;
+    color: inherit;
+    font-size: 16px;
+    align-self: flex-start;
+    transition: $transition;
+    margin-top: 30px;
+
+    &:hover {
+      opacity: $opacity;
+    }
+  }
+}
