@@ -11,13 +11,13 @@ const LoginForm: FC = () => {
     <form name="login" className={styles.form}>
       <h2 className={styles.title}>Авторизация</h2>
       <AuthFormElements buttonText="Войти">
-        <Input type="email" required placeholder="Почта" />
+        <Input type="email" required placeholder="Email" />
         <Input type="password" required placeholder="Пароль" />
       </AuthFormElements>
       <Link to={ROUTES.register} className={styles.link}>
         Не зарегистрированы?
       </Link>
-      <Link to={''} className={styles.link}>
+      <Link to={ROUTES.forgotPassword} className={styles.link}>
         Забыли пароль?
       </Link>
     </form>
