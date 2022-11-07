@@ -1,0 +1,44 @@
+@import '../../styles/vars.scss';
+
+.list {
+  margin: 0;
+  padding: 20px;
+  font: {
+    family: $font-family;
+    size: 20px;
+  }
+  list-style-type: none;
+  border: {
+    top: 1px solid $light-theme;
+    bottom: 1px solid $light-theme;
+  }
+  counter-reset: list;
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .item {
+    padding-left: 10px;
+
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .link {
+    text-decoration: none;
+    color: $dark-theme-font;
+    transition: $transition;
+
+    &:hover {
+      opacity: $opacity;
+    }
+
+    &::before {
+      counter-increment: list;
+      content: counter(list) ') ';
+    }
+  }
+}
