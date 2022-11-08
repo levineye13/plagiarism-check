@@ -1,0 +1,11 @@
+@import '../../styles/vars.scss';
+
+.title {
+  margin: 0;
+  font: {
+    family: $font-family;
+    size: 28px;
+  }
+  color: $dark-theme-font;
+  text-align: center;
+}
