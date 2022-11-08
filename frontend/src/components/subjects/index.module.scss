@@ -1,0 +1,32 @@
+@import '../../styles/vars.scss';
+
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font: {
+    family: $font-family;
+    size: 20px;
+  }
+
+  .item {
+    border: {
+      left: 1px solid $dark-theme-font;
+      right: 1px solid $dark-theme-font;
+      top: 1px solid $dark-theme-font;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $dark-theme-font;
+    }
+  }
+
+  .name {
+    display: block;
+    color: $dark-theme-font;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
+}
