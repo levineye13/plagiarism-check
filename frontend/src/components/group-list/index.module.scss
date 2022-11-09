@@ -1,0 +1,25 @@
+.groups {
+  max-height: 350px;
+  overflow-y: scroll;
+  list-style-type: none;
+  padding: 0 5px 0 0;
+  margin: 0;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+  }
+
+  .item {
+    &:not(:last-of-type) {
+      margin-bottom: 8px;
+    }
+  }
+}
