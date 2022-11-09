@@ -1,0 +1,22 @@
+@import '../../styles/vars.scss';
+
+.link {
+  padding: 5px;
+  border: 1px solid $light-theme;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    opacity: $opacity;
+  }
+
+  .del {
+    width: 18px;
+    height: 18px;
+  }
+}
