@@ -7,13 +7,15 @@ interface IInput {
   required?: boolean;
   placeholder?: string;
   value?: string;
+  pattern?: string;
 }
 
 const Input: FC<IInput> = ({
   type,
   required = false,
-  placeholder = '',
-  value = '',
+  placeholder,
+  value,
+  pattern,
 }) => {
   return (
     <label className={styles.label}>
@@ -23,6 +25,7 @@ const Input: FC<IInput> = ({
         required={required}
         placeholder={placeholder}
         value={value}
+        pattern={pattern}
       />
       <span className={styles.error}></span>
     </label>
