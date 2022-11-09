@@ -23,16 +23,17 @@
   }
 
   .item:not(:last-child) {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   .link {
     text-decoration: none;
     color: $dark-theme-font;
+    display: block;
+    padding: 5px;
   }
 
   .active {
-    display: block;
     border-bottom: 1px solid $dark-theme-font;
     transition: $transition;
 

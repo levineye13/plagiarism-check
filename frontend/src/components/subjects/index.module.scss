@@ -28,5 +28,10 @@
     color: $dark-theme-font;
     text-decoration: none;
     padding: 5px 10px;
+    transition: $transition;
+
+    &:hover {
+      opacity: $opacity;
+    }
   }
 }
