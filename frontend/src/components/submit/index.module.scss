@@ -1,6 +1,11 @@
 @import '../../styles/vars.scss';
 
 .button {
+  font: {
+    family: $font-family;
+    size: 16px;
+    weight: 500;
+  }
   min-width: 150px;
   padding: 7px 10px;
   border-radius: 5px;
