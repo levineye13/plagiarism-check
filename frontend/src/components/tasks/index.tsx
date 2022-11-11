@@ -37,7 +37,7 @@ const Tasks: FC = () => {
     <ul className={styles.list}>
       {tasks.map((task) => (
         <li className={styles.item} key={task.id}>
-          <Task title={task.title} description={task.description}>
+          <Task id={task.id} title={task.title} description={task.description}>
             {task.text}
           </Task>
         </li>
