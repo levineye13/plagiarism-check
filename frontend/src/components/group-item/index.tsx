@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FCWithChildren } from '../../utils/types';
+import DeleteButton from '../delete-button';
 import styles from './index.module.scss';
 import Delete from '../../images/delete.png';
 
@@ -21,14 +22,7 @@ const GroupItem: FCWithChildren = ({ children }) => {
   return (
     <Link className={styles.link} to="#" ref={linkRef}>
       {children}
-      {user.role !== 'student' && (
-        <img
-          src={Delete}
-          alt="Значок удаления"
-          className={styles.del}
-          onClick={onClick}
-        />
-      )}
+      {user.role !== 'student' && <DeleteButton onClick={onClick} />}
     </Link>
   );
 };
