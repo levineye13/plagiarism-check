@@ -8,9 +8,17 @@ interface IButton {
 }
 
 const EditButton: FC<IButton> = ({ onClick }) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.stopPropagation();
+
+    if (typeof onClick === 'function') {
+      onClick();
+    }
+  };
+
   return (
-    <button className={styles.button} type="button" onClick={onClick}>
-      <img className={styles.img} src={Edit} alt="Значок удаления" />
+    <button className={styles.button} type="button" onClick={handleClick}>
+      <img className={styles.img} src={Edit} alt="Значок редактирования" />
     </button>
   );
 };

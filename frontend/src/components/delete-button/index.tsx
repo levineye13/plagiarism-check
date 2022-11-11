@@ -8,8 +8,16 @@ interface IButton {
 }
 
 const DeleteButton: FC<IButton> = ({ onClick }) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.stopPropagation();
+
+    if (typeof onClick === 'function') {
+      onClick();
+    }
+  };
+
   return (
-    <button className={styles.button} type="button" onClick={onClick}>
+    <button className={styles.button} type="button" onClick={handleClick}>
       <img className={styles.img} src={Delete} alt="Значок удаления" />
     </button>
   );
