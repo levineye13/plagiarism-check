@@ -1,0 +1,55 @@
+@import '../../styles/vars.scss';
+
+.article {
+  font-family: $font-family;
+  padding: 8px;
+  border: 1px solid $light-theme;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: $dark-theme-font;
+  transition: $transition;
+  position: relative;
+  border-radius: $border-radius;
+
+  .title {
+    font: {
+      size: 24px;
+      weight: 500;
+    }
+    margin: 0 0 20px 0;
+  }
+
+  .description {
+    margin: 0;
+    font: {
+      size: 18px;
+      weight: 400;
+    }
+  }
+
+  .area {
+    font: {
+      size: 16px;
+      weight: 400;
+    }
+    border: 1px solid $dark-theme-font;
+    padding: 10px;
+    margin: 20px 0 0 0;
+    border-radius: $border-radius;
+    color: $dark-theme-font;
+    background: $dark-theme;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .edit {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
