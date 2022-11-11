@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 
 const AddGroupForm: FC = () => {
   return (
-    <form name="addGroup" className={styles.form}>
+    <form name="addGroupForm" className={styles.form}>
       <Input
         type="text"
         required
