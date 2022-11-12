@@ -1,29 +1,38 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FCWithChildren } from '../../utils/types';
 import DeleteButton from '../delete-button';
 import styles from './index.module.scss';
-import Delete from '../../images/delete.png';
+import { ROUTES } from '../../utils/constants';
 
 const user = {
   role: 'teacher',
 };
 
-const GroupItem: FCWithChildren = ({ children }) => {
-  const linkRef = useRef<HTMLAnchorElement>(null);
+interface IGroupItem {
+  readonly id: number;
+}
 
-  const onClick = (): void => {
+const GroupItem: FCWithChildren<IGroupItem> = ({ id, children }) => {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const navigate = useNavigate();
+
+  const onDelete = (): void => {
     if (linkRef.current !== null) {
       linkRef.current.remove();
     }
   };
 
+  const onClick = (): void => {
+    navigate(`${ROUTES.groups}/${id}`);
+  };
+
   return (
-    <Link className={styles.link} to="#" ref={linkRef}>
+    <article className={styles.link} ref={linkRef} onClick={onClick}>
       {children}
-      {user.role !== 'student' && <DeleteButton onClick={onClick} />}
-    </Link>
+      {user.role !== 'student' && <DeleteButton onClick={onDelete} />}
+    </article>
   );
 };
 
