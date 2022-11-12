@@ -8,14 +8,10 @@ const MyCourses: FC = () => {
     <ul className={styles.list}>
       <li className={styles.title}>Мои курсы:</li>
       <li className={styles.item}>
-        <Link className={styles.link} to="">
-          Машинное обучение
-        </Link>
+        <p className={styles.paragraph}>Алгоритмы</p>
       </li>
       <li className={styles.item}>
-        <Link className={styles.link} to="">
-          Искусственный интеллект
-        </Link>
+        <p className={styles.paragraph}>Структуры данных</p>
       </li>
     </ul>
   );
