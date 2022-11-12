@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FCWithChildren } from '../../utils/types';
 import DeleteButton from '../delete-button';
@@ -22,11 +22,10 @@ const Task: FCWithChildren<ITask> = ({
   children,
   description = '',
 }) => {
-  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const handleClick = (): void => {
-    navigate(`${pathname}${ROUTES.tasks}/${id}`);
+    navigate(`${ROUTES.tasks}/${id}`);
   };
 
   return (
