@@ -2,14 +2,15 @@
 
 .section {
   box-sizing: border-box;
-  max-width: 600px;
-  width: 100%;
   padding: 20px;
   font: {
     family: $font-family;
   }
   color: $dark-theme-font;
-  border: 1px solid $light-theme;
+
+  .content {
+    max-width: 600px;
+  }
 
   .subtitle,
   .description {

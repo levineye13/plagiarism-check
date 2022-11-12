@@ -1,10 +1,7 @@
 @import '../../styles/vars.scss';
 
 .section {
-  max-width: 600px;
-  width: 100%;
   padding: 20px;
-  border: 1px solid $light-theme;
   display: flex;
   flex-direction: column;
 }

@@ -1,6 +1,7 @@
 @import '../../styles/vars.scss';
 
 .list {
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   list-style-type: none;

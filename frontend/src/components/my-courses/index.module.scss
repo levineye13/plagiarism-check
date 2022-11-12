@@ -27,14 +27,9 @@
     }
   }
 
-  .link {
-    text-decoration: none;
+  .paragraph {
+    margin: 0;
     color: $dark-theme-font;
-    transition: $transition;
-
-    &:hover {
-      opacity: $opacity;
-    }
 
     &::before {
       counter-increment: list;
