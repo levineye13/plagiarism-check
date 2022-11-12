@@ -15,7 +15,7 @@ const Profile: FC = () => {
   return (
     <section className={styles.section}>
       <div className={styles.content}>
-        <img src={Prifile} alt="Profile user" className={styles.img} />
+        <img src={Prifile} alt="Профиль пользователя" className={styles.img} />
         <p className={styles.info}>ФИО: {user.fio}</p>
         <p className={`${styles.info} ${styles.role}`}>
           Роль: {isStudent ? 'Студент' : 'Преподаватель'}

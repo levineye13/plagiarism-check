@@ -4,9 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
 
 const subjects = [
-  { id: 1, title: 'Алхимия' },
-  { id: 2, title: 'Наложение чар' },
-  { id: 3, title: 'Кузнечное дело' },
+  { id: 1, title: 'Алгоритмы' },
+  { id: 2, title: 'Структуры данных' },
 ];
 
 const Subjects: FC = () => {
