@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import Title from '../../components/section-title';
-import Button from '../../components/submit';
+import AddAnswerForm from '../../components/add-answer-form';
 import styles from './index.module.scss';
 
 const Task: FC = () => {
@@ -12,18 +12,7 @@ const Task: FC = () => {
       <p className={styles.description}>
         Вам необходимо реализовать сортировку пузырьком...
       </p>
-      <form className={styles.form} name="addAnswerForm">
-        <label className={styles.label}>Добавить ответ на задание:</label>
-        <code className={styles.code}>
-          <span
-            className={styles.area}
-            role="textbox"
-            contentEditable
-            placeholder="Добавить ответ на задание"
-          ></span>
-        </code>
-        <Button>Отправить</Button>
-      </form>
+      <AddAnswerForm />
     </section>
   );
 };
