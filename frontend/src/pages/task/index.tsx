@@ -8,11 +8,13 @@ const Task: FC = () => {
   return (
     <section className={styles.section}>
       <Title>Лабораторная 1</Title>
-      <p className={styles.subtitle}>Сортировка пузырьком</p>
-      <p className={styles.description}>
-        Вам необходимо реализовать сортировку пузырьком...
-      </p>
-      <AddAnswerForm />
+      <div className={styles.content}>
+        <p className={styles.subtitle}>Сортировка пузырьком</p>
+        <p className={styles.description}>
+          Вам необходимо реализовать сортировку пузырьком...
+        </p>
+        <AddAnswerForm />
+      </div>
     </section>
   );
 };

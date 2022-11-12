@@ -18,22 +18,24 @@ const Subject: FC = () => {
   return (
     <section className={styles.section}>
       <Title>{subject.title}</Title>
-      <p className={styles.paragraph}>Группы</p>
-      <GroupList />
-      {user.role !== 'student' && (
-        <>
-          <p className={styles.paragraph}>Добавление группы</p>
-          <AddGroupForm />
-        </>
-      )}
-      <p className={styles.paragraph}>Задания</p>
-      <Tasks />
-      {user.role !== 'student' && (
-        <>
-          <p className={styles.paragraph}>Добавление задания</p>
-          <AddTaskForm />
-        </>
-      )}
+      <div className={styles.wrapper}>
+        <p className={styles.paragraph}>Группы</p>
+        <GroupList />
+        {user.role !== 'student' && (
+          <>
+            <p className={styles.paragraph}>Добавление группы</p>
+            <AddGroupForm />
+          </>
+        )}
+        <p className={styles.paragraph}>Задания</p>
+        <Tasks />
+        {user.role !== 'student' && (
+          <>
+            <p className={styles.paragraph}>Добавление задания</p>
+            <AddTaskForm />
+          </>
+        )}
+      </div>
     </section>
   );
 };
