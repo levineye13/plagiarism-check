@@ -6,6 +6,15 @@
   flex-direction: column;
   font-family: $font-family;
   margin-bottom: 20px;
+  position: relative;
+
+  &.required::before {
+    content: '*';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: $dark-theme-font;
+  }
 
   .input {
     box-sizing: border-box;

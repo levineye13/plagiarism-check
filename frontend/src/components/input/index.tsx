@@ -18,7 +18,7 @@ const Input: FC<IInput> = ({
   pattern,
 }) => {
   return (
-    <label className={styles.label}>
+    <label className={`${styles.label} ${required ? styles.required : ''}`}>
       <input
         className={styles.input}
         type={type}

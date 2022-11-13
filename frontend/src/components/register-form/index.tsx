@@ -13,6 +13,7 @@ const RegisterForm: FC = () => {
       <AuthFormElements buttonText="Зарегистрироваться">
         <Input type="email" required placeholder="Email" />
         <Input type="text" required placeholder="Логин" />
+        <Input type="text" placeholder="Группа" />
         <Input type="password" required placeholder="Пароль" />
         <Input type="password" required placeholder="Подтвердите пароль" />
       </AuthFormElements>
