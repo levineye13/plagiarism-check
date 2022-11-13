@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Task from '../task';
 import styles from './index.module.scss';
@@ -27,11 +28,18 @@ const tasks = [
 ];
 
 const Tasks: FC = () => {
+  const { state } = useLocation();
+
   return (
     <ul className={styles.list}>
       {tasks.map((task) => (
         <li className={styles.item} key={task.id}>
-          <Task id={task.id} title={task.title} description={task.description}>
+          <Task
+            taskId={task.id}
+            subjectId={state.subjectId}
+            title={task.title}
+            description={task.description}
+          >
             {task.text}
           </Task>
         </li>

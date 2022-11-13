@@ -13,10 +13,10 @@ const Subjects: FC = () => {
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    path: string
+    subjectId: number
   ) => {
     e.preventDefault();
-    navigate(path);
+    navigate(`${subjectId}`, { state: { subjectId } });
   };
 
   return (
@@ -24,7 +24,7 @@ const Subjects: FC = () => {
       {subjects.map((subject) => (
         <li className={styles.item} key={subject.id}>
           <Link
-            onClick={(e) => handleClick(e, `${subject.id}`)}
+            onClick={(e) => handleClick(e, subject.id)}
             to=""
             className={styles.name}
           >

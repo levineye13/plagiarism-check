@@ -27,7 +27,7 @@ const AddAnswerForm: FC = () => {
       <Button style={{ marginBottom: 20 }} onClick={clearArea}>
         Очистить
       </Button>
-      <Button onClick={() => {}}>Отправить</Button>
+      <Button>Отправить</Button>
     </form>
   );
 };

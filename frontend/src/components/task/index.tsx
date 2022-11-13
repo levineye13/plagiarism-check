@@ -10,14 +10,16 @@ import styles from './index.module.scss';
 const user = { role: 'teacher' };
 
 interface ITask {
-  readonly id: number;
+  readonly taskId: number;
+  readonly subjectId: number;
   readonly title: string;
   readonly children: string;
   readonly description?: string;
 }
 
 const Task: FCWithChildren<ITask> = ({
-  id,
+  taskId,
+  subjectId,
   title,
   children,
   description = '',
@@ -25,7 +27,7 @@ const Task: FCWithChildren<ITask> = ({
   const navigate = useNavigate();
 
   const handleClick = (): void => {
-    navigate(`${ROUTES.tasks}/${id}`);
+    navigate(`${ROUTES.subjects}/${subjectId}${ROUTES.tasks}/${taskId}`);
   };
 
   return (
