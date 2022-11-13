@@ -4,7 +4,7 @@ import GroupItem from '../group-item';
 import styles from './index.module.scss';
 
 const subject = {
-  title: 'Машинное обучение',
+  title: 'Алгоритмы',
   groups: [
     { id: 1, title: 'AAA-21-20' },
     { id: 2, title: 'BBB-22-21' },
@@ -15,7 +15,7 @@ const subject = {
 const GroupList: FC = () => {
   return (
     <ul className={styles.groups}>
-      {subject.groups.map((group, index) => (
+      {subject.groups.map((group) => (
         <li className={styles.item} key={group.id}>
           <GroupItem id={group.id}>{group.title}</GroupItem>
         </li>

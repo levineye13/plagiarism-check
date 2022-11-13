@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 import { FCWithChildren } from '../../utils/types';
 import DeleteButton from '../delete-button';
@@ -17,6 +17,8 @@ interface IGroupItem {
 const GroupItem: FCWithChildren<IGroupItem> = ({ id, children }) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const navigate = useNavigate();
+  const { taskId } = useParams();
+  const { pathname } = useLocation();
 
   const onDelete = (): void => {
     if (linkRef.current !== null) {
@@ -25,7 +27,11 @@ const GroupItem: FCWithChildren<IGroupItem> = ({ id, children }) => {
   };
 
   const onClick = (): void => {
-    navigate(`${ROUTES.groups}/${id}`);
+    if (taskId) {
+      navigate(`${pathname}/${id}`);
+    } else {
+      navigate(`${ROUTES.groups}/${id}`);
+    }
   };
 
   return (
