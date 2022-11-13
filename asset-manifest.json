@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/plagiarism-check/static/css/main.7dff6ad3.css",
-    "main.js": "/plagiarism-check/static/js/main.d796af79.js",
+    "main.js": "/plagiarism-check/static/js/main.e6961a6c.js",
     "static/media/JetBrainsMono-Bold.woff": "/plagiarism-check/static/media/JetBrainsMono-Bold.e03c0d87d0a3f043c187.woff",
     "static/media/JetBrainsMono-Medium.woff": "/plagiarism-check/static/media/JetBrainsMono-Medium.64604892d6578e39774a.woff",
     "static/media/JetBrainsMono-Regular.woff": "/plagiarism-check/static/media/JetBrainsMono-Regular.3d6a7341dfbc22c0d623.woff",
@@ -10,10 +10,10 @@
     "static/media/JetBrainsMono-Regular.woff2": "/plagiarism-check/static/media/JetBrainsMono-Regular.cb69399c3a0354fa97ea.woff2",
     "index.html": "/plagiarism-check/index.html",
     "main.7dff6ad3.css.map": "/plagiarism-check/static/css/main.7dff6ad3.css.map",
-    "main.d796af79.js.map": "/plagiarism-check/static/js/main.d796af79.js.map"
+    "main.e6961a6c.js.map": "/plagiarism-check/static/js/main.e6961a6c.js.map"
   },
   "entrypoints": [
     "static/css/main.7dff6ad3.css",
-    "static/js/main.d796af79.js"
+    "static/js/main.e6961a6c.js"
   ]
 }
