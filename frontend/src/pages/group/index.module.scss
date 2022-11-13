@@ -1,0 +1,29 @@
+@import '../../styles/vars.scss';
+
+.section {
+  font: {
+    family: $font-family;
+  }
+  padding: 20px;
+  color: $dark-theme-font;
+
+  .list {
+    list-style-type: square;
+    padding: 0 0 0 20px;
+    margin: 30px 0 0;
+  }
+
+  .item:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  .link {
+    color: inherit;
+    font-size: 20px;
+    transition: $transition;
+
+    &:hover {
+      opacity: $opacity;
+    }
+  }
+}
