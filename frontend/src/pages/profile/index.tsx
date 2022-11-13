@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import Courses from '../../components/my-courses';
 import styles from './index.module.scss';
-import Prifile from '../../images/profile-user.png';
+import User from '../../images/profile-user.png';
 
 const user = {
   fio: 'Иванов Иван Иванович',
@@ -15,7 +15,7 @@ const Profile: FC = () => {
   return (
     <section className={styles.section}>
       <div className={styles.content}>
-        <img src={Prifile} alt="Профиль пользователя" className={styles.img} />
+        <img src={User} alt="Профиль пользователя" className={styles.img} />
         <p className={styles.info}>ФИО: {user.fio}</p>
         <p className={`${styles.info} ${styles.role}`}>
           Роль: {isStudent ? 'Студент' : 'Преподаватель'}
