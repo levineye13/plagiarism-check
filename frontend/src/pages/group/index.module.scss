@@ -20,10 +20,30 @@
   .link {
     color: inherit;
     font-size: 20px;
+    text-decoration: none;
     transition: $transition;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     &:hover {
       opacity: $opacity;
+    }
+
+    &.ready::after,
+    &.notready::after {
+      font-size: 25px;
+      margin-left: 10px;
+    }
+
+    &.ready::after {
+      content: '\2714';
+      color: green;
+    }
+
+    &.notready::after {
+      content: '\2718';
+      color: red;
     }
   }
 }

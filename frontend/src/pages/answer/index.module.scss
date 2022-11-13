@@ -1,0 +1,14 @@
+@import '../../styles/vars.scss';
+
+.section {
+  padding: 20px;
+  color: $dark-theme-font;
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  .answer {
+    font-style: 18px;
+  }
+}
