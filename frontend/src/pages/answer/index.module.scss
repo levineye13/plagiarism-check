@@ -2,13 +2,22 @@
 
 .section {
   padding: 20px;
+  font-size: $font-family;
   color: $dark-theme-font;
 
   .subtitle {
     font-size: 20px;
+    margin: 20px 0 5px;
   }
 
   .answer {
-    font-style: 18px;
+    margin: 0 0 20px 0;
+    max-width: 600px;
+    border: 1px solid $light-theme;
+    border-radius: $border-radius;
+  }
+
+  .code {
+    font-size: 16px;
   }
 }
