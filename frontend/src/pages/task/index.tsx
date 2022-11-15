@@ -19,6 +19,7 @@ const Task: FC = () => {
         <p className={styles.description}>
           Вам необходимо реализовать сортировку пузырьком...
         </p>
+        <p className={styles.grade}>Оценено: 5</p>
         <AddAnswerForm />
         {user.role !== 'student' && (
           <Link to={`${pathname}${ROUTES.groups}`} className={styles.link}>

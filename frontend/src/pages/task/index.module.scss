@@ -19,11 +19,12 @@
 
   .subtitle {
     font-size: 20px;
+    margin: 20px 0;
   }
 
   .description {
     font-size: 18px;
-    margin-bottom: 50px;
+    margin: 20px 0 0;
   }
 
   .link {
@@ -31,5 +32,12 @@
     margin-top: 20px;
     color: inherit;
     font-size: 18px;
+  }
+
+  .grade {
+    font-size: 20px;
+    margin: 20px 0 40px;
+    text-decoration: underline;
+    text-align: left;
   }
 }
