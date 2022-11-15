@@ -11,7 +11,7 @@ interface ISubmit {
 const Submit: FCWithChildren<ISubmit> = ({ children, onClick, style }) => {
   return (
     <button
-      type="button"
+      type="submit"
       onClick={onClick}
       className={styles.button}
       style={style}

@@ -14,7 +14,6 @@ const data = [
 const Group: FC = () => {
   const { taskId } = useParams();
   const { pathname } = useLocation();
-  console.log(pathname);
 
   const path: string = taskId
     ? `${pathname}${ROUTES.users}`
