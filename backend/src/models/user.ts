@@ -1,11 +1,15 @@
-import { Model, InferAttributes, DataTypes } from 'sequelize';
+import { Model, DataTypes, Optional } from 'sequelize';
 
 import { sequelize } from '../db';
-import { Role } from '../utils/types';
+import { TRole } from '../utils/types';
+import { IUser } from '../utils/interfaces';
 
-class User extends Model<InferAttributes<User>> {
+class User
+  extends Model<IUser, Optional<IUser, 'id' | 'role'>>
+  implements IUser
+{
   declare id: number;
-  declare role: Role;
+  declare role: TRole;
   declare email: string;
   declare name: string;
   declare password: string;
@@ -17,11 +21,9 @@ User.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false,
     },
     role: {
       type: DataTypes.ENUM('admin', 'moderator', 'user'),
-      allowNull: false,
       defaultValue: 'user',
     },
     email: {
