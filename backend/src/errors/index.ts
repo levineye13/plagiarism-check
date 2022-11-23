@@ -3,3 +3,4 @@ export { BadRequest } from './badRequest';
 export { Unauthorized } from './unauthorized';
 export { Forbidden } from './forbidden';
 export { NotFound } from './notFound';
+export { Conflict } from './conflict';
