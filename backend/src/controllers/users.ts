@@ -1,22 +1,21 @@
-import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 
-import { User as UserModel } from '../models';
+import {
+  User as UserModel,
+  Subject as SubjectModel,
+  Group as GroupModel,
+} from '../models';
 import { IController } from '../utils/interfaces';
-import { getPasswordHash, generateKeychain } from '../utils/utils';
-import { Conflict, NotFound, Unauthorized } from '../errors';
+import {
+  getPasswordHash,
+  generateKeychain,
+  getCookieOptions,
+} from '../utils/utils';
+import { BadRequest, Conflict, NotFound, Unauthorized } from '../errors';
 import { Token } from '../utils/constants';
 
-interface IUserController {
-  readonly login: (data: IController) => Promise<void>;
-  readonly register: (data: IController) => Promise<void>;
-  readonly getAll: (data: IController) => Promise<UserModel[] | void>;
-  readonly getById: (data: IController) => Promise<UserModel | void>;
-  readonly delete: (data: IController) => Promise<void>;
-}
-
-class User implements IUserController {
-  public register = async (data: IController): Promise<void> => {
+class User {
+  public static register = async (data: IController): Promise<void> => {
     const { email, name, password } = data.req.body;
 
     const passwordHash = getPasswordHash(password, 10);
@@ -47,20 +46,14 @@ class User implements IUserController {
             name: newUser.name,
           },
         })
-        .cookie(Token.Refresh, refresh, {
-          maxAge: 1000 * 60 * 60 * 24 * 7,
-          httpOnly: true,
-        })
-        .cookie(Token.Access, access, {
-          maxAge: 1000 * 60 * 20,
-          httpOnly: true,
-        });
+        .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
+        .cookie(Token.Access, access, getCookieOptions(Token.Access));
     } catch (e) {
       console.error(e);
     }
   };
 
-  public login = async (data: IController) => {
+  public static login = async (data: IController): Promise<void> => {
     const { email, password } = data.req.body;
 
     try {
@@ -82,61 +75,87 @@ class User implements IUserController {
 
       data.res
         .status(204)
-        .cookie(Token.Refresh, refresh, {
-          maxAge: 1000 * 60 * 60 * 24 * 7,
-          httpOnly: true,
-        })
-        .cookie(Token.Access, access, {
-          maxAge: 1000 * 60 * 20,
-          httpOnly: true,
-        });
+        .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
+        .cookie(Token.Access, access, getCookieOptions(Token.Access));
     } catch (e) {
       console.error(e);
     }
   };
 
-  public getAll = async (data: IController): Promise<UserModel[] | void> => {
+  public static getAll = async (data: IController): Promise<void> => {
     try {
       const users: UserModel[] = await UserModel.findAll();
 
-      return users;
+      if (users.length === 0) {
+        data.res.status(200).json({
+          success: true,
+          users: [],
+          text: 'Отсутствуют зарегистрированные пользователи',
+        });
+      } else {
+        data.res.status(200).json({ success: true, users });
+      }
     } catch (e) {
       console.error(e);
     }
   };
 
-  public getById = async (data: IController): Promise<UserModel | void> => {
-    const { id } = data.req.user;
+  public static getMe = async (data: IController): Promise<void> => {
+    const { user } = data.req;
+
+    if (user === undefined || user.id === undefined) {
+      throw new Unauthorized();
+    }
+
+    const id = user.id;
+
+    try {
+      const user: UserModel | null = await UserModel.findByPk(id, {
+        include: [SubjectModel, GroupModel],
+      });
+
+      if (user === null) {
+        throw new NotFound();
+      }
+      user;
+      data.res.status(200).json(user);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  public static getById = async (data: IController): Promise<void> => {
+    const { id } = data.req.body;
 
     if (id === undefined) {
-      throw new Error();
+      throw new BadRequest();
     }
 
     try {
       const user: UserModel | null = await UserModel.findByPk(id);
 
       if (user === null) {
-        throw new Error();
+        throw new NotFound();
       }
 
-      return user;
+      data.res.status(200).json(user);
     } catch (e) {
       console.error(e);
     }
   };
 
-  public delete = async (data: IController): Promise<void> => {
-    const { id } = data.req.user;
+  public static delete = async (data: IController): Promise<void> => {
+    const { id } = data.req.body;
 
     if (id === undefined) {
-      throw new Error();
+      throw new BadRequest();
     }
 
     try {
       const user: UserModel | null = await UserModel.findByPk(id);
 
       if (user === null) {
-        throw new Error();
+        throw new NotFound();
       }
 
       await user.destroy();
