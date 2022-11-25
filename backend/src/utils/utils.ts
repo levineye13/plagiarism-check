@@ -1,8 +1,10 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { CookieOptions } from 'express';
 
 import { SECRET_KEY } from '../config';
-import { TOKEN_TYPE } from './constants';
+import { Token, TOKEN_TYPE } from './constants';
+import { TokenType } from './types';
 
 export const getPasswordHash = (password: string, salt: number): string => {
   let passwordHash = password;
@@ -29,3 +31,25 @@ export const generateKeychain = (
     refresh,
   };
 };
+
+export const getCookieOptions = (tokenType: TokenType): CookieOptions => {
+  let maxAge;
+
+  if (tokenType === Token.Refresh) {
+    maxAge = 1000 * 60 * 60 * 24 * 7;
+  } else if (tokenType === Token.Access) {
+    maxAge = 1000 * 60 * 20;
+  }
+
+  return {
+    httpOnly: true,
+    maxAge,
+  };
+};
+
+export const extractJWTFromCookie = (cookieValue: string): string =>
+  cookieValue.split(' ')[1];
+
+export const checkJWTValidity = (
+  JWToken: string
+): string | jwt.JwtPayload | never => jwt.verify(JWToken, SECRET_KEY);
