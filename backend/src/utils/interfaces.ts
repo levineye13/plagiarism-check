@@ -19,14 +19,15 @@ export interface IRegisterData extends ILoginData {
   readonly name: string;
 }
 
-interface IRequest extends Request {
+export interface IRequest extends Request {
   readonly body: {
     readonly email: string;
     readonly name: string;
     readonly password: string;
-  };
-  readonly user: {
     readonly id?: number;
+  };
+  user?: {
+    id?: number;
   };
 }
 
