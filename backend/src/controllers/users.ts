@@ -1,3 +1,4 @@
+import { NextFunction, Response } from 'express';
 import bcrypt from 'bcryptjs';
 
 import {
@@ -5,7 +6,7 @@ import {
   Subject as SubjectModel,
   Group as GroupModel,
 } from '../models';
-import { IController } from '../utils/interfaces';
+import { IController, IRequest } from '../utils/interfaces';
 import {
   getPasswordHash,
   generateKeychain,
@@ -15,8 +16,12 @@ import { BadRequest, Conflict, NotFound, Unauthorized } from '../errors';
 import { Token } from '../utils/constants';
 
 class User {
-  public static register = async (data: IController): Promise<void> => {
-    const { email, name, password } = data.req.body;
+  public static register = async (
+    req: IRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const { email, name, password } = req.body;
 
     const passwordHash = getPasswordHash(password, 10);
 
@@ -25,7 +30,7 @@ class User {
         where: { email },
       });
 
-      if (user === null) {
+      if (user instanceof UserModel) {
         throw new Conflict();
       }
 
@@ -37,7 +42,7 @@ class User {
 
       const { access, refresh } = generateKeychain(newUser.id);
 
-      data.res
+      res
         .status(201)
         .json({
           success: true,
@@ -53,8 +58,12 @@ class User {
     }
   };
 
-  public static login = async (data: IController): Promise<void> => {
-    const { email, password } = data.req.body;
+  public static login = async (
+    req: IRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const { email, password } = req.body;
 
     try {
       const user: UserModel | null = await UserModel.findOne({
@@ -73,13 +82,21 @@ class User {
 
       const { access, refresh } = generateKeychain(user.id);
 
-      data.res
+      res
         .status(204)
         .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
         .cookie(Token.Access, access, getCookieOptions(Token.Access));
     } catch (e) {
       console.error(e);
     }
+  };
+
+  public static logout = async (
+    req: IRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    res.status(204).clearCookie(Token.Access).clearCookie(Token.Refresh);
   };
 
   public static getAll = async (data: IController): Promise<void> => {
@@ -100,8 +117,12 @@ class User {
     }
   };
 
-  public static getMe = async (data: IController): Promise<void> => {
-    const { user } = data.req;
+  public static getMe = async (
+    req: IRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const { user } = req;
 
     if (user === undefined || user.id === undefined) {
       throw new Unauthorized();
@@ -117,15 +138,19 @@ class User {
       if (user === null) {
         throw new NotFound();
       }
-      user;
-      data.res.status(200).json(user);
+
+      res.status(200).json(user);
     } catch (e) {
       console.error(e);
     }
   };
 
-  public static getById = async (data: IController): Promise<void> => {
-    const { id } = data.req.body;
+  public static getById = async (
+    req: IRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const { id } = req.body;
 
     if (id === undefined) {
       throw new BadRequest();
@@ -138,14 +163,18 @@ class User {
         throw new NotFound();
       }
 
-      data.res.status(200).json(user);
+      res.status(200).json(user);
     } catch (e) {
       console.error(e);
     }
   };
 
-  public static delete = async (data: IController): Promise<void> => {
-    const { id } = data.req.body;
+  public static delete = async (
+    req: IRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const { id } = req.body;
 
     if (id === undefined) {
       throw new BadRequest();
