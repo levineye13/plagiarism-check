@@ -18,7 +18,7 @@ export const getPasswordHash = (password: string, salt: number): string => {
 };
 
 export const generateToken = (id: number, expiresIn: string | number): string =>
-  jwt.sign(`${id}`, SECRET_KEY, { expiresIn });
+  jwt.sign({ id }, SECRET_KEY, { expiresIn });
 
 export const generateKeychain = (
   id: number
@@ -42,7 +42,7 @@ export const getCookieOptions = (tokenType: TokenType): CookieOptions => {
   }
 
   return {
-    httpOnly: true,
+    httpOnly: tokenType === Token.Access ? true : false,
     maxAge,
   };
 };
