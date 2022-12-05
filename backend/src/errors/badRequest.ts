@@ -1,4 +1,4 @@
-import {HttpError} from './httpError';
+import { HttpError } from './httpError';
 
 class BadRequest extends HttpError {
   public code: number;
@@ -9,4 +9,4 @@ class BadRequest extends HttpError {
   }
 }
 
-export  {BadRequest};
+export { BadRequest };

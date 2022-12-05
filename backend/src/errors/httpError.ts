@@ -1,5 +1,6 @@
 abstract class HttpError extends Error {
   public name: string;
+  abstract code: number;
 
   protected constructor(message: string) {
     super(message);
