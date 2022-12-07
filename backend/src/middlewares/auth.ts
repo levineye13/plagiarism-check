@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 
 import { IRequest } from '../utils/interfaces';
 import { Unauthorized } from '../errors';
@@ -17,13 +17,13 @@ const auth = (req: IRequest, res: Response, next: NextFunction) => {
   const token = extractJWTFromCookie(cookieValue);
 
   try {
-    const id = Number(checkJWTValidity(token));
+    const payload = checkJWTValidity(token);
 
     if (req.user === undefined) {
       req.user = {};
     }
 
-    req.user.id = id;
+    req.user.id = payload.id;
     next();
   } catch (e) {
     next(new Unauthorized());

@@ -40,7 +40,7 @@ class User {
         password: passwordHash,
       });
 
-      const { access, refresh } = generateKeychain(newUser.id);
+      const { access, refresh } = generateKeychain(newUser.id, newUser.role);
 
       res
         .status(201)
@@ -80,7 +80,7 @@ class User {
         throw new Unauthorized();
       }
 
-      const { access, refresh } = generateKeychain(user.id);
+      const { access, refresh } = generateKeychain(user.id, user.role);
 
       res
         .status(204)

@@ -4,7 +4,7 @@ import { CookieOptions } from 'express';
 
 import { SECRET_KEY } from '../config';
 import { Token, TOKEN_TYPE } from './constants';
-import { TokenType } from './types';
+import { TokenType, TRole, TPayload } from './types';
 
 export const getPasswordHash = (password: string, salt: number): string => {
   let passwordHash = password;
@@ -17,14 +17,18 @@ export const getPasswordHash = (password: string, salt: number): string => {
   return passwordHash;
 };
 
-export const generateToken = (id: number, expiresIn: string | number): string =>
-  jwt.sign({ id }, SECRET_KEY, { expiresIn });
+export const generateToken = (
+  id: number,
+  role: TRole,
+  expiresIn: string | number
+): string => jwt.sign({ id, role }, SECRET_KEY, { expiresIn });
 
 export const generateKeychain = (
-  id: number
+  id: number,
+  role: TRole
 ): { access: string; refresh: string } => {
-  const access = `${TOKEN_TYPE} ${generateToken(id, 1000 * 60 * 20)}`;
-  const refresh = generateToken(id, '7d');
+  const access = `${TOKEN_TYPE} ${generateToken(id, role, 1000 * 60 * 20)}`;
+  const refresh = generateToken(id, role, '7d');
 
   return {
     access,
@@ -50,6 +54,5 @@ export const getCookieOptions = (tokenType: TokenType): CookieOptions => {
 export const extractJWTFromCookie = (cookieValue: string): string =>
   cookieValue.split(' ')[1];
 
-export const checkJWTValidity = (
-  JWToken: string
-): string | jwt.JwtPayload | never => jwt.verify(JWToken, SECRET_KEY);
+export const checkJWTValidity = (JWToken: string): TPayload | never =>
+  <TPayload>jwt.verify(JWToken, SECRET_KEY);
