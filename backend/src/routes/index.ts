@@ -3,7 +3,7 @@ import { Router } from 'express';
 import userRouter from './users';
 import { Path } from '../utils/constants';
 import User from '../controllers/users';
-import auth from '../middlewares/auth';
+import { auth } from '../middlewares';
 
 const router = Router();
 
