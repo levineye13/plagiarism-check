@@ -6,7 +6,7 @@ import {
   Subject as SubjectModel,
   Group as GroupModel,
 } from '../models';
-import { IController, IRequest } from '../utils/interfaces';
+import { IRequest } from '../utils/interfaces';
 import {
   getPasswordHash,
   generateKeychain,
@@ -54,7 +54,7 @@ class User {
         .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
         .cookie(Token.Access, access, getCookieOptions(Token.Access));
     } catch (e) {
-      console.error(e);
+      next(e);
     }
   };
 
@@ -87,7 +87,7 @@ class User {
         .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
         .cookie(Token.Access, access, getCookieOptions(Token.Access));
     } catch (e) {
-      console.error(e);
+      next(e);
     }
   };
 
@@ -99,21 +99,25 @@ class User {
     res.status(204).clearCookie(Token.Access).clearCookie(Token.Refresh);
   };
 
-  public static getAll = async (data: IController): Promise<void> => {
+  public static getAll = async (
+    req: IRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const users: UserModel[] = await UserModel.findAll();
 
       if (users.length === 0) {
-        data.res.status(200).json({
+        res.status(200).json({
           success: true,
           users: [],
           text: 'Отсутствуют зарегистрированные пользователи',
         });
       } else {
-        data.res.status(200).json({ success: true, users });
+        res.status(200).json({ success: true, users });
       }
     } catch (e) {
-      console.error(e);
+      next(e);
     }
   };
 
@@ -141,7 +145,7 @@ class User {
 
       res.status(200).json(user);
     } catch (e) {
-      console.error(e);
+      next(e);
     }
   };
 
@@ -165,7 +169,7 @@ class User {
 
       res.status(200).json(user);
     } catch (e) {
-      console.error(e);
+      next(e);
     }
   };
 
@@ -189,7 +193,7 @@ class User {
 
       await user.destroy();
     } catch (e) {
-      console.error(e);
+      next(e);
     }
   };
 }
