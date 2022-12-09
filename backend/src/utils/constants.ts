@@ -11,4 +11,11 @@ export enum Path {
   signin = '/signin',
   signup = '/signup',
   me = '/users/me',
+  groups = '/groups',
+}
+
+export enum Role {
+  Admin = 'admin',
+  Moderator = 'moderator',
+  User = 'user',
 }
