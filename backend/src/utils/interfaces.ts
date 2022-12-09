@@ -10,6 +10,11 @@ export interface IUser {
   readonly password: string;
 }
 
+export interface IGroup {
+  readonly id: number;
+  readonly name: string;
+}
+
 export interface ILoginData {
   readonly email: string;
   readonly password: string;
@@ -25,6 +30,17 @@ export interface IRequest extends Request {
     readonly name: string;
     readonly password: string;
     readonly id?: number;
+    readonly role?: TRole;
+  };
+  user?: {
+    id?: number;
+  };
+}
+
+export interface IGroupRequest extends Request {
+  readonly body: {
+    readonly id: number;
+    readonly name: string;
   };
   user?: {
     id?: number;
