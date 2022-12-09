@@ -1,10 +1,13 @@
-import { Model, InferAttributes, DataTypes } from 'sequelize';
+import { Model, DataTypes, Optional } from 'sequelize';
 
 import { sequelize } from '../db';
+import { IGroup } from '../utils/interfaces';
+import UserModel from './user';
 
-class Group extends Model<InferAttributes<Group>> {
-  declare id: number;
-  declare name: string;
+class Group extends Model<IGroup, Optional<IGroup, 'id'>> implements IGroup {
+  public id!: number;
+  public name!: string;
+  public addUser!: (user: UserModel) => void;
 }
 
 Group.init(
@@ -13,7 +16,6 @@ Group.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
