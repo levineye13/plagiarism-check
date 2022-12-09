@@ -8,11 +8,11 @@ class User
   extends Model<IUser, Optional<IUser, 'id' | 'role'>>
   implements IUser
 {
-  declare id: number;
-  declare role: TRole;
-  declare email: string;
-  declare name: string;
-  declare password: string;
+  public id!: number;
+  public role!: TRole;
+  public email!: string;
+  public name!: string;
+  public password!: string;
 }
 
 User.init(
