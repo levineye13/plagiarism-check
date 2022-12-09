@@ -21,7 +21,7 @@ class User {
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    const { email, name, password } = req.body;
+    const { email, name, password, role } = req.body;
 
     const passwordHash = getPasswordHash(password, 10);
 
@@ -38,6 +38,7 @@ class User {
         email,
         name,
         password: passwordHash,
+        role,
       });
 
       const { access, refresh } = generateKeychain(newUser.id, newUser.role);
