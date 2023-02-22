@@ -14,7 +14,7 @@ const initialState: IAuthState = {
 
 export const authReducer = (
   state = initialState,
-  action: { type: string; payload: { login: string; email: string } }
+  action: { type: string; payload?: { login: string; email: string } }
 ): IAuthState => {
   switch (action.type) {
     case REGISTER:
