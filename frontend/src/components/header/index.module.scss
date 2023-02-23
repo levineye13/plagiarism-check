@@ -1,0 +1,65 @@
+@import '../../styles/vars.scss';
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: $font-family;
+  color: $dark-theme-font;
+
+  .button {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    outline: 0;
+    border: 2px solid $light-theme;
+    border-radius: $border-radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    .span {
+      width: 70%;
+      height: 2px;
+      background-color: $light-theme;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      height: 2px;
+      width: 70%;
+      background-color: $light-theme;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transition: $transition;
+    }
+
+    &::before {
+      transform: translate(-50%, calc(-50% - 7px));
+    }
+
+    &::after {
+      transform: translate(-50%, calc(-50% + 7px));
+    }
+
+    &_active {
+      .span {
+        opacity: 0;
+      }
+
+      &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+}
