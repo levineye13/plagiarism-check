@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
+import Logo from '../../images/logo.png';
+import { ROUTES } from '../../utils/constants';
 
 const Header = () => {
   const [isActive, setIsActive] = useState(false);
@@ -17,8 +20,13 @@ const Header = () => {
       >
         <span className={styles.span} />
       </button>
-      <img className={styles.img} src="" alt="РТУ МИРЭА" />
-      <p className={styles.paragraph}>РТУ МИРЭА</p>
+      <figure className={styles.figure}>
+        <img className={styles.img} src={Logo} alt="РТУ МИРЭА" />
+        <figcaption className={styles.paragraph}>РТУ МИРЭА</figcaption>
+      </figure>
+      <Link to={ROUTES.login} className={styles.link}>
+        Вход
+      </Link>
     </header>
   );
 };

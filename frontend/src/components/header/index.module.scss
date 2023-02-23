@@ -1,12 +1,16 @@
 @import '../../styles/vars.scss';
 
 .header {
+  box-sizing: border-box;
   width: 100%;
+  padding: 8px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   font-family: $font-family;
   color: $dark-theme-font;
+  border: 1px solid $light-theme;
 
   .button {
     padding: 0;
@@ -60,6 +64,30 @@
       &::after {
         transform: translate(-50%, -50%) rotate(-45deg);
       }
+    }
+  }
+
+  .figure {
+    margin: 0 auto 0 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .img {
+    max-height: 40px;
+    margin-right: 10px;
+  }
+
+  .link {
+    font-family: inherit;
+    color: $dark-theme-font;
+    text-decoration: none;
+    border-bottom: 1px solid $light-theme;
+    transition: $transition;
+
+    &:hover {
+      opacity: $opacity;
     }
   }
 }
