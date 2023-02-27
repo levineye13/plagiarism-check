@@ -1,20 +1,20 @@
-import { TAppThunk, TAppDispatch } from './../../utils/types';
+import { TAppThunk, TAppDispatch } from '../types';
 
 import { REGISTER, LOGIN, LOGOUT } from '../action-types';
 import { apiUser } from '../../utils/api/';
 import { IUser } from '../../utils/interfaces';
 
-export interface IRegister {
+interface IRegister {
   readonly type: typeof REGISTER;
   readonly payload: { login: string; email: string };
 }
 
-export interface ILogin {
+interface ILogin {
   readonly type: typeof LOGIN;
   readonly payload: { login: string; email: string };
 }
 
-export interface ILogout {
+interface ILogout {
   readonly type: typeof LOGOUT;
 }
 
