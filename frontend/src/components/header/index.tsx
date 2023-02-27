@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
 import Logo from '../../images/logo.png';
 import { ROUTES } from '../../utils/constants';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { openMenu, closeMenu } from '../../store/actions';
 
 const Header = () => {
-  const [isActive, setIsActive] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const { isOpen } = useAppSelector((state) => state.menu);
+
+  const handleClick = () =>
+    isOpen ? dispatch(closeMenu()) : dispatch(openMenu());
 
   return (
     <header className={styles.header}>
       <button
         className={`${styles.button} ${
-          isActive ? `${styles.button_active}` : ''
+          isOpen ? `${styles.button_active}` : ''
         }`}
-        onClick={() => {
-          setIsActive(!isActive);
-        }}
+        onClick={handleClick}
       >
         <span className={styles.span} />
       </button>
