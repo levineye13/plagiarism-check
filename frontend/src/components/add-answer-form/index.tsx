@@ -51,8 +51,10 @@ const AddAnswerForm: FC = () => {
         value="//Напишите код"
         theme={theme}
       />
-      <Button style={{ marginBottom: 20 }}>Очистить</Button>
-      <Button>Отправить</Button>
+      <div className={styles.buttons}>
+        <Button style={{ marginRight: 20 }}>Очистить</Button>
+        <Button>Отправить</Button>
+      </div>
     </form>
   );
 };
