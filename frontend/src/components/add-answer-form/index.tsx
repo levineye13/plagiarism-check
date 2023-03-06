@@ -1,32 +1,57 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useCallback } from 'react';
+import Editor from '@monaco-editor/react';
 
 import Button from '../submit';
+import { LANGUAGE, THEME } from '../../utils/constants';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import styles from './index.module.scss';
+import Select from '../select';
+import { setLanguage, setTheme } from '../../store/actions';
+import { TLanguage, TTheme } from '../../utils/types';
 
 const AddAnswerForm: FC = () => {
-  const areaRef = useRef<HTMLTextAreaElement>(null);
+  const { theme, language } = useAppSelector((store) => store.editor);
+  const dispatch = useAppDispatch();
 
-  const clearArea = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    e.stopPropagation();
+  const handleLanguageSelect = useCallback(
+    (language: TLanguage): void => {
+      dispatch(setLanguage(language));
+    },
+    [dispatch]
+  );
 
-    if (areaRef.current !== null) {
-      areaRef.current.value = '';
-    }
-  };
+  const handleThemeSelect = useCallback(
+    (theme: TTheme): void => {
+      dispatch(setTheme(theme));
+    },
+    [dispatch]
+  );
 
   return (
     <form className={styles.form} name="addAnswerForm">
-      <label className={styles.label}>Добавить ответ на задание:</label>
-      <code className={styles.code}>
-        <textarea
-          className={styles.area}
-          placeholder="Вставьте код"
-          ref={areaRef}
+      <div className={styles.div}>
+        <Select<TLanguage>
+          title="Язык программирования"
+          list={Object.keys(LANGUAGE) as TLanguage[]}
+          selected={language}
+          onSelect={handleLanguageSelect}
+          style={{ marginRight: 20 }}
         />
-      </code>
-      <Button style={{ marginBottom: 20 }} onClick={clearArea}>
-        Очистить
-      </Button>
+        <Select<TTheme>
+          title="Тема"
+          list={Object.keys(THEME) as TTheme[]}
+          selected={theme}
+          onSelect={handleThemeSelect}
+        />
+      </div>
+      <Editor
+        width="100%"
+        height="400px"
+        language={language}
+        value="//Напишите код"
+        theme={theme}
+      />
+      <Button style={{ marginBottom: 20 }}>Очистить</Button>
       <Button>Отправить</Button>
     </form>
   );

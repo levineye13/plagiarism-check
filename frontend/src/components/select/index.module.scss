@@ -6,7 +6,6 @@
   background-color: rgba($color: #fff, $alpha: 0.05);
   padding: 12px 30px 12px 12px;
   border-radius: $border-radius $border-radius 0 0;
-  overflow: hidden;
   border-bottom: 1px solid $light-theme;
   font-family: $font-family;
   cursor: pointer;
@@ -36,16 +35,25 @@
   }
 
   .list {
+    box-sizing: border-box;
+    background-color: rgba($color: #000, $alpha: 0.8);
     margin: 0;
     padding: 0;
     height: 0;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
     opacity: 0;
+    padding: 15px 12px 0;
     transition: opacity 0.3s ease, height 0.3s ease;
     overflow-y: scroll;
+    list-style-type: none;
+    z-index: 100;
 
     &_active {
       opacity: 1;
-      height: 150px;
+      height: 100px;
     }
 
     &::-webkit-scrollbar {

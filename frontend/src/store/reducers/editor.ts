@@ -10,7 +10,7 @@ interface ISelectState {
 
 const initialState: ISelectState = {
   theme: THEME['vs-dark'],
-  language: LANGUAGE.html,
+  language: LANGUAGE.python,
 };
 
 export const editorReducer = (

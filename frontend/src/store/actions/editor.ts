@@ -1,6 +1,5 @@
 import { SET_LANGUAGE, SET_THEME } from '../action-types';
 import { TLanguage, TTheme } from '../../utils/types';
-import { LANGUAGE, THEME } from '../../utils/constants';
 
 interface ISetTheme {
   readonly type: typeof SET_THEME;
@@ -14,7 +13,12 @@ interface ISetLanguage {
 
 export type TSelect = ISetTheme | ISetLanguage;
 
-export const setTheme = (theme: TTheme): TTheme => THEME[theme];
+export const setTheme = (theme: TTheme): ISetTheme => ({
+  type: SET_THEME,
+  payload: { theme },
+});
 
-export const setLanguage = (language: TLanguage): TLanguage =>
-  LANGUAGE[language];
+export const setLanguage = (language: TLanguage): ISetLanguage => ({
+  type: SET_LANGUAGE,
+  payload: { language },
+});
