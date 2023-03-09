@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import Button from '../submit';
+import Button from '../button';
 import styles from './index.module.scss';
 
 const SearchForm: FC = () => {
@@ -21,7 +21,7 @@ const SearchForm: FC = () => {
             <input className={styles.checkbox} type="checkbox" />
           </li>
         </ul>
-        <Button />
+        <Button type="submit" />
       </fieldset>
     </form>
   );

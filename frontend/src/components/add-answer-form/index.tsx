@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import Editor from '@monaco-editor/react';
 
-import Button from '../submit';
+import Button from '../button';
 import { LANGUAGE, THEME } from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import styles from './index.module.scss';
@@ -52,8 +52,10 @@ const AddAnswerForm: FC = () => {
         theme={theme}
       />
       <div className={styles.buttons}>
-        <Button style={{ marginRight: 20 }}>Очистить</Button>
-        <Button>Отправить</Button>
+        <Button type="button" style={{ marginRight: 20 }}>
+          Очистить
+        </Button>
+        <Button type="submit">Отправить</Button>
       </div>
     </form>
   );

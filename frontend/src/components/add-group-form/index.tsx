@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import Input from '../input';
-import Button from '../submit';
+import Button from '../button';
 import styles from './index.module.scss';
 
 const AddGroupForm: FC = () => {
@@ -13,7 +13,7 @@ const AddGroupForm: FC = () => {
         placeholder="Добавить группу"
         pattern="[А-ЯЁ]{4}\-\d\d\-\d\d"
       />
-      <Button>Добавить</Button>
+      <Button type="submit">Добавить</Button>
     </form>
   );
 };
