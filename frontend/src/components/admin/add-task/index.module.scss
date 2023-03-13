@@ -1,0 +1,44 @@
+@import '../../../styles/vars.scss';
+
+.section {
+  font-family: $font-family;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .title {
+    color: $dark-theme-font;
+    margin: 0;
+    flex-basis: 100%;
+  }
+
+  .form {
+    flex-basis: calc(50% - 10px);
+    max-width: 500px;
+    min-width: 300px;
+  }
+
+  .fieds {
+    width: 100%;
+  }
+
+  .area {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    border-radius: $border-radius;
+    background-color: transparent;
+    padding: 10px;
+    color: $dark-theme-font;
+    border: 1px solid $light-theme;
+  }
+
+  .list {
+    flex-basis: calc(50% - 10px);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+}
