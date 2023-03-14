@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from 'react';
 import Editor from '@monaco-editor/react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import Button from '../button';
-import { LANGUAGE, THEME } from '../../utils/constants';
+import { THEME } from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import styles from './index.module.scss';
 import Select from '../select';
@@ -12,6 +13,8 @@ import { TLanguage, TTheme } from '../../utils/types';
 const AddAnswerForm: FC = () => {
   const { theme, language } = useAppSelector((store) => store.editor);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLanguageSelect = useCallback(
     (language: TLanguage): void => {
@@ -27,12 +30,17 @@ const AddAnswerForm: FC = () => {
     [dispatch]
   );
 
+  const handleOpenModal = (): void => {
+    navigate('.', { state: { background: location } });
+  };
+
   return (
     <form className={styles.form} name="addAnswerForm">
       <div className={styles.div}>
-        <Select<TLanguage>
+        <Select
+          blocked
           title="Язык программирования"
-          list={Object.keys(LANGUAGE) as TLanguage[]}
+          list={[]}
           selected={language}
           onSelect={handleLanguageSelect}
           style={{ marginRight: 20 }}
@@ -52,7 +60,11 @@ const AddAnswerForm: FC = () => {
         theme={theme}
       />
       <div className={styles.buttons}>
-        <Button type="button" style={{ marginRight: 20 }}>
+        <Button
+          type="button"
+          style={{ marginRight: 20 }}
+          onClick={handleOpenModal}
+        >
           Очистить
         </Button>
         <Button type="submit">Отправить</Button>
