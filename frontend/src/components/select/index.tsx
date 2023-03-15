@@ -10,6 +10,7 @@ interface ISelect<T> {
   readonly onSelect: (arg: T) => void;
   readonly style?: CSSProperties;
   readonly blocked?: boolean;
+  readonly className?: string;
 }
 
 const Select = <T extends string | number>({
@@ -19,6 +20,7 @@ const Select = <T extends string | number>({
   style,
   onSelect,
   blocked,
+  className,
 }: ISelect<T>): React.ReactElement => {
   const [active, setActive] = useState(false);
 
@@ -42,7 +44,11 @@ const Select = <T extends string | number>({
   };
 
   return (
-    <div className={styles.select} onClick={handleClick} style={style}>
+    <div
+      className={`${styles.select} ${className}`}
+      onClick={handleClick}
+      style={style}
+    >
       <p className={styles.title}>{title}</p>
       <p className={styles.selected}>{selected}</p>
       {!blocked && (
