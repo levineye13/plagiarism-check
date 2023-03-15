@@ -14,10 +14,15 @@
     flex-basis: 100%;
   }
 
+  .wrapper {
+    width: 100%;
+    max-width: 500px;
+  }
+
   .form {
-    flex-basis: calc(50% - 10px);
     max-width: 500px;
     min-width: 300px;
+    width: 100%;
   }
 
   .fieds {
@@ -33,12 +38,5 @@
     padding: 10px;
     color: $dark-theme-font;
     border: 1px solid $light-theme;
-  }
-
-  .list {
-    flex-basis: calc(50% - 10px);
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
   }
 }
