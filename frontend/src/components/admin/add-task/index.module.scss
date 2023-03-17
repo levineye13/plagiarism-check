@@ -8,15 +8,26 @@
   flex-wrap: wrap;
   gap: 20px;
 
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
   .title {
     color: $dark-theme-font;
     margin: 0;
     flex-basis: 100%;
+    order: 0;
   }
 
   .wrapper {
     width: 100%;
     max-width: 500px;
+    order: 1;
+
+    @media screen and (max-width: 900px) {
+      order: 3;
+    }
   }
 
   .form {
@@ -25,8 +36,9 @@
     width: 100%;
   }
 
-  .fieds {
+  .fields {
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .area {
@@ -38,5 +50,9 @@
     padding: 10px;
     color: $dark-theme-font;
     border: 1px solid $light-theme;
+  }
+
+  .select {
+    order: 2;
   }
 }

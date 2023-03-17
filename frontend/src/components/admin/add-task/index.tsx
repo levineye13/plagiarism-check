@@ -3,6 +3,7 @@ import React, { ReactElement, useCallback, useState } from 'react';
 import Input from '../../input';
 import Select from '../../select';
 import MultiSelect from '../../multi-select';
+import Button from '../../button';
 import { TLanguage } from '../../../utils/types';
 import { LANGUAGE } from '../../../utils/constants';
 import { useAppDispatch } from '../../../store/hooks';
@@ -60,9 +61,11 @@ const AddTask = (): ReactElement => {
               placeholder="Введите описание работы"
             />
           </div>
+          <Button type="submit">Добавить</Button>
         </form>
       </div>
       <MultiSelect<string>
+        className={styles.select}
         title="Группы"
         list={subject.groups.map((item) => item.title)}
         onSelect={() => {}}
