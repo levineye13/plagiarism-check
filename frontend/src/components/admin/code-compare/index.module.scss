@@ -1,0 +1,25 @@
+@import '../../../styles/vars.scss';
+
+.section {
+  font-family: $font-family;
+  padding: 20px;
+  color: $dark-theme-font;
+  font-size: 18px;
+
+  .procent {
+    margin: 0;
+  }
+
+  .span {
+    font-size: 20px;
+    font-style: italic;
+  }
+
+  .author {
+    margin: 20px 0;
+  }
+
+  .editor {
+    height: 350px;
+  }
+}
