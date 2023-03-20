@@ -4,6 +4,8 @@ import Input from '../../input';
 import Select from '../../select';
 import MultiSelect from '../../multi-select';
 import Button from '../../button';
+import SectionTitle from '../../section-title';
+import Back from '../../back-button';
 import { TLanguage } from '../../../utils/types';
 import { LANGUAGE } from '../../../utils/constants';
 import { useAppDispatch } from '../../../store/hooks';
@@ -43,7 +45,10 @@ const AddTask = (): ReactElement => {
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.title}>Добавление задания</h2>
+      <Back />
+      <SectionTitle style={{ flexBasis: '100%', marginBottom: 20 }}>
+        Добавление задания
+      </SectionTitle>
       <div className={styles.wrapper}>
         <Select<TLanguage>
           title="Язык программирования"

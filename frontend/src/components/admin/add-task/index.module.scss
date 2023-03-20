@@ -2,22 +2,16 @@
 
 .section {
   font-family: $font-family;
-  padding: 20px;
+  padding: 30px 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
+  position: relative;
 
   @media screen and (max-width: 900px) {
     flex-direction: column;
     flex-wrap: nowrap;
-  }
-
-  .title {
-    color: $dark-theme-font;
-    margin: 0;
-    flex-basis: 100%;
-    order: 0;
   }
 
   .wrapper {
