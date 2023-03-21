@@ -71,7 +71,7 @@ const AddTask = (): ReactElement => {
       </div>
       <MultiSelect<string>
         className={styles.select}
-        title="Группы"
+        title="Выберите группы"
         list={subject.groups.map((item) => item.title)}
         onSelect={() => {}}
       />
