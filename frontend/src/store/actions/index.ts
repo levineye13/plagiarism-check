@@ -7,4 +7,10 @@ export type { TForm } from './form';
 export { register, login, logout } from './auth';
 export { openMenu, closeMenu } from './menu';
 export { setTheme, setLanguage } from './editor';
-export { modalOpen, modalClose } from './modal';
+export {
+  modalOpen,
+  modalClose,
+  modalSetAgree,
+  modalSetForm,
+  modalSetQuestion,
+} from './modal';

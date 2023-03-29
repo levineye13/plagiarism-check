@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useState } from 'react';
+import React, { ReactElement, useCallback } from 'react';
 
 import Input from '../../input';
 import Select from '../../select';
@@ -8,8 +8,14 @@ import SectionTitle from '../../section-title';
 import Back from '../../back-button';
 import { TLanguage } from '../../../utils/types';
 import { LANGUAGE } from '../../../utils/constants';
-import { useAppDispatch } from '../../../store/hooks';
-import { setLanguage } from '../../../store/actions';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import {
+  modalOpen,
+  setLanguage,
+  modalClose,
+  modalSetForm,
+  modalSetQuestion,
+} from '../../../store/actions';
 import styles from './index.module.scss';
 
 const subject = {
@@ -26,6 +32,7 @@ const subject = {
 
 const AddTask = (): ReactElement => {
   const dispatch = useAppDispatch();
+  const { language } = useAppSelector((state) => state.editor);
 
   //const [groups, setGroups] = useState<string[]>([]);
 
@@ -42,6 +49,19 @@ const AddTask = (): ReactElement => {
   //   },
   //   [groups]
   // );
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    console.log('SUBMIT');
+
+    dispatch(modalClose());
+  };
+
+  const handleOpenModal = (): void => {
+    dispatch(modalSetForm('addTask'));
+    dispatch(modalSetQuestion('Добавить задание?'));
+    dispatch(modalOpen());
+  };
 
   return (
     <section className={styles.section}>
@@ -53,11 +73,17 @@ const AddTask = (): ReactElement => {
         <Select<TLanguage>
           title="Язык программирования"
           list={Object.keys(LANGUAGE) as TLanguage[]}
-          selected="python"
+          selected={language}
           onSelect={handleLanguageSelect}
           style={{ marginBottom: 20 }}
         />
-        <form className={styles.form} name="addTask">
+        <form
+          className={styles.form}
+          name="addTask"
+          id="addTask"
+          noValidate
+          onSubmit={handleSubmit}
+        >
           <div className={styles.fields}>
             <Input type="text" required placeholder="Введите название работы" />
             <textarea
@@ -66,7 +92,9 @@ const AddTask = (): ReactElement => {
               placeholder="Введите описание работы"
             />
           </div>
-          <Button type="submit">Добавить</Button>
+          <Button type="button" onClick={handleOpenModal}>
+            Добавить
+          </Button>
         </form>
       </div>
       <MultiSelect<string>
