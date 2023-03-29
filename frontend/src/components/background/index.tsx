@@ -3,8 +3,16 @@ import { FCWithChildren } from '../../utils/types';
 
 import styles from './index.module.scss';
 
-const Background: FCWithChildren = ({ children }) => {
-  return <div className={styles.div}>{children}</div>;
+interface IBackground {
+  readonly onClose: () => void;
+}
+
+const Background: FCWithChildren<IBackground> = ({ children, onClose }) => {
+  return (
+    <div className={styles.div} onClick={onClose}>
+      {children}
+    </div>
+  );
 };
 
 export default Background;

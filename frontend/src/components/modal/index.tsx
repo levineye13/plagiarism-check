@@ -1,24 +1,33 @@
-import React from 'react';
-import { FCWithChildren } from '../../utils/types';
+import React, { FC, MouseEvent } from 'react';
 
 import Button from '../button';
+import Background from '../background';
 import styles from './index.module.scss';
 import Close from '../../images/close.svg';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { modalClose, modalSetAgree } from '../../store/actions/modal';
 
-interface IModal {
-  readonly buttonText: string;
-  //readonly callback: () => void;
-}
+const Modal: FC = () => {
+  const dispatch = useAppDispatch();
+  const { question, form } = useAppSelector((state) => state.modal);
 
-const Modal: FCWithChildren<IModal> = ({ children, buttonText }) => {
+  const handleClose = (): void => {
+    dispatch(modalClose());
+  };
+
   return (
-    <dialog className={styles.modal} open={true}>
-      <button type="button" className={styles.button}>
-        <img className={styles.img} src={Close} alt="Кнопка закрытия" />
-      </button>
-      <p className={styles.text}>{children}</p>
-      <Button type="button">{buttonText}</Button>
-    </dialog>
+    <>
+      <Background onClose={handleClose} />
+      <dialog className={styles.modal} open>
+        <button type="button" className={styles.button} onClick={handleClose}>
+          <img className={styles.img} src={Close} alt="Кнопка закрытия" />
+        </button>
+        <p className={styles.text}>{question}</p>
+        <Button type="submit" form={form}>
+          Да
+        </Button>
+      </dialog>
+    </>
   );
 };
 

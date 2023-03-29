@@ -7,6 +7,7 @@ interface ISubmit {
   readonly type: 'button' | 'submit' | 'reset';
   readonly onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   readonly style?: React.CSSProperties;
+  readonly form?: string;
 }
 
 const Submit: FCWithChildren<ISubmit> = ({
@@ -14,6 +15,7 @@ const Submit: FCWithChildren<ISubmit> = ({
   type,
   onClick,
   style,
+  form,
 }) => {
   return (
     <button
@@ -21,6 +23,7 @@ const Submit: FCWithChildren<ISubmit> = ({
       onClick={onClick}
       className={styles.button}
       style={style}
+      form={form}
     >
       {children}
     </button>
