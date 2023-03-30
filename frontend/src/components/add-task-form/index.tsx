@@ -4,13 +4,31 @@ import Input from '../input';
 import Button from '../button';
 import styles from './index.module.scss';
 
-const AddTaskForm: FC = () => {
+interface IAddTaskForm {
+  readonly onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  readonly onButtonClick: () => void;
+}
+
+const AddTaskForm: FC<IAddTaskForm> = ({ onSubmit, onButtonClick }) => {
   return (
-    <form className={styles.form} name="addTaskForm">
-      <Input type="text" required placeholder="Введите заголовок" />
-      <Input type="text" placeholder="Введите описание" />
-      <Input type="text" required placeholder="Введите задание" />
-      <Button type="submit">Добавить</Button>
+    <form
+      className={styles.form}
+      onSubmit={onSubmit}
+      name="addTask"
+      id="addTask"
+      noValidate
+    >
+      <div className={styles.fields}>
+        <Input type="text" required placeholder="Введите название работы" />
+        <textarea
+          className={styles.area}
+          required
+          placeholder="Введите описание работы"
+        />
+      </div>
+      <Button type="button" onClick={onButtonClick}>
+        Добавить
+      </Button>
     </form>
   );
 };

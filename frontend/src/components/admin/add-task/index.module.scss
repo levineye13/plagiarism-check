@@ -24,28 +24,6 @@
     }
   }
 
-  .form {
-    max-width: 500px;
-    min-width: 300px;
-    width: 100%;
-  }
-
-  .fields {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .area {
-    box-sizing: border-box;
-    width: 100%;
-    height: 200px;
-    border-radius: $border-radius;
-    background-color: transparent;
-    padding: 10px;
-    color: $dark-theme-font;
-    border: 1px solid $light-theme;
-  }
-
   .select {
     order: 2;
   }

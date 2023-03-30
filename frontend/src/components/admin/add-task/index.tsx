@@ -4,6 +4,7 @@ import Input from '../../input';
 import Select from '../../select';
 import MultiSelect from '../../multi-select';
 import Button from '../../button';
+import AddTaskForm from '../../add-task-form';
 import SectionTitle from '../../section-title';
 import Back from '../../back-button';
 import { TLanguage } from '../../../utils/types';
@@ -77,25 +78,7 @@ const AddTask = (): ReactElement => {
           onSelect={handleLanguageSelect}
           style={{ marginBottom: 20 }}
         />
-        <form
-          className={styles.form}
-          name="addTask"
-          id="addTask"
-          noValidate
-          onSubmit={handleSubmit}
-        >
-          <div className={styles.fields}>
-            <Input type="text" required placeholder="Введите название работы" />
-            <textarea
-              className={styles.area}
-              required
-              placeholder="Введите описание работы"
-            />
-          </div>
-          <Button type="button" onClick={handleOpenModal}>
-            Добавить
-          </Button>
-        </form>
+        <AddTaskForm onSubmit={handleSubmit} onButtonClick={handleOpenModal} />
       </div>
       <MultiSelect<string>
         className={styles.select}
