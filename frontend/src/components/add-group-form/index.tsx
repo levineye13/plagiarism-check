@@ -4,16 +4,30 @@ import Input from '../input';
 import Button from '../button';
 import styles from './index.module.scss';
 
-const AddGroupForm: FC = () => {
+interface IAddGroupForm {
+  readonly id: string;
+  readonly onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  readonly onButtonClick: () => void;
+}
+
+const AddGroupForm: FC<IAddGroupForm> = ({ id, onSubmit, onButtonClick }) => {
   return (
-    <form name="addGroupForm" className={styles.form}>
+    <form
+      name="addGroup"
+      className={styles.form}
+      id={id}
+      onSubmit={onSubmit}
+      noValidate
+    >
       <Input
         type="text"
         required
         placeholder="Добавить группу"
         pattern="[А-ЯЁ]{4}\-\d\d\-\d\d"
       />
-      <Button type="submit">Добавить</Button>
+      <Button type="button" onClick={onButtonClick}>
+        Добавить
+      </Button>
     </form>
   );
 };

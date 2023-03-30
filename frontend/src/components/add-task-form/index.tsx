@@ -5,17 +5,18 @@ import Button from '../button';
 import styles from './index.module.scss';
 
 interface IAddTaskForm {
+  readonly id: string;
   readonly onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   readonly onButtonClick: () => void;
 }
 
-const AddTaskForm: FC<IAddTaskForm> = ({ onSubmit, onButtonClick }) => {
+const AddTaskForm: FC<IAddTaskForm> = ({ id, onSubmit, onButtonClick }) => {
   return (
     <form
       className={styles.form}
       onSubmit={onSubmit}
       name="addTask"
-      id="addTask"
+      id={id}
       noValidate
     >
       <div className={styles.fields}>

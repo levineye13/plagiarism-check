@@ -5,7 +5,7 @@ import Background from '../background';
 import styles from './index.module.scss';
 import Close from '../../images/close.svg';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { modalClose, modalSetAgree } from '../../store/actions/modal';
+import { modalClose } from '../../store/actions/modal';
 
 const Modal: FC = () => {
   const dispatch = useAppDispatch();

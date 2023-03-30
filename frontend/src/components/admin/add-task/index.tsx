@@ -1,22 +1,14 @@
-import React, { ReactElement, useCallback } from 'react';
+import React, { FC, ReactElement, useCallback } from 'react';
 
-import Input from '../../input';
 import Select from '../../select';
 import MultiSelect from '../../multi-select';
-import Button from '../../button';
 import AddTaskForm from '../../add-task-form';
 import SectionTitle from '../../section-title';
 import Back from '../../back-button';
 import { TLanguage } from '../../../utils/types';
 import { LANGUAGE } from '../../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import {
-  modalOpen,
-  setLanguage,
-  modalClose,
-  modalSetForm,
-  modalSetQuestion,
-} from '../../../store/actions';
+import { setLanguage, modalClose } from '../../../store/actions';
 import styles from './index.module.scss';
 
 const subject = {
@@ -31,7 +23,11 @@ const subject = {
   ],
 };
 
-const AddTask = (): ReactElement => {
+interface IAddTask {
+  readonly onOpenModal: (formId: string, question: string) => void;
+}
+
+const AddTask: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   const dispatch = useAppDispatch();
   const { language } = useAppSelector((state) => state.editor);
 
@@ -59,9 +55,7 @@ const AddTask = (): ReactElement => {
   };
 
   const handleOpenModal = (): void => {
-    dispatch(modalSetForm('addTask'));
-    dispatch(modalSetQuestion('Добавить задание?'));
-    dispatch(modalOpen());
+    onOpenModal('addTask', 'Добавить задание?');
   };
 
   return (
@@ -78,7 +72,11 @@ const AddTask = (): ReactElement => {
           onSelect={handleLanguageSelect}
           style={{ marginBottom: 20 }}
         />
-        <AddTaskForm onSubmit={handleSubmit} onButtonClick={handleOpenModal} />
+        <AddTaskForm
+          id="addTask"
+          onSubmit={handleSubmit}
+          onButtonClick={handleOpenModal}
+        />
       </div>
       <MultiSelect<string>
         className={styles.select}
