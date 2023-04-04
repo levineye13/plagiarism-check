@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FCWithChildren } from '../../utils/types';
 import DeleteButton from '../delete-button';
@@ -11,12 +11,12 @@ const user = {
 
 interface IGroupItem {
   readonly id: number;
+  readonly path: string;
 }
 
-const GroupItem: FCWithChildren<IGroupItem> = ({ id, children }) => {
+const GroupItem: FCWithChildren<IGroupItem> = ({ id, path, children }) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const onDelete = (): void => {
     if (linkRef.current !== null) {
@@ -25,8 +25,9 @@ const GroupItem: FCWithChildren<IGroupItem> = ({ id, children }) => {
   };
 
   const onClick = (): void => {
-    navigate(`${pathname}/${id}`);
+    navigate(`${path}/${id}`);
   };
+  console.log(path);
 
   return (
     <article className={styles.link} ref={linkRef} onClick={onClick}>

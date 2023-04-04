@@ -12,12 +12,18 @@ const subject = {
   ],
 };
 
-const GroupList: FC = () => {
+interface IGroupList {
+  readonly path: string;
+}
+
+const GroupList: FC<IGroupList> = ({ path }) => {
   return (
     <ul className={styles.groups}>
       {subject.groups.map((group) => (
         <li className={styles.item} key={group.id}>
-          <GroupItem id={group.id}>{group.title}</GroupItem>
+          <GroupItem id={group.id} path={path}>
+            {group.title}
+          </GroupItem>
         </li>
       ))}
     </ul>

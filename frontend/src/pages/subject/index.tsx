@@ -2,10 +2,9 @@ import React, { FC } from 'react';
 
 import Title from '../../components/section-title';
 import GroupList from '../../components/group-list';
-import AddGroupForm from '../../components/add-group-form';
 import Tasks from '../../components/tasks';
-import AddTaskForm from '../../components/add-task-form';
 import styles from './index.module.scss';
+import { ROUTES } from '../../utils/constants';
 
 const subject = {
   title: 'Алгоритмы',
@@ -16,29 +15,15 @@ const subject = {
   ],
 };
 
-const user = { role: 'teacher' };
-
 const Subject: FC = () => {
   return (
     <section className={styles.section}>
       <Title>{subject.title}</Title>
       <div className={styles.wrapper}>
         <p className={styles.paragraph}>Группы</p>
-        <GroupList />
-        {user.role !== 'student' && (
-          <>
-            <p className={styles.paragraph}>Добавление группы</p>
-            <AddGroupForm />
-          </>
-        )}
+        <GroupList path={ROUTES.groups} />
         <p className={styles.paragraph}>Задания</p>
         <Tasks />
-        {user.role !== 'student' && (
-          <>
-            <p className={styles.paragraph}>Добавление задания</p>
-            <AddTaskForm />
-          </>
-        )}
       </div>
     </section>
   );
