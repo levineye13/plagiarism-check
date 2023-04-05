@@ -1,0 +1,12 @@
+.section {
+  box-sizing: border-box;
+  max-width: 500px;
+  padding: 20px;
+
+  .div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}
