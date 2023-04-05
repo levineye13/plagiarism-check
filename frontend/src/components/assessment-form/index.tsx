@@ -4,10 +4,15 @@ import Input from '../input';
 import Button from '../button';
 import styles from './index.module.scss';
 
-const AssessmentForm: FC = () => {
+interface IForm {
+  style?: React.CSSProperties;
+}
+
+const AssessmentForm: FC<IForm> = ({ style }) => {
   return (
-    <form className={styles.form} name="assessmentForm">
+    <form className={styles.form} style={style} name="assessmentForm">
       <Input type="text" required placeholder="Оценка" pattern="(2|3|4|5)" />
+      <textarea className={styles.area} placeholder="Отзыв" />
       <Button type="submit">Оценить</Button>
     </form>
   );

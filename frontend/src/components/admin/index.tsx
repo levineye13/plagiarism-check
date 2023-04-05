@@ -5,9 +5,14 @@ import Menu from './menu';
 import Groups from './groups';
 import Group from '../../pages/group';
 import AddTask from './add-task';
+import Tasks from './tasks';
+import Task from './task';
+import Answers from './answers';
+import Answer from './answer';
 import CodeCompare from './code-compare';
 import CreateGroup from './create-group';
 import styles from './index.module.scss';
+import { ROUTES } from '../../utils/constants';
 
 const subject = {
   title: 'Алгоритмы',
@@ -23,12 +28,18 @@ interface IAdminPanel {
 }
 
 const AdminPanel: FC<IAdminPanel> = ({ onOpenModal }) => {
+  const { home, tasks, task, group, groups, answer } = ROUTES;
+
   return (
     <section className={styles.section}>
       <Routes>
-        <Route path="/" element={<Menu />} />
-        <Route path="groups" element={<Groups />} />
-        <Route path="groups/:id" element={<Group />} />
+        <Route path={home} element={<Menu />} />
+        <Route path={tasks} element={<Tasks />} />
+        <Route path={task} element={<Task />} />
+        <Route path={groups} element={<Groups />} />
+        <Route path={group} element={<Group />} />
+        <Route path={`${task}${group}`} element={<Answers />} />
+        <Route path={`${task}${group}${answer}`} element={<Answer />} />
         <Route
           path="add-group"
           element={<CreateGroup onOpenModal={onOpenModal} />}
