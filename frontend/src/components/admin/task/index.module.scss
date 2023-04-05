@@ -1,0 +1,13 @@
+@import '../../../styles/vars.scss';
+
+.section {
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+
+  .description,
+  .text {
+    font-size: 20px;
+    color: $dark-theme-font;
+  }
+}
