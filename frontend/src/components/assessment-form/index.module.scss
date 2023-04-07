@@ -6,8 +6,15 @@
   flex-direction: column;
 
   .area {
+    box-sizing: border-box;
+    font: {
+      family: $font-family;
+      size: 16px;
+      weight: 400;
+    }
     margin-bottom: 20px;
     height: 180px;
+    padding: 10px;
     background-color: transparent;
     color: $dark-theme-font;
     border: 1px solid $dark-theme-font;
