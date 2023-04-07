@@ -1,5 +1,5 @@
 import type { TForm } from '../actions';
-import { SET_FIELD } from '../action-types';
+import { CLEAR_FORM, SET_FIELD } from '../action-types';
 
 interface IState {
   [formName: string]: {
@@ -15,7 +15,7 @@ const initialForm: IState = {
 
 export const formReducer = (state = initialForm, action: TForm) => {
   const { type, payload } = action;
-  const { form, key, value } = payload;
+  const { form } = payload;
 
   switch (type) {
     case SET_FIELD:
@@ -23,8 +23,14 @@ export const formReducer = (state = initialForm, action: TForm) => {
         ...state,
         [form]: {
           ...state[form],
-          [key]: value,
+          [payload.key]: payload.value,
         },
+      };
+
+    case CLEAR_FORM:
+      return {
+        ...state,
+        [form]: {},
       };
 
     default:

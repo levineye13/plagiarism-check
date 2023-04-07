@@ -16,13 +16,6 @@ const AddAnswerForm: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLanguageSelect = useCallback(
-    (language: TLanguage): void => {
-      dispatch(setLanguage(language));
-    },
-    [dispatch]
-  );
-
   const handleThemeSelect = useCallback(
     (theme: TTheme): void => {
       dispatch(setTheme(theme));
@@ -42,7 +35,7 @@ const AddAnswerForm: FC = () => {
           title="Язык программирования"
           list={[]}
           selected={language}
-          onSelect={handleLanguageSelect}
+          onSelect={() => {}}
           style={{ marginRight: 20 }}
         />
         <Select<TTheme>

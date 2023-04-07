@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
 import Title from '../../components/section-title';
+import BackButton from '../../components/back-button';
 import { ROUTES } from '../../utils/constants';
 import styles from './index.module.scss';
 
@@ -24,6 +25,7 @@ const Group: FC = () => {
 
   return (
     <section className={styles.section}>
+      <BackButton />
       <Title>Группа: AAA-21-20</Title>
       <ul className={styles.list}>
         {data.map((user) => (

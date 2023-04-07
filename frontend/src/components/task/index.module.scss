@@ -2,6 +2,7 @@
 
 .article {
   font-family: $font-family;
+  max-width: 600px;
   padding: 8px;
   border: 1px solid $light-theme;
   display: flex;

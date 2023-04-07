@@ -3,6 +3,7 @@ export type { TMenu } from './menu';
 export type { TSelect } from './editor';
 export type { TModal } from './modal';
 export type { TForm } from './form';
+export type { TTask } from './task';
 
 export { register, login, logout } from './auth';
 export { openMenu, closeMenu } from './menu';
@@ -14,3 +15,4 @@ export {
   modalSetForm,
   modalSetQuestion,
 } from './modal';
+export { setTitle } from './task';

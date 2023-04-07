@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import Editor from '@monaco-editor/react';
 
 import styles from './index.module.scss';
+import BackButton from '../../back-button';
 
 const code1 = `function bubbleSortConcept1(arr) {
   for (let j = arr.length - 1; j > 0; j--) {
@@ -36,17 +37,19 @@ const code2 = `function bubbleSortConcept2(arr) {
 const CodeCompare = (): ReactElement => {
   return (
     <section className={styles.section}>
-      <p className={styles.procent}>
-        Процент сходства: <span className={styles.span}>75%</span>
+      <BackButton />
+      <p className={styles.author}>
+        Павлов Егор,&emsp;процент совпадения:&ensp;75%
       </p>
-      <p className={styles.author}>Павлов Егор</p>
       <Editor
         className={styles.editor}
         language="javasript"
         theme="vs-dark"
         value={code1}
       />
-      <p className={styles.info}>Александр Казанов</p>
+      <p className={styles.info}>
+        Александр Казанов,&emsp;процент совпадения:&ensp;75%
+      </p>
       <Editor
         className={styles.editor}
         language="javasript"

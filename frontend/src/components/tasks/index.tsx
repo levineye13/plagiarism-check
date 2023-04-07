@@ -36,7 +36,7 @@ const Tasks: FC = () => {
         <li className={styles.item} key={task.id}>
           <Task
             taskId={task.id}
-            subjectId={state.subjectId}
+            subjectId={state?.subjectId || null}
             title={task.title}
             description={task.description}
           >

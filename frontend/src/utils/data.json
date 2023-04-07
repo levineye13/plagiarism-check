@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Жаров Олег",
+    "email": "oleg@email.com",
+    "role": "admin"
+  },
+  {
+    "name": "Оцоков Шамиль Алиевич",
+    "email": "pochta@yandex.ru",
+    "role": "moderator"
+  },
+  {
+    "name": "Василий Тихонов",
+    "email": "vasya@yandex.ru",
+    "role": "user",
+    "group": "БСМО-04-21"
+  },
+  {
+    "name": "Алексей Зайцавич",
+    "email": "alexey@mail.ru",
+    "role": "user",
+    "group": "БСМО-03-21"
+  }
+]

@@ -4,6 +4,7 @@
   box-sizing: border-box;
   padding: 20px;
   position: relative;
+  font-family: $font-family;
 
   .list {
     list-style-type: none;
@@ -14,19 +15,46 @@
   }
 
   .link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     color: $dark-theme-font;
     font: {
-      size: 18px;
+      size: 16px;
       weight: 500;
     }
     text-decoration: none;
-    display: block;
     border: 1px solid $dark-theme-font;
     padding: 10px;
     transition: $transition;
 
     &:hover {
       opacity: $opacity;
+    }
+  }
+
+  .label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid $dark-theme-font;
+
+    .custom {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .hidden:checked + .custom {
+      background-color: $dark-theme-font;
     }
   }
 }

@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import { ROUTES } from '../../utils/constants';
 import 'normalize.css';
 import '../../styles/index.scss';
 import styles from './index.module.scss';
 
+import Header from '../../components/header';
 import Menu from '../../components/menu';
 import Login from '../../pages/login';
 import Register from '../../pages/register';
@@ -18,14 +19,38 @@ import Task from '../../pages/task';
 import Group from '../../pages/group';
 import Groups from '../../pages/groups';
 import Answer from '../../pages/answer';
+import Protected from '../../hoc/protected-component';
+import Modal from '../modal';
+import AdminPanel from '../admin';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { modalOpen, modalSetForm, modalSetQuestion } from '../../store/actions';
 
 const App: FC = () => {
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { isOpen } = useAppSelector((state) => state.modal);
+
+  const handleOpenModal = (formId: string, question: string): void => {
+    dispatch(modalSetForm(formId));
+    dispatch(modalSetQuestion(question));
+    dispatch(modalOpen());
+  };
+
   return (
     <div className={styles.page}>
-      <Menu />
+      <Header />
       <div className={styles.content}>
+        <Menu />
         <Routes>
-          <Route path={ROUTES.home} element={<Profile />} />
+          <Route
+            path={ROUTES.home}
+            element={
+              <Protected>
+                <Profile />
+              </Protected>
+            }
+          />
           <Route path={ROUTES.user} element={<Profile />} />
           <Route path={ROUTES.login} element={<Login />} />
           <Route path={ROUTES.register} element={<Register />} />
@@ -47,7 +72,12 @@ const App: FC = () => {
             path={`${ROUTES.subject}${ROUTES.task}${ROUTES.group}${ROUTES.user}`}
             element={<Answer />}
           />
+          <Route
+            path="admin/*"
+            element={<AdminPanel onOpenModal={handleOpenModal} />}
+          />
         </Routes>
+        {isOpen && <Modal />}
       </div>
     </div>
   );

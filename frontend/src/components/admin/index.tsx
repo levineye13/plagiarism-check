@@ -28,7 +28,7 @@ interface IAdminPanel {
 }
 
 const AdminPanel: FC<IAdminPanel> = ({ onOpenModal }) => {
-  const { home, tasks, task, group, groups, answer } = ROUTES;
+  const { home, tasks, task, group, groups, answer, compare } = ROUTES;
 
   return (
     <section className={styles.section}>
@@ -48,7 +48,7 @@ const AdminPanel: FC<IAdminPanel> = ({ onOpenModal }) => {
           path="add-task"
           element={<AddTask onOpenModal={onOpenModal} />}
         />
-        <Route path="compare" element={<CodeCompare />} />
+        <Route path={`${task}${group}${compare}`} element={<CodeCompare />} />
       </Routes>
     </section>
   );

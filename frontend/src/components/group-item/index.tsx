@@ -27,7 +27,6 @@ const GroupItem: FCWithChildren<IGroupItem> = ({ id, path, children }) => {
   const onClick = (): void => {
     navigate(`${path}/${id}`);
   };
-  console.log(path);
 
   return (
     <article className={styles.link} ref={linkRef} onClick={onClick}>

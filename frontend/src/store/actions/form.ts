@@ -1,4 +1,4 @@
-import { SET_FIELD } from '../action-types';
+import { SET_FIELD, CLEAR_FORM } from '../action-types';
 
 interface IFormPayload {
   form: string;
@@ -11,7 +11,12 @@ interface ISetField {
   readonly payload: IFormPayload;
 }
 
-export type TForm = ISetField;
+interface IClearForm {
+  readonly type: typeof CLEAR_FORM;
+  readonly payload: { form: string };
+}
+
+export type TForm = ISetField | IClearForm;
 
 export const setField = ({ form, key, value }: IFormPayload): ISetField => ({
   type: SET_FIELD,
@@ -20,4 +25,9 @@ export const setField = ({ form, key, value }: IFormPayload): ISetField => ({
     key,
     value,
   },
+});
+
+export const clearForm = ({ form }: IFormPayload): IClearForm => ({
+  type: CLEAR_FORM,
+  payload: { form },
 });

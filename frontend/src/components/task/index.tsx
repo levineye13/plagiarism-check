@@ -1,17 +1,15 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { FCWithChildren } from '../../utils/types';
-import DeleteButton from '../delete-button';
-import EditButton from '../edit-button';
 import { ROUTES } from '../../utils/constants';
 import styles from './index.module.scss';
-
-const user = { role: 'teacher' };
+import { useAppDispatch } from '../../store/hooks';
+import { setTask } from '../../store/actions/task';
 
 interface ITask {
   readonly taskId: number;
-  readonly subjectId: number;
+  readonly subjectId: number | null;
   readonly title: string;
   readonly children: string;
   readonly description?: string;
@@ -25,9 +23,19 @@ const Task: FCWithChildren<ITask> = ({
   description = '',
 }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+
+  const tasks = ROUTES.tasks;
 
   const handleClick = (): void => {
-    navigate(`${ROUTES.subjects}/${subjectId}${ROUTES.tasks}/${taskId}`);
+    dispatch(setTask(title, children, description));
+
+    if (pathname.includes(tasks)) {
+      navigate(`${pathname}/${taskId}`);
+    } else {
+      navigate(`${pathname}/${tasks}/${taskId}`);
+    }
   };
 
   return (
@@ -35,12 +43,6 @@ const Task: FCWithChildren<ITask> = ({
       <h3 className={styles.title}>{title}</h3>
       <p className={styles.description}>{description}</p>
       <p className={styles.area}>{children}</p>
-      {user.role !== 'student' && (
-        <div className={styles.edit}>
-          <DeleteButton />
-          <EditButton />
-        </div>
-      )}
     </article>
   );
 };

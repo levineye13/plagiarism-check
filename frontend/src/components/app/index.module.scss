@@ -6,7 +6,7 @@
   min-height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   align-items: stretch;
   padding: 15px;
@@ -14,5 +14,7 @@
   .content {
     flex-basis: 100%;
     border: 1px solid $dark-theme-font;
+    display: flex;
+    flex-direction: row;
   }
 }
