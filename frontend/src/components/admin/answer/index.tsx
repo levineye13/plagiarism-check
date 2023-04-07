@@ -9,6 +9,7 @@ import { setLanguage, setTheme } from '../../../store/actions';
 import { TLanguage, TTheme } from '../../../utils/types';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { THEME } from '../../../utils/constants';
+import BackButton from '../../back-button';
 
 const Answer: FC = () => {
   const { theme, language } = useAppSelector((store) => store.editor);
@@ -23,6 +24,7 @@ const Answer: FC = () => {
 
   return (
     <section className={styles.section}>
+      <BackButton />
       <Title style={{ marginBottom: 20 }}>Лабораторная 1</Title>
       <div className={styles.div}>
         <Select
