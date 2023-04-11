@@ -40,7 +40,7 @@ const App: FC = () => {
   return (
     <div className={styles.page}>
       <Header />
-      <div className={styles.content}>
+      <main className={styles.content}>
         <Menu />
         <Routes>
           <Route
@@ -78,7 +78,7 @@ const App: FC = () => {
           />
         </Routes>
         {isOpen && <Modal />}
-      </div>
+      </main>
     </div>
   );
 };
