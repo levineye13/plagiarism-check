@@ -34,27 +34,13 @@
     }
   }
 
-  .label {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    border: 1px solid $dark-theme-font;
-
-    .custom {
-      display: block;
-      width: 18px;
-      height: 18px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .hidden:checked + .custom {
-      background-color: $dark-theme-font;
+  .compare_link {
+    display: block;
+    margin-top: 40px;
+    color: $dark-theme-font;
+    font: {
+      size: 18px;
+      weight: 400;
     }
   }
 }
