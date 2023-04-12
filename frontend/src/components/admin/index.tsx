@@ -9,6 +9,7 @@ import Tasks from './tasks';
 import Task from './task';
 import Answers from './answers';
 import Answer from './answer';
+import CompareList from './compare-list';
 import CodeCompare from './code-compare';
 import CreateGroup from './create-group';
 import styles from './index.module.scss';
@@ -28,7 +29,8 @@ interface IAdminPanel {
 }
 
 const AdminPanel: FC<IAdminPanel> = ({ onOpenModal }) => {
-  const { home, tasks, task, group, groups, answer, compare } = ROUTES;
+  const { home, tasks, task, group, groups, answer, compare, compareList } =
+    ROUTES;
 
   return (
     <section className={styles.section}>
@@ -36,10 +38,17 @@ const AdminPanel: FC<IAdminPanel> = ({ onOpenModal }) => {
         <Route path={home} element={<Menu />} />
         <Route path={tasks} element={<Tasks />} />
         <Route path={task} element={<Task />} />
+        <Route path={`${compareList}${tasks}`} element={<Tasks />} />
+        <Route path={`${compareList}${task}`} element={<Task />} />
         <Route path={groups} element={<Groups />} />
         <Route path={group} element={<Group />} />
         <Route path={`${task}${group}`} element={<Answers />} />
         <Route path={`${task}${group}${answer}`} element={<Answer />} />
+        <Route
+          path={`${compareList}${task}${group}`}
+          element={<CompareList />}
+        />
+        <Route path={`${compare}${task}${group}`} element={<CodeCompare />} />
         <Route
           path="add-group"
           element={<CreateGroup onOpenModal={onOpenModal} />}
@@ -48,7 +57,6 @@ const AdminPanel: FC<IAdminPanel> = ({ onOpenModal }) => {
           path="add-task"
           element={<AddTask onOpenModal={onOpenModal} />}
         />
-        <Route path={`${task}${group}${compare}`} element={<CodeCompare />} />
       </Routes>
     </section>
   );

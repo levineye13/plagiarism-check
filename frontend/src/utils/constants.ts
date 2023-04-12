@@ -18,7 +18,9 @@ export const ROUTES = {
   group: '/groups/:groupId',
   answers: '/answers',
   answer: '/answers/:answerId',
+  compareList: '/compare-list',
   compare: '/compare',
+  admin: '/admin',
 };
 
 export const THEME: {

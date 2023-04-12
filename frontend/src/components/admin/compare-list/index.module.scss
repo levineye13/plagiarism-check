@@ -1,0 +1,52 @@
+@import '../../../styles/vars.scss';
+
+.section {
+  padding: 20px;
+  font-family: $font-family;
+  color: $dark-theme-font;
+  position: relative;
+
+  .list {
+    margin: 25px 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item {
+    border: 1px solid $dark-theme-font;
+    border-radius: $border-radius;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  .div {
+    margin-right: 40px;
+    max-width: 200px;
+    width: 100%;
+  }
+
+  .par {
+    font-size: 16px;
+    margin: 0;
+
+    &:first-child {
+      margin-bottom: 15px;
+    }
+  }
+
+  .percent {
+  }
+}
