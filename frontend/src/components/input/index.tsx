@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import styles from './index.module.scss';
 
@@ -8,6 +8,7 @@ interface IInput {
   placeholder?: string;
   value?: string;
   pattern?: string;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 const Input: FC<IInput> = ({
@@ -16,7 +17,14 @@ const Input: FC<IInput> = ({
   placeholder,
   value,
   pattern,
+  inputRef,
 }) => {
+  const [inputValue, setValue] = useState(value);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
   return (
     <label className={`${styles.label} ${required ? styles.required : ''}`}>
       <input
@@ -24,8 +32,10 @@ const Input: FC<IInput> = ({
         type={type}
         required={required}
         placeholder={placeholder}
-        value={value}
+        value={inputValue}
         pattern={pattern}
+        onChange={handleChange}
+        ref={inputRef}
       />
       <span className={styles.error}></span>
     </label>
