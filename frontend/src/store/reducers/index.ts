@@ -5,6 +5,7 @@ import { menuReducer } from './menu';
 import { editorReducer } from './editor';
 import { modalReducer } from './modal';
 import { taskReducer } from './task';
+import { tasksReducer } from './tasks';
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   editor: editorReducer,
   modal: modalReducer,
   task: taskReducer,
+  tasks: tasksReducer,
 });

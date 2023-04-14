@@ -5,9 +5,11 @@ import Delete from '../../images/delete.png';
 
 interface IButton {
   readonly onClick?: () => void;
+  readonly style?: React.CSSProperties;
+  readonly className?: string;
 }
 
-const DeleteButton: FC<IButton> = ({ onClick }) => {
+const DeleteButton: FC<IButton> = ({ onClick, style, className }) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
 
@@ -17,7 +19,12 @@ const DeleteButton: FC<IButton> = ({ onClick }) => {
   };
 
   return (
-    <button className={styles.button} type="button" onClick={handleClick}>
+    <button
+      style={style}
+      className={`${styles.button} ${className}`}
+      type="button"
+      onClick={handleClick}
+    >
       <img className={styles.img} src={Delete} alt="Значок удаления" />
     </button>
   );

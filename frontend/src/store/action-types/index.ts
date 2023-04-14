@@ -10,3 +10,4 @@ export {
 } from './modal';
 export { SET_FIELD, CLEAR_FORM } from './form';
 export { TASK_SET_TITLE, TASK_SET } from './task';
+export { SET_TASKS, ADD_TASK, DELETE_TASK } from './tasks';

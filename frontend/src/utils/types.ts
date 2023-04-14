@@ -11,3 +11,10 @@ export type TLanguage =
   | 'json';
 
 export type TTheme = 'light' | 'vs-dark';
+
+export type TTask = {
+  id: number;
+  title: string;
+  description?: string;
+  text: string;
+};

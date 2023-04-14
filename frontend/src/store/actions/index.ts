@@ -4,6 +4,7 @@ export type { TSelect } from './editor';
 export type { TModal } from './modal';
 export type { TForm } from './form';
 export type { TTask } from './task';
+export type { TTasks } from './tasks';
 
 export { register, login, logout } from './auth';
 export { openMenu, closeMenu } from './menu';
@@ -16,3 +17,4 @@ export {
   modalSetQuestion,
 } from './modal';
 export { setTitle } from './task';
+export { setTasks, addTask, deleteTask } from './tasks';

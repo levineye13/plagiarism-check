@@ -12,6 +12,7 @@
   transition: $transition;
   position: relative;
   border-radius: $border-radius;
+  z-index: -1;
   cursor: pointer;
 
   .title {
