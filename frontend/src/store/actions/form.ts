@@ -1,9 +1,10 @@
 import { SET_FIELD, CLEAR_FORM } from '../action-types';
+import { TAppForm } from '../../utils/types';
 
 interface IFormPayload {
-  form: string;
+  form: TAppForm;
   key: string;
-  value: string | number;
+  value: string | number | boolean;
 }
 
 interface ISetField {
@@ -13,7 +14,7 @@ interface ISetField {
 
 interface IClearForm {
   readonly type: typeof CLEAR_FORM;
-  readonly payload: { form: string };
+  readonly payload: { form: TAppForm };
 }
 
 export type TForm = ISetField | IClearForm;

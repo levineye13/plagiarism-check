@@ -1,28 +1,30 @@
 import type { TForm } from '../actions';
 import { CLEAR_FORM, SET_FIELD } from '../action-types';
+import { TAppForm } from '../../utils/types';
 
-interface IState {
-  [formName: string]: {
+type IState = {
+  [formName in TAppForm]: {
     [key: string]: string | number;
   };
-}
+};
 
 const initialForm: IState = {
   login: {},
   register: {},
   addAnswer: {},
+  addGroup: {},
+  addTask: {},
 };
 
 export const formReducer = (state = initialForm, action: TForm) => {
   const { type, payload } = action;
-  const { form } = payload;
 
   switch (type) {
     case SET_FIELD:
       return {
         ...state,
-        [form]: {
-          ...state[form],
+        [payload.form]: {
+          ...state[payload.form],
           [payload.key]: payload.value,
         },
       };
@@ -30,10 +32,10 @@ export const formReducer = (state = initialForm, action: TForm) => {
     case CLEAR_FORM:
       return {
         ...state,
-        [form]: {},
+        [payload.form]: {},
       };
 
     default:
-      break;
+      return state;
   }
 };
