@@ -15,6 +15,13 @@ export interface IGroup {
   readonly name: string;
 }
 
+export interface ITask {
+  readonly id: number;
+  readonly description: string;
+  readonly text: string;
+  readonly creatorId: number;
+}
+
 export interface ILoginData {
   readonly email: string;
   readonly password: string;
