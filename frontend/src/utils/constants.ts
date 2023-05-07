@@ -1,4 +1,4 @@
-import { TLanguage, TTheme } from './types';
+import { TAppForm, TLanguage, TTheme } from './types';
 
 export const ROUTES = {
   home: '/',
@@ -40,3 +40,24 @@ export const LANGUAGE: {
   css: 'css',
   json: 'json',
 };
+
+export const formNames: { [formName in TAppForm]: formName } = {
+  login: 'login',
+  register: 'register',
+  addAnswer: 'addAnswer',
+  addGroup: 'addGroup',
+  addTask: 'addTask',
+  forgotPassword: 'forgotPassword',
+  resetPassword: 'resetPassword',
+};
+
+export enum Fields {
+  Email = 'email',
+  Login = 'login',
+  Group = 'group',
+  Password = 'password',
+  Confirm = 'confirm',
+  Grade = 'grade',
+  AddGroup = 'addGroup',
+  AddTask = 'addTask',
+}

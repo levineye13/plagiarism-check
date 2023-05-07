@@ -8,6 +8,6 @@ export {
   MODAL_SET_QUESTION,
   MODAL_SET_FORM,
 } from './modal';
-export { SET_FIELD, CLEAR_FORM } from './form';
+export { SET_FIELD, SET_FIELD_ERROR, CLEAR_FORM } from './form';
 export { TASK_SET_TITLE, TASK_SET } from './task';
 export { SET_TASKS, ADD_TASK, DELETE_TASK } from './tasks';

@@ -18,3 +18,4 @@ export {
 } from './modal';
 export { setTitle } from './task';
 export { setTasks, addTask, deleteTask } from './tasks';
+export { setField, setFieldError, clearForm } from './form';

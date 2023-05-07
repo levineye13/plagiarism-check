@@ -1,14 +1,15 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { setField } from '../store/actions/form';
+import { setField, setFieldError } from '../store/actions/form';
 import { TAppForm } from '../utils/types';
 
-export const useForm = (
+export const useForm = <TFields extends string>(
   formName: TAppForm,
-  submitCallback: () => void
+  initialFields: { [key in TFields]: string },
+  submitCallback?: () => void
 ): {
   values: {
-    [key: string]: string | number;
+    [key in TFields]: { value: string; error: string };
   };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -16,11 +17,30 @@ export const useForm = (
   const dispatch = useAppDispatch();
   const form = useAppSelector((state) => state.form[formName]);
 
+  useEffect(() => {
+    for (const field in initialFields) {
+      dispatch(
+        setField({ form: formName, key: field, value: initialFields[field] })
+      );
+    }
+  }, [dispatch, formName, initialFields]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, type } = e.currentTarget;
 
     const value =
-      type === 'checkbox' ? e.currentTarget.checked : e.currentTarget.value;
+      e.currentTarget.type &&
+      e.currentTarget.type === 'input' &&
+      type === 'checkbox'
+        ? e.currentTarget.checked
+        : e.currentTarget.value;
+
+    if (!e.currentTarget.validity.valid) {
+      const error = e.currentTarget.validationMessage;
+      dispatch(setFieldError({ form: formName, key: name, value: error }));
+    } else {
+      dispatch(setFieldError({ form: formName, key: name, value: '' }));
+    }
 
     dispatch(setField({ form: formName, key: name, value }));
   };
@@ -28,8 +48,16 @@ export const useForm = (
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    submitCallback();
+    if (typeof submitCallback === 'function') {
+      submitCallback();
+    }
   };
 
-  return { values: form, onChange: handleChange, onSubmit: handleSubmit };
+  return {
+    values: form as {
+      [key in TFields]: { value: string; error: string };
+    },
+    onChange: handleChange,
+    onSubmit: handleSubmit,
+  };
 };

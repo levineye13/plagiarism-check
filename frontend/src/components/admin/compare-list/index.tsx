@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
 import Title from '../../section-title';
 import styles from './index.module.scss';
@@ -6,7 +6,6 @@ import { Link, useParams } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants';
 import BackButton from '../../back-button';
 import Button from '../../button';
-import Input from '../../input';
 
 const percents = [
   { user1: 'Жаров Олег', user2: 'Казанов Александр', percent: 95 },
@@ -35,6 +34,11 @@ const CompareList: FC = () => {
     setSorted(sorted);
   };
 
+  useEffect(() => {
+    maxRef.current!.value = '100';
+    minRef.current!.value = '0';
+  }, []);
+
   return (
     <section className={styles.section}>
       <BackButton />
@@ -61,19 +65,9 @@ const CompareList: FC = () => {
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
           <label className={styles.title}>Процент схожести</label>
           <label className={styles.label}>Максимум</label>
-          <Input
-            type="text"
-            placeholder="Максимум"
-            value={'100'}
-            inputRef={maxRef}
-          />
+          <input type="text" className={styles.input} ref={maxRef} />
           <label className={styles.label}>Минимум</label>
-          <Input
-            type="text"
-            placeholder="Минимум"
-            value={'0'}
-            inputRef={minRef}
-          />
+          <input type="text" className={styles.input} ref={minRef} />
           <Button type="submit">Применить</Button>
         </form>
       </div>

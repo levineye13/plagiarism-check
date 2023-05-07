@@ -18,3 +18,12 @@ export type TTask = {
   description?: string;
   text: string;
 };
+
+export type TAppForm =
+  | 'addAnswer'
+  | 'addGroup'
+  | 'addTask'
+  | 'register'
+  | 'login'
+  | 'forgotPassword'
+  | 'resetPassword';

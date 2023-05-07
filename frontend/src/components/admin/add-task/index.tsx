@@ -46,11 +46,7 @@ const AddTask: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   //   },
   //   [groups]
   // );
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
-    console.log('SUBMIT');
-
+  const handleSubmit = (): void => {
     dispatch(modalClose());
   };
 

@@ -14,11 +14,7 @@ interface IAddTask {
 const CreateGroup: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
-    console.log('SUBMIT');
-
+  const handleSubmit = (): void => {
     dispatch(modalClose());
   };
 

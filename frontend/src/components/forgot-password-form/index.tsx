@@ -3,15 +3,40 @@ import { Link } from 'react-router-dom';
 
 import AuthFormElements from '../auth-form-elements';
 import Input from '../input';
-import { ROUTES } from '../../utils/constants';
+import { Fields, ROUTES, formNames } from '../../utils/constants';
 import styles from './index.module.scss';
+import { useForm } from '../../hooks/useForm';
+
+type TFields = Fields.Email;
+
+const initialFields: { [key in TFields]: string } = {
+  email: '',
+};
 
 const ForgotPasswordForm: FC = () => {
+  const { values, onChange, onSubmit } = useForm<TFields>(
+    formNames.forgotPassword,
+    initialFields
+  );
+
   return (
-    <form name="forgotPassword" className={styles.form}>
+    <form
+      name={formNames.forgotPassword}
+      className={styles.form}
+      onSubmit={onSubmit}
+      noValidate
+    >
       <h2 className={styles.title}>Восстановление пароля</h2>
       <AuthFormElements buttonText="Восстановить">
-        <Input type="email" required placeholder="Email" />
+        <Input
+          type="email"
+          name={Fields.Email}
+          required
+          placeholder="Email"
+          value={values.email.value}
+          error={values.email.error}
+          onChange={onChange}
+        />
       </AuthFormElements>
       <Link to={ROUTES.login} className={styles.link}>
         Вспомнили пароль?

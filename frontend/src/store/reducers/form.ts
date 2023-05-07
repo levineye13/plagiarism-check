@@ -1,10 +1,10 @@
 import type { TForm } from '../actions';
-import { CLEAR_FORM, SET_FIELD } from '../action-types';
+import { CLEAR_FORM, SET_FIELD, SET_FIELD_ERROR } from '../action-types';
 import { TAppForm } from '../../utils/types';
 
 type IState = {
   [formName in TAppForm]: {
-    [key: string]: string | number;
+    [key: string]: { value: string; error: string };
   };
 };
 
@@ -14,25 +14,48 @@ const initialForm: IState = {
   addAnswer: {},
   addGroup: {},
   addTask: {},
+  forgotPassword: {},
+  resetPassword: {},
 };
 
 export const formReducer = (state = initialForm, action: TForm) => {
   const { type, payload } = action;
 
   switch (type) {
-    case SET_FIELD:
+    case SET_FIELD: {
+      const { form, key, value } = payload;
+
       return {
         ...state,
-        [payload.form]: {
-          ...state[payload.form],
-          [payload.key]: payload.value,
+        [form]: {
+          ...state[form],
+          [key]: {
+            ...state[form][key],
+            value,
+          },
         },
       };
+    }
+
+    case SET_FIELD_ERROR: {
+      const { form, key, value } = payload;
+
+      return {
+        ...state,
+        [form]: {
+          ...state[form],
+          [key]: {
+            ...state[form][key],
+            error: value,
+          },
+        },
+      };
+    }
 
     case CLEAR_FORM:
       return {
         ...state,
-        [payload.form]: {},
+        [payload.form]: { errors: {} },
       };
 
     default:
