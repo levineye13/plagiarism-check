@@ -38,8 +38,8 @@ const AddGroupForm: FC<IAddGroupForm> = ({ id, onSubmit, onButtonClick }) => {
         name={Fields.AddGroup}
         required
         placeholder="Добавить группу"
-        value={values.addGroup.value}
-        error={values.addGroup.error}
+        value={values.addGroup ? values.addGroup.value : ''}
+        error={values.addGroup ? values.addGroup.error : ''}
         onChange={onChange}
         pattern="[А-ЯЁ]{4}\-\d\d\-\d\d"
       />

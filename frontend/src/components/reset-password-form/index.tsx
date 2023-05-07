@@ -34,8 +34,8 @@ const ResetPasswordForm: FC = () => {
           name={Fields.Password}
           required
           placeholder="Пароль"
-          value={values.password.value}
-          error={values.password.error}
+          value={values.password ? values.password.value : ''}
+          error={values.password ? values.password.error : ''}
           onChange={onChange}
         />
         <Input
@@ -43,8 +43,8 @@ const ResetPasswordForm: FC = () => {
           name={Fields.Confirm}
           required
           placeholder="Введите код"
-          value={values.confirm.value}
-          error={values.confirm.error}
+          value={values.confirm ? values.confirm.value : ''}
+          error={values.confirm ? values.confirm.error : ''}
           onChange={onChange}
         />
       </AuthFormElements>

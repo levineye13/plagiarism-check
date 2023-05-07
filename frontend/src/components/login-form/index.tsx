@@ -34,8 +34,8 @@ const LoginForm: FC = () => {
           name={Fields.Email}
           required
           placeholder="Email"
-          value={values.email.value}
-          error={values.email.error}
+          value={values.email ? values.email.value : ''}
+          error={values.email ? values.email.error : ''}
           onChange={onChange}
         />
         <Input
@@ -43,8 +43,8 @@ const LoginForm: FC = () => {
           name={Fields.Password}
           required
           placeholder="Пароль"
-          value={values.password.value}
-          error={values.password.error}
+          value={values.password ? values.password.value : ''}
+          error={values.password ? values.password.error : ''}
           onChange={onChange}
         />
       </AuthFormElements>

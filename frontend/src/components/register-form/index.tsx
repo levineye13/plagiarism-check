@@ -42,8 +42,8 @@ const RegisterForm: FC = () => {
           name={Fields.Email}
           required
           placeholder="Email"
-          value={values.email.value}
-          error={values.email.error}
+          value={values.email ? values.email.value : ''}
+          error={values.email ? values.email.error : ''}
           onChange={onChange}
         />
         <Input
@@ -51,8 +51,8 @@ const RegisterForm: FC = () => {
           name={Fields.Login}
           required
           placeholder="Логин"
-          value={values.login.value}
-          error={values.login.error}
+          value={values.login ? values.login.value : ''}
+          error={values.login ? values.login.error : ''}
           onChange={onChange}
         />
         <Input
@@ -60,8 +60,8 @@ const RegisterForm: FC = () => {
           name={Fields.Group}
           required
           placeholder="Группа"
-          value={values.group.value}
-          error={values.group.error}
+          value={values.group ? values.group.value : ''}
+          error={values.group ? values.group.error : ''}
           onChange={onChange}
         />
         <Input
@@ -69,8 +69,8 @@ const RegisterForm: FC = () => {
           name={Fields.Password}
           required
           placeholder="Пароль"
-          value={values.password.value}
-          error={values.password.error}
+          value={values.password ? values.password.value : ''}
+          error={values.password ? values.password.error : ''}
           onChange={onChange}
         />
         <Input
@@ -78,8 +78,8 @@ const RegisterForm: FC = () => {
           name={Fields.Confirm}
           required
           placeholder="Подтвердите пароль"
-          value={values.confirm.value}
-          error={values.confirm.error}
+          value={values.confirm ? values.confirm.value : ''}
+          error={values.confirm ? values.confirm.error : ''}
           onChange={onChange}
         />
       </AuthFormElements>

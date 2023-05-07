@@ -40,8 +40,8 @@ const AddTaskForm: FC<IAddTaskForm> = ({ id, onSubmit, onButtonClick }) => {
           name={Fields.AddTask}
           required
           placeholder="Введите название работы"
-          value={values.addTask.value}
-          error={values.addTask.error}
+          value={values.addTask ? values.addTask.value : ''}
+          error={values.addTask ? values.addTask.error : ''}
           onChange={onChange}
         />
         <input
@@ -49,7 +49,7 @@ const AddTaskForm: FC<IAddTaskForm> = ({ id, onSubmit, onButtonClick }) => {
           className={styles.area}
           name="description"
           required
-          value={values.description.value}
+          value={values.description ? values.description.value : ''}
           placeholder="Введите описание работы"
           onChange={onChange}
         />

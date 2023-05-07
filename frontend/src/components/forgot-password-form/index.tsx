@@ -33,8 +33,8 @@ const ForgotPasswordForm: FC = () => {
           name={Fields.Email}
           required
           placeholder="Email"
-          value={values.email.value}
-          error={values.email.error}
+          value={values.email ? values.email.value : ''}
+          error={values.email ? values.email.error : ''}
           onChange={onChange}
         />
       </AuthFormElements>
