@@ -1,5 +1,5 @@
 import { NextFunction, Response } from 'express';
-import { Conflict, NotFound, Unauthorized } from '../errors';
+import { BadRequest, Conflict, NotFound, Unauthorized } from '../errors';
 
 import { Group as GroupModel, User as UserModel } from '../models';
 import { IGroupRequest } from '../utils/interfaces';
@@ -27,7 +27,7 @@ class Group {
     }
   };
 
-  public static add = async (
+  public static create = async (
     req: IGroupRequest,
     res: Response,
     next: NextFunction
@@ -50,6 +50,30 @@ class Group {
         id: newGroup.id,
         name: newGroup.name,
       });
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  public static delete = async (
+    req: IGroupRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.body;
+
+    if (id === undefined) {
+      throw new BadRequest();
+    }
+
+    try {
+      const group: GroupModel | null = await GroupModel.findByPk(id);
+
+      if (group === null) {
+        throw new NotFound();
+      }
+
+      await group.destroy();
     } catch (e) {
       next(e);
     }

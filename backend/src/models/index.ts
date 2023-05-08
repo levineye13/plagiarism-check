@@ -21,4 +21,4 @@ Subject.belongsToMany(User, { through: UserSubject });
 Group.belongsToMany(Subject, { through: GroupSubject });
 Subject.belongsToMany(Group, { through: GroupSubject });
 
-export { User, Group, Subject };
+export { User, Group, Subject, Task };

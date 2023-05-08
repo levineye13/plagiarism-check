@@ -1,9 +1,18 @@
-import { Model, InferAttributes, DataTypes } from 'sequelize';
+import {
+  Model,
+  InferAttributes,
+  DataTypes,
+  CreationOptional,
+  InferCreationAttributes,
+} from 'sequelize';
 
 import { sequelize } from '../db';
 
-class Subject extends Model<InferAttributes<Subject>> {
-  declare id: number;
+class Subject extends Model<
+  InferAttributes<Subject>,
+  InferCreationAttributes<Subject>
+> {
+  declare id: CreationOptional<number>;
   declare name: string;
 }
 

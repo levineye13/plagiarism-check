@@ -41,6 +41,7 @@ export interface IRequest extends Request {
   };
   user?: {
     id?: number;
+    role?: TRole;
   };
 }
 
@@ -51,8 +52,39 @@ export interface IGroupRequest extends Request {
   };
   user?: {
     id?: number;
+    role?: TRole;
   };
 }
+
+export interface ISubjectRequest extends Request {
+  readonly body: {
+    readonly id: number;
+    readonly name: string;
+  };
+  user?: {
+    id?: number;
+    role?: TRole;
+  };
+}
+
+export interface ITaskRequest extends Request {
+  readonly body: {
+    readonly id: number;
+    readonly description: string;
+    readonly text: string;
+    readonly creatorId: number;
+  };
+  user?: {
+    id?: number;
+    role?: TRole;
+  };
+}
+
+export type MiddlewareFn = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => void;
 
 export interface IController {
   readonly req: IRequest;

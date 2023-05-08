@@ -104,7 +104,7 @@ class User {
     req: IRequest,
     res: Response,
     next: NextFunction
-  ): Promise<void> => {
+  ) => {
     try {
       const users: UserModel[] = await UserModel.findAll();
 

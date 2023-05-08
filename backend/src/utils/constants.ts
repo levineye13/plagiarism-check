@@ -12,6 +12,7 @@ export enum Path {
   signup = '/signup',
   me = '/users/me',
   groups = '/groups',
+  subjects = '/subjects',
 }
 
 export enum Role {

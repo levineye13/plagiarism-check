@@ -3,6 +3,7 @@ import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '../db';
 import { TRole } from '../utils/types';
 import { IUser } from '../utils/interfaces';
+import { Role } from '../utils/constants';
 
 class User
   extends Model<IUser, Optional<IUser, 'id' | 'role'>>
@@ -23,7 +24,7 @@ User.init(
       autoIncrement: true,
     },
     role: {
-      type: DataTypes.ENUM('admin', 'moderator', 'user'),
+      type: DataTypes.ENUM(Role.Admin, Role.Moderator, Role.User),
       defaultValue: 'user',
     },
     email: {
