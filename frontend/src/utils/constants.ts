@@ -60,4 +60,5 @@ export enum Fields {
   Grade = 'grade',
   AddGroup = 'addGroup',
   AddTask = 'addTask',
+  AddCourse = 'addCourse',
 }

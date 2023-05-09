@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { setLanguage, modalClose } from '../../../store/actions';
 import styles from './index.module.scss';
 
+const courses = [{ title: 'Алгоритмы' }, { title: 'Машинное обучение' }];
+
 const subject = {
   title: 'Алгоритмы',
   groups: [
@@ -76,8 +78,8 @@ const AddTask: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
       </div>
       <MultiSelect<string>
         className={styles.select}
-        title="Выберите группы"
-        list={subject.groups.map((item) => item.title)}
+        title="Выберите курсы"
+        list={courses.map((item) => item.title)}
         onSelect={() => {}}
       />
     </section>
