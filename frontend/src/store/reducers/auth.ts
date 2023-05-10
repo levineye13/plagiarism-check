@@ -4,12 +4,14 @@ interface IAuthState {
   readonly isAuth: boolean;
   readonly login: string;
   readonly email: string;
+  readonly group: string;
 }
 
 const initialState: IAuthState = {
   isAuth: true,
   login: '',
   email: '',
+  group: '',
 };
 
 export const authReducer = (

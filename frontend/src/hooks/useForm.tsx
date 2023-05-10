@@ -2,11 +2,13 @@ import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setField, setFieldError } from '../store/actions/form';
 import { TAppForm } from '../utils/types';
+import { TAppActions, TAppThunk } from '../store/types';
+import { ActionCreator } from 'redux';
 
 export const useForm = <TFields extends string>(
   formName: TAppForm,
   initialFields: { [key in TFields]: string },
-  submitCallback?: () => void
+  submitAction?: TAppThunk | ActionCreator<TAppActions>
 ): {
   values: {
     [key in TFields]: { value: string; error: string };
@@ -48,8 +50,14 @@ export const useForm = <TFields extends string>(
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    if (typeof submitCallback === 'function') {
-      submitCallback();
+    if (typeof submitAction === 'function') {
+      const arg: { [key: string]: string } = {};
+
+      for (const key in form) {
+        arg[key] = form[key].value;
+      }
+
+      dispatch(submitAction(arg));
     }
   };
 

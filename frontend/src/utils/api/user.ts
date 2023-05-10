@@ -1,7 +1,7 @@
 import Api from './api';
 import { IUser } from '../interfaces';
 import { IApiUser, TApiAnswer } from './types';
-import { HTTP_METHODS, HEADERS, API_ROUTES } from './constants';
+import { HTTP_METHODS, HEADERS, API_ROUTES, API_BASE_URL } from './constants';
 
 class UserApi extends Api {
   public constructor(baseUrl: string, headers: { [key: string]: string } = {}) {
@@ -19,9 +19,10 @@ class UserApi extends Api {
     return newUser;
   };
 
-  public login = async (
-    user: Omit<IApiUser, 'login'>
-  ): Promise<IUser | never> => {
+  public login = async (user: {
+    email: string;
+    password: string;
+  }): Promise<IUser | never> => {
     const res: Response = await fetch(`${this.baseUrl}/${API_ROUTES.signin}`, {
       method: HTTP_METHODS.post,
       headers: this.headers,
@@ -43,6 +44,6 @@ class UserApi extends Api {
   };
 }
 
-const apiUser = new UserApi('', HEADERS);
+const apiUser = new UserApi(API_BASE_URL, HEADERS);
 
 export { apiUser };

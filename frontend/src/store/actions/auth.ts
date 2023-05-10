@@ -1,7 +1,7 @@
 import { TAppThunk, TAppDispatch } from '../types';
 
 import { REGISTER, LOGIN, LOGOUT } from '../action-types';
-import { apiUser } from '../../utils/api/';
+import { api } from '../../utils/api/';
 import { IUser } from '../../utils/interfaces';
 
 interface IRegister {
@@ -21,10 +21,15 @@ interface ILogout {
 export type TAuth = IRegister | ILogin | ILogout;
 
 export const register: TAppThunk =
-  ({ email, login, password }) =>
+  ({ email, login, group, password }) =>
   async (dispatch: TAppDispatch) => {
     try {
-      const user: IUser = await apiUser.register({ email, login, password });
+      const user: IUser = await api.user.register({
+        email,
+        login,
+        group,
+        password,
+      });
 
       dispatch({ type: REGISTER, payload: user });
     } catch (e) {
@@ -36,7 +41,7 @@ export const login: TAppThunk =
   ({ email, password }) =>
   async (dispatch: TAppDispatch) => {
     try {
-      const user: IUser = await apiUser.login({
+      const user: IUser = await api.user.login({
         email,
         password,
       });
@@ -51,7 +56,7 @@ export const logout: TAppThunk =
   ({ email, password }) =>
   async (dispatch: TAppDispatch) => {
     try {
-      await apiUser.logout();
+      await api.user.logout();
 
       dispatch({ type: LOGOUT });
     } catch (e) {
