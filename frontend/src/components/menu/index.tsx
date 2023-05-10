@@ -11,9 +11,10 @@ const Menu: FC = () => {
     `${styles.link} ${isActive ? styles.active : undefined}`;
 
   const { isOpen } = useAppSelector((state) => state.menu);
+  const { isAuth } = useAppSelector((state) => state.auth);
 
   return (
-    <nav className={`${styles.nav} ${isOpen ? styles.nav_open : ''}`}>
+    <nav className={`${styles.nav} ${isOpen && isAuth ? styles.nav_open : ''}`}>
       <ul className={styles.list}>
         <li className={styles.title}>
           <Title>Меню</Title>

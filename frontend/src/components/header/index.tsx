@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
@@ -7,9 +7,9 @@ import { ROUTES } from '../../utils/constants';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { openMenu, closeMenu } from '../../store/actions';
 
-const Header = () => {
+const Header: FC = () => {
   const dispatch = useAppDispatch();
-
+  const { isAuth } = useAppSelector((state) => state.auth);
   const { isOpen } = useAppSelector((state) => state.menu);
 
   const handleClick = () =>
@@ -17,14 +17,16 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <button
-        className={`${styles.button} ${
-          isOpen ? `${styles.button_active}` : ''
-        }`}
-        onClick={handleClick}
-      >
-        <span className={styles.span} />
-      </button>
+      {isAuth && (
+        <button
+          className={`${styles.button} ${
+            isOpen ? `${styles.button_active}` : ''
+          }`}
+          onClick={handleClick}
+        >
+          <span className={styles.span} />
+        </button>
+      )}
       <figure className={styles.figure}>
         <img className={styles.img} src={Logo} alt="РТУ МИРЭА" />
         <figcaption className={styles.paragraph}>РТУ МИРЭА</figcaption>
