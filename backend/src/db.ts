@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 export const sequelize: Sequelize = new Sequelize({
-  //database: 'plagiarism_check',
+  database: 'plagiarism_check',
   host: 'localhost',
   port: 5432,
   username: 'postgres',

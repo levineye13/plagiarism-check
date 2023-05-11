@@ -8,11 +8,13 @@ export interface IUser {
   readonly email: string;
   readonly name: string;
   readonly password: string;
+  readonly group: string;
 }
 
 export interface IGroup {
   readonly id: number;
   readonly name: string;
+  readonly creatorId: number;
 }
 
 export interface ITask {
@@ -20,6 +22,7 @@ export interface ITask {
   readonly description: string;
   readonly text: string;
   readonly creatorId: number;
+  readonly subjectId: number;
 }
 
 export interface ILoginData {
@@ -36,6 +39,7 @@ export interface IRequest extends Request {
     readonly email: string;
     readonly name: string;
     readonly password: string;
+    readonly group: string;
     readonly id?: number;
     readonly role?: TRole;
   };
@@ -49,6 +53,8 @@ export interface IGroupRequest extends Request {
   readonly body: {
     readonly id: number;
     readonly name: string;
+    readonly creatorId: number;
+    readonly subjectId?: number;
   };
   user?: {
     id?: number;
@@ -73,6 +79,7 @@ export interface ITaskRequest extends Request {
     readonly description: string;
     readonly text: string;
     readonly creatorId: number;
+    readonly subjectId: number;
   };
   user?: {
     id?: number;
