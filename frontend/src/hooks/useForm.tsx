@@ -8,6 +8,7 @@ import { ActionCreator } from 'redux';
 export const useForm = <TFields extends string>(
   formName: TAppForm,
   initialFields: { [key in TFields]: string },
+  omitFields?: TFields[],
   submitAction?: TAppThunk | ActionCreator<TAppActions>
 ): {
   values: {
@@ -54,6 +55,10 @@ export const useForm = <TFields extends string>(
       const arg: { [key: string]: string } = {};
 
       for (const key in form) {
+        if (omitFields && omitFields.includes(key as TFields)) {
+          continue;
+        }
+
         arg[key] = form[key].value;
       }
 
