@@ -5,6 +5,7 @@ import {
   User as UserModel,
   Subject as SubjectModel,
   Group as GroupModel,
+  Task as TaskModel,
 } from '../models';
 import { IRequest } from '../utils/interfaces';
 import {
@@ -13,7 +14,7 @@ import {
   getCookieOptions,
 } from '../utils/utils';
 import { BadRequest, Conflict, NotFound, Unauthorized } from '../errors';
-import { Token } from '../utils/constants';
+import { Role, Token } from '../utils/constants';
 
 class User {
   public static register = async (
@@ -21,7 +22,7 @@ class User {
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    const { email, name, password, role } = req.body;
+    const { email, name, password, group, role = Role.User } = req.body;
 
     const passwordHash = getPasswordHash(password, 10);
 
@@ -30,30 +31,40 @@ class User {
         where: { email },
       });
 
-      if (user instanceof UserModel) {
+      if (user) {
         throw new Conflict();
       }
+
+      const groupInstance: GroupModel | null = await GroupModel.findOne({
+        where: { name: group },
+      });
 
       const newUser = await UserModel.create({
         email,
         name,
         password: passwordHash,
         role,
+        group,
       });
+
+      if (groupInstance) {
+        await newUser.setGroup(groupInstance);
+      }
 
       const { access, refresh } = generateKeychain(newUser.id, newUser.role);
 
       res
         .status(201)
+        .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
+        .cookie(Token.Access, access, getCookieOptions(Token.Access))
         .json({
           success: true,
           user: {
             email: newUser.email,
             name: newUser.name,
+            group: newUser.group,
           },
-        })
-        .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
-        .cookie(Token.Access, access, getCookieOptions(Token.Access));
+        });
     } catch (e) {
       next(e);
     }
@@ -75,18 +86,31 @@ class User {
         throw new NotFound();
       }
 
-      const isCompare = await bcrypt.compare(password, user.password);
+      //const isCompare = await bcrypt.compare(password, user.password);
 
-      if (!isCompare) {
+      // if (!isCompare) {
+      //   throw new Unauthorized();
+      // }
+
+      if (password !== user.password) {
         throw new Unauthorized();
+      }
+
+      const groupInstance: GroupModel | null = await GroupModel.findOne({
+        where: { name: user.group },
+      });
+
+      if (groupInstance) {
+        await user.setGroup(groupInstance);
       }
 
       const { access, refresh } = generateKeychain(user.id, user.role);
 
       res
-        .status(204)
+        .status(200)
         .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
-        .cookie(Token.Access, access, getCookieOptions(Token.Access));
+        .cookie(Token.Access, access, getCookieOptions(Token.Access))
+        .send({ email: user.email, group: user.group, name: user.name });
     } catch (e) {
       next(e);
     }
@@ -137,7 +161,11 @@ class User {
 
     try {
       const user: UserModel | null = await UserModel.findByPk(id, {
-        include: [SubjectModel, GroupModel],
+        include: [
+          { model: SubjectModel },
+          { model: GroupModel },
+          { model: TaskModel },
+        ],
       });
 
       if (user === null) {

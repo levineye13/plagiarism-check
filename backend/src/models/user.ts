@@ -1,9 +1,15 @@
-import { Model, DataTypes, Optional } from 'sequelize';
+import {
+  Model,
+  DataTypes,
+  Optional,
+  BelongsToSetAssociationMixin,
+} from 'sequelize';
 
 import { sequelize } from '../db';
 import { TRole } from '../utils/types';
 import { IUser } from '../utils/interfaces';
 import { Role } from '../utils/constants';
+import Group from './group';
 
 class User
   extends Model<IUser, Optional<IUser, 'id' | 'role'>>
@@ -14,6 +20,8 @@ class User
   public email!: string;
   public name!: string;
   public password!: string;
+  public group!: string;
+  public setGroup!: BelongsToSetAssociationMixin<Group, number>;
 }
 
 User.init(
@@ -25,7 +33,7 @@ User.init(
     },
     role: {
       type: DataTypes.ENUM(Role.Admin, Role.Moderator, Role.User),
-      defaultValue: 'user',
+      defaultValue: Role.User,
     },
     email: {
       type: DataTypes.STRING,
@@ -40,6 +48,10 @@ User.init(
       allowNull: false,
     },
     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    group: {
       type: DataTypes.STRING,
       allowNull: false,
     },

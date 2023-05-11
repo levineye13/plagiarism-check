@@ -24,6 +24,7 @@ const auth = (req: IRequest, res: Response, next: NextFunction) => {
     }
 
     req.user.id = payload.id;
+    req.user.role = payload.role;
     next();
   } catch (e) {
     next(new Unauthorized());
