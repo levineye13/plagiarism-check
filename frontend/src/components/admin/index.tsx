@@ -12,6 +12,7 @@ import Answer from './answer';
 import CompareList from './compare-list';
 import CodeCompare from './code-compare';
 import CreateGroup from './create-group';
+import CreateCourse from './create-course';
 import styles from './index.module.scss';
 import { ROUTES } from '../../utils/constants';
 
@@ -52,6 +53,10 @@ const AdminPanel: FC<IAdminPanel> = ({ onOpenModal }) => {
         <Route
           path="add-group"
           element={<CreateGroup onOpenModal={onOpenModal} />}
+        />
+        <Route
+          path="add-course"
+          element={<CreateCourse onOpenModal={onOpenModal} />}
         />
         <Route
           path="add-task"

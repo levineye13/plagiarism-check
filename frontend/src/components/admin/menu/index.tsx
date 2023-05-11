@@ -27,6 +27,11 @@ const Menu: FC = (): ReactElement => {
             </Link>
           </li>
           <li className={styles.li}>
+            <Link className={styles.link} to="add-course">
+              Добавить курс
+            </Link>
+          </li>
+          <li className={styles.li}>
             <Link className={styles.link} to="add-task">
               Добавить задание
             </Link>
