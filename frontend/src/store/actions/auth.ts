@@ -6,12 +6,12 @@ import { IUser } from '../../utils/interfaces';
 
 interface IRegister {
   readonly type: typeof REGISTER;
-  readonly payload: { login: string; email: string };
+  readonly payload: { name: string; email: string };
 }
 
 interface ILogin {
   readonly type: typeof LOGIN;
-  readonly payload: { login: string; email: string };
+  readonly payload: { name: string; email: string };
 }
 
 interface ILogout {
@@ -26,7 +26,7 @@ export const register: TAppThunk =
     try {
       const user: IUser = await api.user.register({
         email,
-        login,
+        name: login,
         group,
         password,
       });
@@ -52,14 +52,12 @@ export const login: TAppThunk =
     }
   };
 
-export const logout: TAppThunk =
-  ({ email, password }) =>
-  async (dispatch: TAppDispatch) => {
-    try {
-      await api.user.logout();
+export const logout: TAppThunk = () => async (dispatch: TAppDispatch) => {
+  try {
+    await api.user.logout();
 
-      dispatch({ type: LOGOUT });
-    } catch (e) {
-      console.error(e);
-    }
-  };
+    dispatch({ type: LOGOUT });
+  } catch (e) {
+    console.error(e);
+  }
+};

@@ -2,31 +2,34 @@ import { REGISTER, LOGIN, LOGOUT } from '../action-types';
 
 interface IAuthState {
   readonly isAuth: boolean;
-  readonly login: string;
-  readonly email: string;
-  readonly group: string;
+  readonly user: {
+    name: string;
+    email: string;
+    group: string;
+  };
 }
 
 const initialState: IAuthState = {
-  isAuth: true,
-  login: '',
-  email: '',
-  group: '',
+  isAuth: false,
+  user: { name: '', email: '', group: '' },
 };
 
 export const authReducer = (
   state = initialState,
-  action: { type: string; payload?: { login: string; email: string } }
+  action: {
+    type: string;
+    payload: { name: string; email: string; group: string };
+  }
 ): IAuthState => {
   switch (action.type) {
     case REGISTER:
-      return { ...state, isAuth: true, ...action.payload };
+      return { ...state, isAuth: true, user: action.payload };
 
     case LOGIN:
-      return { ...state, isAuth: true, ...action.payload };
+      return { ...state, isAuth: true, user: action.payload };
 
     case LOGOUT:
-      return { ...state, isAuth: false };
+      return initialState;
 
     default:
       return state;
