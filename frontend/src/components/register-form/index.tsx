@@ -6,6 +6,7 @@ import Input from '../input';
 import { ROUTES, formNames, Fields } from '../../utils/constants';
 import styles from './index.module.scss';
 import { useForm } from '../../hooks/useForm';
+import { register } from '../../store/actions';
 
 type TFields =
   | Fields.Email
@@ -25,7 +26,9 @@ const initialFields: { [key in TFields]: string } = {
 const RegisterForm: FC = () => {
   const { values, onChange, onSubmit } = useForm<TFields>(
     formNames.register,
-    initialFields
+    initialFields,
+    [Fields.Confirm],
+    register
   );
 
   return (

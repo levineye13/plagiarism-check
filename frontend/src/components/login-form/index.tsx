@@ -6,6 +6,7 @@ import Input from '../input';
 import { Fields, ROUTES, formNames } from '../../utils/constants';
 import styles from './index.module.scss';
 import { useForm } from '../../hooks/useForm';
+import { login } from '../../store/actions';
 
 type TFields = Fields.Email | Fields.Password;
 
@@ -17,7 +18,9 @@ const initialFields: { [key in TFields]: string } = {
 const LoginForm: FC = () => {
   const { values, onChange, onSubmit } = useForm<TFields>(
     formNames.login,
-    initialFields
+    initialFields,
+    [],
+    login
   );
 
   return (
