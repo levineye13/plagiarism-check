@@ -13,6 +13,7 @@ class UserApi extends Api {
       method: HTTP_METHODS.post,
       headers: this.headers,
       body: JSON.stringify(user),
+      credentials: 'include',
     });
 
     const newUser = await this.checkResponce<IUser>(res);
@@ -27,6 +28,7 @@ class UserApi extends Api {
       method: HTTP_METHODS.post,
       headers: this.headers,
       body: JSON.stringify(user),
+      credentials: 'include',
     });
 
     const currentUser = await this.checkResponce<IUser>(res);
@@ -37,11 +39,25 @@ class UserApi extends Api {
     const res: Response = await fetch(`${this.baseUrl}/${API_ROUTES.signout}`, {
       method: HTTP_METHODS.head,
       headers: HEADERS,
+      credentials: 'include',
     });
 
     const data = await this.checkResponce<TApiAnswer>(res);
     return data;
   };
+
+  // public getUser = async (): Promise<IUser | never> => {
+  //   const res: Response = await fetch(`${this.baseUrl}${ApiEndpoints.User}`, {
+  //     method: HTTP_METHODS.get,
+  //     headers: {
+  //       HEADERS,
+  //       authorization: `${this.options.schemaType} ${Cookie.get('access')}`,
+  //     },
+  //   });
+
+  //   const data = await this.checkResponce<IUser>(res);
+  //   return data;
+  // };
 }
 
 const apiUser = new UserApi(API_BASE_URL, HEADERS);
