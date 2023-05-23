@@ -23,7 +23,11 @@ export const useForm = <TFields extends string>(
   useEffect(() => {
     for (const field in initialFields) {
       dispatch(
-        setField({ form: formName, key: field, value: initialFields[field] })
+        setField({
+          form: formName,
+          key: field,
+          value: initialFields[field],
+        })
       );
     }
   }, [dispatch, formName, initialFields]);

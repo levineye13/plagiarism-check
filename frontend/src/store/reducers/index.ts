@@ -7,6 +7,8 @@ import { modalReducer } from './modal';
 import { taskReducer } from './task';
 import { tasksReducer } from './tasks';
 import { formReducer } from './form';
+import { groupReducer } from './group';
+import { subjectReducer } from './subject';
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -16,4 +18,6 @@ export const rootReducer = combineReducers({
   task: taskReducer,
   tasks: tasksReducer,
   form: formReducer,
+  groups: groupReducer,
+  subject: subjectReducer,
 });

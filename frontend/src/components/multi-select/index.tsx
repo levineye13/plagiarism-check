@@ -6,7 +6,8 @@ import styles from './index.module.scss';
 interface IMultiSelect<T> {
   readonly title: string;
   readonly list: Array<T>;
-  readonly onSelect: (arg: T) => void;
+  readonly selectList: Array<T>;
+  readonly onSelect: (arg: T[]) => void;
   readonly style?: CSSProperties;
   readonly blocked?: boolean;
   readonly className?: string;
@@ -15,28 +16,27 @@ interface IMultiSelect<T> {
 const MultiSelect = <T extends string | number>({
   title,
   list,
+  selectList,
   style,
   onSelect,
   blocked,
   className,
 }: IMultiSelect<T>): React.ReactElement => {
-  const [selectList, setSelectList] = useState<string[]>([]);
-
   const handleSelect = (e: MouseEvent<HTMLLIElement>): void => {
     if (blocked) {
       return;
     }
 
-    const elem = e.currentTarget.textContent as string;
+    const elem = e.currentTarget.textContent as T;
 
     const index = selectList.indexOf(elem);
 
     if (index === -1) {
-      setSelectList([...selectList, elem]);
+      onSelect([...selectList, elem]);
       e.currentTarget.classList.add(`${styles.item_select}`);
     } else {
       selectList.splice(index, 1);
-      setSelectList([...selectList]);
+      onSelect([...selectList]);
       e.currentTarget.classList.remove(`${styles.item_select}`);
     }
   };

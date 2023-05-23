@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 
 import SectionTitle from '../../section-title';
 import AddCourseForm from '../../add-course-form';
@@ -6,16 +6,17 @@ import MultiSelect from '../../multi-select';
 import Back from '../../back-button';
 import styles from './index.module.scss';
 import { modalClose } from '../../../store/actions';
-import { useAppDispatch } from '../../../store/hooks';
-
-const courses = [{ title: 'БСАЫ-23-12' }, { title: 'ЛАРО-23-11' }];
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { getAllGroupsOwner } from '../../../store/actions/group';
 
 interface IAddTask {
   readonly onOpenModal: (formId: string, question: string) => void;
 }
 
-const CreateGroup: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
+const CreateCourse: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   const dispatch = useAppDispatch();
+  const { ownGroups } = useAppSelector((state) => state.groups);
+  const [selectList, setSelectList] = useState<string[]>([]);
 
   const handleSubmit = (): void => {
     dispatch(modalClose());
@@ -25,6 +26,10 @@ const CreateGroup: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
     onOpenModal('addCourse', 'Добавить курс?');
   };
 
+  useEffect(() => {
+    dispatch(getAllGroupsOwner());
+  }, [dispatch]);
+
   return (
     <section className={styles.section}>
       <Back />
@@ -33,11 +38,13 @@ const CreateGroup: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
         className={styles.select}
         style={{ marginBottom: 20 }}
         title="Выберите группы"
-        list={courses.map((item) => item.title)}
-        onSelect={() => {}}
+        list={ownGroups.map((item) => item.name)}
+        selectList={selectList}
+        onSelect={setSelectList}
       />
       <AddCourseForm
         id="addCourse"
+        groups={selectList}
         onSubmit={handleSubmit}
         onButtonClick={handleOpenModal}
       />
@@ -45,4 +52,4 @@ const CreateGroup: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   );
 };
 
-export default CreateGroup;
+export default CreateCourse;

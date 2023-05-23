@@ -5,6 +5,8 @@ export type { TModal } from './modal';
 export type { TForm } from './form';
 export type { TTask } from './task';
 export type { TTasks } from './tasks';
+export type { TGroup } from './group';
+export type { TSubject } from './subject';
 
 export { register, login, logout } from './auth';
 export { openMenu, closeMenu } from './menu';
@@ -19,3 +21,5 @@ export {
 export { setTitle } from './task';
 export { setTasks, addTask, deleteTask } from './tasks';
 export { setField, setFieldError, clearForm } from './form';
+export { getAllGroups, getAllGroupsOwner } from './group';
+export { getAllSubjects, getAllSubjectsOwner, createSubject } from './subject';

@@ -1,10 +1,18 @@
 import { ActionCreator, Dispatch } from 'redux';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ThunkAction } from 'redux-thunk';
 
 import { rootReducer } from './reducers';
-import { TAuth, TMenu, TModal, TSelect, TForm, TTask } from './actions';
-import { TTasks } from './actions/tasks';
-import { TGroup } from './actions/group';
+import {
+  TAuth,
+  TMenu,
+  TModal,
+  TSelect,
+  TForm,
+  TTask,
+  TTasks,
+  TGroup,
+  TSubject,
+} from './actions';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -16,7 +24,8 @@ export type TAppActions =
   | TForm
   | TTask
   | TTasks
-  | TGroup;
+  | TGroup
+  | TSubject;
 
 export type TAppDispatch = Dispatch<TAppActions>;
 
