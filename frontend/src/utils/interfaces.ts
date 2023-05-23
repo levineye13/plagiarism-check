@@ -5,14 +5,17 @@ export interface IUser {
 }
 
 export interface IGroup {
+  id: number;
   name: string;
 }
 
 export interface ISubject {
+  id: number;
   name: string;
 }
 
 export interface ITask {
+  id: number;
   description: string;
   text: string;
 }

@@ -47,6 +47,7 @@ export const formNames: { [formName in TAppForm]: formName } = {
   addAnswer: 'addAnswer',
   addGroup: 'addGroup',
   addTask: 'addTask',
+  addCourse: 'addCourse',
   forgotPassword: 'forgotPassword',
   resetPassword: 'resetPassword',
 };

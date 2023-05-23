@@ -19,7 +19,6 @@ type TFields = Fields.AddCourse;
 
 const initialFields: { [key in TFields]: string } = {
   addCourse: '',
-  // groups: [],
 };
 
 const AddCourseForm: FC<IAddCourseForm> = ({

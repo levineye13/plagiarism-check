@@ -2,27 +2,20 @@ import React, { FC } from 'react';
 
 import GroupItem from '../group-item';
 import styles from './index.module.scss';
-
-const subject = {
-  title: 'Алгоритмы',
-  groups: [
-    { id: 1, title: 'AAA-21-20' },
-    { id: 2, title: 'BBB-22-21' },
-    { id: 3, title: 'CCC-23-22' },
-  ],
-};
+import { IGroup } from '../../utils/interfaces';
 
 interface IGroupList {
   readonly path: string;
+  readonly list: Array<IGroup>;
 }
 
-const GroupList: FC<IGroupList> = ({ path }) => {
+const GroupList: FC<IGroupList> = ({ path, list }) => {
   return (
     <ul className={styles.groups}>
-      {subject.groups.map((group) => (
+      {list.map((group) => (
         <li className={styles.item} key={group.id}>
           <GroupItem id={group.id} path={path}>
-            {group.title}
+            {group.name}
           </GroupItem>
         </li>
       ))}

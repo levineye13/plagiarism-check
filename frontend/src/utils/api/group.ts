@@ -8,6 +8,20 @@ class GroupApi extends Api {
     super(baseUrl, headers);
   }
 
+  public create = async (
+    name: string
+  ): Promise<(IGroup & { id: number }) | never> => {
+    const res: Response = await fetch(`${this.baseUrl}/groups`, {
+      method: HTTP_METHODS.post,
+      headers: this.headers,
+      credentials: 'include',
+      body: JSON.stringify({ name }),
+    });
+
+    const group = await this.checkResponce<IGroup>(res);
+    return group;
+  };
+
   public getAll = async (): Promise<IGroup[] | never> => {
     const res: Response = await fetch(`${this.baseUrl}/groups`, {
       method: HTTP_METHODS.get,

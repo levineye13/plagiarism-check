@@ -23,6 +23,7 @@ export type TAppForm =
   | 'addAnswer'
   | 'addGroup'
   | 'addTask'
+  | 'addCourse'
   | 'register'
   | 'login'
   | 'forgotPassword'
