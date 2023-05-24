@@ -35,9 +35,9 @@ const AddCourseForm: FC<IAddCourseForm> = ({
   } = useForm<TFields>(formNames.addCourse, initialFields, [], createSubject);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    dispatch(
-      setField({ form: formNames.addCourse, key: 'groups', value: groups })
-    );
+    // dispatch(
+    //   setField({ form: formNames.addCourse, key: 'groups', value: groups })
+    // );
     onSubmitForm(e);
     onSubmit();
   };

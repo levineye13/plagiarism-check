@@ -18,7 +18,6 @@ const CreateCourse: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   const dispatch = useAppDispatch();
   const { ownGroups } = useAppSelector((state) => state.groups);
   const { groups } = useAppSelector((state) => state.form.addCourse);
-  //const [selectList, setSelectList] = useState<string[]>([]);
 
   const handleSubmit = (): void => {
     dispatch(modalClose());
@@ -36,13 +35,19 @@ const CreateCourse: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
     <section className={styles.section}>
       <Back />
       <SectionTitle style={{ marginBottom: 60 }}>Создание курса</SectionTitle>
-      <MultiSelect<string>
+      <MultiSelect
         className={styles.select}
         style={{ marginBottom: 20 }}
         title="Выберите группы"
         list={ownGroups.map((item) => item.name)}
         selectList={groups.value as string[]}
-        onSelect={() => setField}
+        onSelect={(newSelect: string[]) =>
+          setField({
+            form: formNames.addCourse,
+            key: 'groups',
+            value: newSelect,
+          })
+        }
       />
       <AddCourseForm
         id="addCourse"

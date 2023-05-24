@@ -3,19 +3,19 @@ import { MouseEvent } from 'react';
 
 import styles from './index.module.scss';
 import { useAppDispatch } from '../../store/hooks';
-import { setField } from '../../store/actions';
+import { ISetField } from '../../store/actions/form';
 
-interface IMultiSelect<T> {
+interface IMultiSelect {
   readonly title: string;
-  readonly list: Array<T>;
-  readonly selectList: Array<T>;
-  readonly onSelect: () => typeof setField;
+  readonly list: string[];
+  readonly selectList: string[];
+  readonly onSelect: (newSelect: string[]) => ISetField;
   readonly style?: CSSProperties;
   readonly blocked?: boolean;
   readonly className?: string;
 }
 
-const MultiSelect = <T extends string | number>({
+const MultiSelect = ({
   title,
   list,
   selectList,
@@ -23,36 +23,24 @@ const MultiSelect = <T extends string | number>({
   onSelect,
   blocked,
   className,
-}: IMultiSelect<T>): React.ReactElement => {
+}: IMultiSelect): React.ReactElement => {
   const dispatch = useAppDispatch();
   const handleSelect = (e: MouseEvent<HTMLLIElement>): void => {
     if (blocked) {
       return;
     }
 
-    const elem = e.currentTarget.textContent as T;
+    const elem = e.currentTarget.textContent as string;
 
     const index = selectList.indexOf(elem);
 
     if (index === -1) {
       const newSelect = [...selectList, elem];
-      dispatch(
-        onSelect()({
-          form: 'addCourse',
-          key: 'groups',
-          value: newSelect as string[],
-        })
-      );
+      dispatch(onSelect(newSelect));
       e.currentTarget.classList.add(`${styles.item_select}`);
     } else {
       const newSelect = [...selectList].splice(index, 1);
-      dispatch(
-        onSelect()({
-          form: 'addCourse',
-          key: 'groups',
-          value: newSelect as string[],
-        })
-      );
+      dispatch(onSelect(newSelect));
       e.currentTarget.classList.remove(`${styles.item_select}`);
     }
   };
