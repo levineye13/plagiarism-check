@@ -1,13 +1,13 @@
 import { SET_FIELD, CLEAR_FORM, SET_FIELD_ERROR } from '../action-types';
 import { TAppForm } from '../../utils/types';
 
-interface IFormPayload {
+export interface IFormPayload {
   form: TAppForm;
   key: string;
-  value: string | number | boolean;
+  value: string | number | boolean | string[];
 }
 
-interface ISetField {
+export interface ISetField {
   readonly type: typeof SET_FIELD;
   readonly payload: IFormPayload;
 }

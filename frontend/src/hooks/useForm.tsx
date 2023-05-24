@@ -56,7 +56,7 @@ export const useForm = <TFields extends string>(
     e.preventDefault();
 
     if (typeof submitAction === 'function') {
-      const arg: { [key: string]: string } = {};
+      const arg: { [key: string]: string | string[] } = {};
 
       for (const key in form) {
         if (omitFields && omitFields.includes(key as TFields)) {

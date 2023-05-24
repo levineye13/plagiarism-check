@@ -4,7 +4,7 @@ import { TAppForm } from '../../utils/types';
 
 type IState = {
   [formName in TAppForm]: {
-    [key: string]: { value: string; error: string };
+    [key: string]: { value: string | string[]; error: string };
   };
 };
 
@@ -14,6 +14,7 @@ const initialForm: IState = {
   addAnswer: {},
   addGroup: {},
   addTask: {},
+  addCourse: { groups: { value: [], error: '' } },
   forgotPassword: {},
   resetPassword: {},
 };

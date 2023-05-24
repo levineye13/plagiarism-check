@@ -5,9 +5,10 @@ import AddCourseForm from '../../add-course-form';
 import MultiSelect from '../../multi-select';
 import Back from '../../back-button';
 import styles from './index.module.scss';
-import { modalClose } from '../../../store/actions';
+import { modalClose, setField } from '../../../store/actions';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getAllGroupsOwner } from '../../../store/actions/group';
+import { formNames } from '../../../utils/constants';
 
 interface IAddTask {
   readonly onOpenModal: (formId: string, question: string) => void;
@@ -16,7 +17,8 @@ interface IAddTask {
 const CreateCourse: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   const dispatch = useAppDispatch();
   const { ownGroups } = useAppSelector((state) => state.groups);
-  const [selectList, setSelectList] = useState<string[]>([]);
+  const { groups } = useAppSelector((state) => state.form.addCourse);
+  //const [selectList, setSelectList] = useState<string[]>([]);
 
   const handleSubmit = (): void => {
     dispatch(modalClose());
@@ -39,12 +41,12 @@ const CreateCourse: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
         style={{ marginBottom: 20 }}
         title="Выберите группы"
         list={ownGroups.map((item) => item.name)}
-        selectList={selectList}
-        onSelect={setSelectList}
+        selectList={groups.value as string[]}
+        onSelect={() => setField}
       />
       <AddCourseForm
         id="addCourse"
-        groups={selectList}
+        groups={groups.value as string[]}
         onSubmit={handleSubmit}
         onButtonClick={handleOpenModal}
       />
