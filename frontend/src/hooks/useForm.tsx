@@ -9,7 +9,8 @@ export const useForm = <TFields extends string>(
   formName: TAppForm,
   initialFields: { [key in TFields]: string },
   omitFields?: TFields[],
-  submitAction?: TAppThunk | ActionCreator<TAppActions>
+  submitAction?: TAppThunk | ActionCreator<TAppActions>,
+  addFields?: { [key in TFields]?: string }
 ): {
   values: {
     [key in TFields]: { value: string; error: string };
@@ -64,6 +65,12 @@ export const useForm = <TFields extends string>(
         }
 
         arg[key] = form[key].value;
+      }
+
+      if (addFields) {
+        for (const key in addFields) {
+          arg[key] = addFields[key] as string;
+        }
       }
 
       dispatch(submitAction(arg));
