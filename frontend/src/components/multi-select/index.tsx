@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties } from 'react';
+import React, { CSSProperties } from 'react';
 import { MouseEvent } from 'react';
 
 import styles from './index.module.scss';
@@ -39,7 +39,8 @@ const MultiSelect = ({
       dispatch(onSelect(newSelect));
       e.currentTarget.classList.add(`${styles.item_select}`);
     } else {
-      const newSelect = [...selectList].splice(index, 1);
+      const newSelect = [...selectList];
+      newSelect.splice(index, 1);
       dispatch(onSelect(newSelect));
       e.currentTarget.classList.remove(`${styles.item_select}`);
     }
