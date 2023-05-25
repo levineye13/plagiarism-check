@@ -25,10 +25,10 @@ interface IGetAllGroupOwner {
 export type TGroup = ICreateGroup | IGetAllGroup | IGetAllGroupOwner;
 
 export const createGroup: TAppThunk =
-  ({ name }) =>
+  ({ addGroup }: { addGroup: string }) =>
   async (dispatch: TAppDispatch) => {
     try {
-      const group = await api.group.create(name);
+      const group = await api.group.create(addGroup);
 
       dispatch({ type: CREATE_GROUP, payload: { group } });
     } catch (e) {

@@ -12,7 +12,7 @@ class SubjectApi extends Api {
   public create = async (
     name: string,
     groups: string[]
-  ): Promise<(ISubject & { id: number }) | never> => {
+  ): Promise<ISubject | never> => {
     const res: Response = await fetch(`${this.baseUrl}/subjects`, {
       method: HTTP_METHODS.post,
       headers: this.headers,
@@ -20,7 +20,7 @@ class SubjectApi extends Api {
       body: JSON.stringify({ name, groups }),
     });
 
-    const subject = await this.checkResponce<ISubject & { id: number }>(res);
+    const subject = await this.checkResponce<ISubject>(res);
     return subject;
   };
 

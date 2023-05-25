@@ -1,13 +1,15 @@
-import { TTask } from '../../utils/types';
-import { ADD_TASK, DELETE_TASK, SET_TASKS } from '../action-types/tasks';
+import { ITask } from '../../utils/interfaces';
+import { SET_TASKS, SET_TASKS_OWNER } from '../action-types/tasks';
 import { TTasks } from '../actions/tasks';
 
 interface IInitialTasks {
-  readonly tasks: TTask[];
+  readonly all: ITask[];
+  readonly allOwner: ITask[];
 }
 
 const initialTasks: IInitialTasks = {
-  tasks: [],
+  all: [],
+  allOwner: [],
 };
 
 export const tasksReducer = (state = initialTasks, action: TTasks) => {
@@ -15,18 +17,10 @@ export const tasksReducer = (state = initialTasks, action: TTasks) => {
 
   switch (type) {
     case SET_TASKS:
-      return { tasks: action.payload.tasks };
+      return { ...state, all: action.payload.tasks };
 
-    case ADD_TASK:
-      return { tasks: [...state.tasks, action.payload.task] };
-
-    case DELETE_TASK: {
-      const newTasks = state.tasks.filter(
-        (task) => task.id !== action.payload.task.id
-      );
-
-      return { tasks: newTasks };
-    }
+    case SET_TASKS_OWNER:
+      return { ...state, allOwner: action.payload.tasks };
 
     default:
       return state;

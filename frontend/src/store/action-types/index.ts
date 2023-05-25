@@ -8,9 +8,22 @@ export {
   MODAL_SET_QUESTION,
   MODAL_SET_FORM,
 } from './modal';
-export { SET_FIELD, SET_FIELD_ERROR, CLEAR_FORM } from './form';
+export {
+  SET_FIELD,
+  SET_FIELD_ERROR,
+  CLEAR_FORM,
+  CLEAR_COURSES_AND_GROUP,
+} from './form';
 export { TASK_SET_TITLE, TASK_SET } from './task';
-export { SET_TASKS, ADD_TASK, DELETE_TASK } from './tasks';
+export {
+  SET_TASKS,
+  SET_TASKS_OWNER,
+  ADD_TASK,
+  DELETE_TASK,
+  CREATE_TASK,
+  GET_ALL_TASKS,
+  GET_ALL_TASKS_OWNER,
+} from './tasks';
 export {
   CREATE_SUBJECT,
   GET_ALL_SUBJECT,

@@ -19,7 +19,19 @@ export {
   modalSetQuestion,
 } from './modal';
 export { setTitle } from './task';
-export { setTasks, addTask, deleteTask } from './tasks';
-export { setField, setFieldError, clearForm } from './form';
-export { getAllGroups, getAllGroupsOwner } from './group';
+export {
+  setTasks,
+  addTask,
+  deleteTask,
+  createTask,
+  getAllTask,
+  getAllTaskOwner,
+} from './tasks';
+export {
+  setField,
+  setFieldError,
+  clearForm,
+  clearCoursesAndGroups,
+} from './form';
+export { getAllGroups, getAllGroupsOwner, createGroup } from './group';
 export { getAllSubjects, getAllSubjectsOwner, createSubject } from './subject';

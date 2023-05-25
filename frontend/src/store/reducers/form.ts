@@ -1,5 +1,10 @@
 import type { TForm } from '../actions';
-import { CLEAR_FORM, SET_FIELD, SET_FIELD_ERROR } from '../action-types';
+import {
+  CLEAR_COURSES_AND_GROUP,
+  CLEAR_FORM,
+  SET_FIELD,
+  SET_FIELD_ERROR,
+} from '../action-types';
 import { TAppForm } from '../../utils/types';
 
 type IState = {
@@ -13,18 +18,18 @@ const initialForm: IState = {
   register: {},
   addAnswer: {},
   addGroup: {},
-  addTask: {},
+  addTask: { courses: { value: [], error: '' } },
   addCourse: { groups: { value: [], error: '' } },
   forgotPassword: {},
   resetPassword: {},
 };
 
 export const formReducer = (state = initialForm, action: TForm) => {
-  const { type, payload } = action;
+  const { type } = action;
 
   switch (type) {
     case SET_FIELD: {
-      const { form, key, value } = payload;
+      const { form, key, value } = action.payload;
 
       return {
         ...state,
@@ -39,7 +44,7 @@ export const formReducer = (state = initialForm, action: TForm) => {
     }
 
     case SET_FIELD_ERROR: {
-      const { form, key, value } = payload;
+      const { form, key, value } = action.payload;
 
       return {
         ...state,
@@ -56,7 +61,14 @@ export const formReducer = (state = initialForm, action: TForm) => {
     case CLEAR_FORM:
       return {
         ...state,
-        [payload.form]: { errors: {} },
+        [action.payload.form]: {},
+      };
+
+    case CLEAR_COURSES_AND_GROUP:
+      return {
+        ...state,
+        addTask: { courses: { value: [], error: '' } },
+        addCourse: { groups: { value: [], error: '' } },
       };
 
     default:

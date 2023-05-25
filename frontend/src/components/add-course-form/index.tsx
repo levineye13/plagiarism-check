@@ -5,7 +5,7 @@ import Button from '../button';
 import styles from './index.module.scss';
 import { useForm } from '../../hooks/useForm';
 import { Fields, formNames } from '../../utils/constants';
-import { createSubject, setField } from '../../store/actions';
+import { clearCoursesAndGroups, createSubject } from '../../store/actions';
 import { useAppDispatch } from '../../store/hooks';
 
 interface IAddCourseForm {
@@ -35,11 +35,9 @@ const AddCourseForm: FC<IAddCourseForm> = ({
   } = useForm<TFields>(formNames.addCourse, initialFields, [], createSubject);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    // dispatch(
-    //   setField({ form: formNames.addCourse, key: 'groups', value: groups })
-    // );
     onSubmitForm(e);
     onSubmit();
+    dispatch(clearCoursesAndGroups());
   };
 
   return (

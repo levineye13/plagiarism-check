@@ -18,4 +18,5 @@ export interface ITask {
   id: number;
   description: string;
   text: string;
+  language: string;
 }

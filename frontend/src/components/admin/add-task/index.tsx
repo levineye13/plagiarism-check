@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useCallback } from 'react';
+import React, { FC, ReactElement, useCallback, useEffect } from 'react';
 
 import Select from '../../select';
 import MultiSelect from '../../multi-select';
@@ -6,24 +6,29 @@ import AddTaskForm from '../../add-task-form';
 import SectionTitle from '../../section-title';
 import Back from '../../back-button';
 import { TLanguage } from '../../../utils/types';
-import { LANGUAGE } from '../../../utils/constants';
+import { LANGUAGE, formNames } from '../../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { setLanguage, modalClose } from '../../../store/actions';
+import {
+  setLanguage,
+  modalClose,
+  setField,
+  getAllSubjectsOwner,
+} from '../../../store/actions';
 import styles from './index.module.scss';
 
-const courses = [{ title: 'Алгоритмы' }, { title: 'Машинное обучение' }];
+// const courses = [{ title: 'Алгоритмы' }, { title: 'Машинное обучение' }];
 
-const subject = {
-  title: 'Алгоритмы',
-  groups: [
-    { id: 1, title: 'AAA-21-20' },
-    { id: 2, title: 'BBB-22-21' },
-    { id: 3, title: 'CCC-23-22' },
-    { id: 1, title: 'AAA-21-23' },
-    { id: 2, title: 'BBB-22-24' },
-    { id: 3, title: 'CCC-23-25' },
-  ],
-};
+// const subject = {
+//   title: 'Алгоритмы',
+//   groups: [
+//     { id: 1, title: 'AAA-21-20' },
+//     { id: 2, title: 'BBB-22-21' },
+//     { id: 3, title: 'CCC-23-22' },
+//     { id: 1, title: 'AAA-21-23' },
+//     { id: 2, title: 'BBB-22-24' },
+//     { id: 3, title: 'CCC-23-25' },
+//   ],
+// };
 
 interface IAddTask {
   readonly onOpenModal: (formId: string, question: string) => void;
@@ -32,6 +37,8 @@ interface IAddTask {
 const AddTask: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
   const dispatch = useAppDispatch();
   const { language } = useAppSelector((state) => state.editor);
+  const { owner } = useAppSelector((state) => state.subject);
+  const { courses } = useAppSelector((state) => state.form.addTask);
 
   //const [groups, setGroups] = useState<string[]>([]);
 
@@ -56,6 +63,10 @@ const AddTask: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
     onOpenModal('addTask', 'Добавить задание?');
   };
 
+  useEffect(() => {
+    dispatch(getAllSubjectsOwner());
+  }, [dispatch]);
+
   return (
     <section className={styles.section}>
       <Back />
@@ -76,11 +87,18 @@ const AddTask: FC<IAddTask> = ({ onOpenModal }): ReactElement => {
           onButtonClick={handleOpenModal}
         />
       </div>
-      <MultiSelect<string>
+      <MultiSelect
         className={styles.select}
         title="Выберите курсы"
-        list={courses.map((item) => item.title)}
-        onSelect={() => {}}
+        list={owner.map((item) => item.name)}
+        selectList={courses.value as string[]}
+        onSelect={(newSelect: string[]) =>
+          setField({
+            form: formNames.addTask,
+            key: 'courses',
+            value: newSelect,
+          })
+        }
       />
     </section>
   );

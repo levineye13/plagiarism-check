@@ -29,8 +29,6 @@ export const createSubject: TAppThunk =
   ({ addCourse, groups }: { addCourse: string; groups: string[] }) =>
   async (dispatch: TAppDispatch) => {
     try {
-      console.log(addCourse, groups);
-
       const subject = await api.subject.create(addCourse, groups);
 
       dispatch({ type: CREATE_SUBJECT, payload: { subject } });

@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
+import React, { FC, ReactElement, useEffect } from 'react';
 
 import SectionTitle from '../../section-title';
 import AddCourseForm from '../../add-course-form';

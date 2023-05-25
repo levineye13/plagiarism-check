@@ -1,10 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 
 import Input from '../input';
 import Button from '../button';
 import styles from './index.module.scss';
 import { Fields, formNames } from '../../utils/constants';
 import { useForm } from '../../hooks/useForm';
+import { clearCoursesAndGroups, createTask } from '../../store/actions';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { TLanguage } from '../../utils/types';
 
 interface IAddTaskForm {
   readonly id: string;
@@ -12,24 +15,35 @@ interface IAddTaskForm {
   readonly onButtonClick: () => void;
 }
 
-type TFields = Fields.AddTask | 'description';
+type TFields = Fields.AddTask | 'description' | 'language';
 
 const initialFields: { [key in TFields]: string } = {
   addTask: '',
   description: '',
+  language: '',
 };
 
 const AddTaskForm: FC<IAddTaskForm> = ({ id, onSubmit, onButtonClick }) => {
+  const dispatch = useAppDispatch();
+  const { language } = useAppSelector((state) => state.editor);
   const {
     values,
     onChange,
     onSubmit: onSubmitForm,
-  } = useForm<TFields>(formNames.addTask, initialFields, onSubmit);
+  } = useForm<TFields>(formNames.addTask, initialFields, [], createTask, {
+    language,
+  });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    onSubmitForm(e);
+    onSubmit();
+    dispatch(clearCoursesAndGroups());
+  };
 
   return (
     <form
       className={styles.form}
-      onSubmit={onSubmitForm}
+      onSubmit={(e) => handleSubmit(e)}
       name={formNames.addTask}
       id={id}
       noValidate

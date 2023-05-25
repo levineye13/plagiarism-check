@@ -1,4 +1,9 @@
-import { SET_FIELD, CLEAR_FORM, SET_FIELD_ERROR } from '../action-types';
+import {
+  SET_FIELD,
+  CLEAR_FORM,
+  SET_FIELD_ERROR,
+  CLEAR_COURSES_AND_GROUP,
+} from '../action-types';
 import { TAppForm } from '../../utils/types';
 
 export interface IFormPayload {
@@ -22,7 +27,15 @@ interface IClearForm {
   readonly payload: { form: TAppForm };
 }
 
-export type TForm = ISetField | IClearForm | ISetFieldError;
+interface IClearCoursesAndGroups {
+  readonly type: typeof CLEAR_COURSES_AND_GROUP;
+}
+
+export type TForm =
+  | ISetField
+  | IClearForm
+  | ISetFieldError
+  | IClearCoursesAndGroups;
 
 export const setField = ({ form, key, value }: IFormPayload): ISetField => ({
   type: SET_FIELD,
@@ -49,4 +62,8 @@ export const setFieldError = ({
 export const clearForm = ({ form }: IFormPayload): IClearForm => ({
   type: CLEAR_FORM,
   payload: { form },
+});
+
+export const clearCoursesAndGroups = (): IClearCoursesAndGroups => ({
+  type: CLEAR_COURSES_AND_GROUP,
 });

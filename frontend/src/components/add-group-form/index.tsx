@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 
 import Input from '../input';
 import Button from '../button';
 import styles from './index.module.scss';
 import { useForm } from '../../hooks/useForm';
 import { Fields, formNames } from '../../utils/constants';
+import { createGroup } from '../../store/actions';
 
 interface IAddGroupForm {
   readonly id: string;
@@ -23,14 +24,19 @@ const AddGroupForm: FC<IAddGroupForm> = ({ id, onSubmit, onButtonClick }) => {
     values,
     onChange,
     onSubmit: onSubmitForm,
-  } = useForm<TFields>(formNames.addGroup, initialFields, onSubmit);
+  } = useForm<TFields>(formNames.addGroup, initialFields, [], createGroup);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    onSubmitForm(e);
+    onSubmit();
+  };
 
   return (
     <form
       name={formNames.addGroup}
       className={styles.form}
       id={id}
-      onSubmit={onSubmitForm}
+      onSubmit={handleSubmit}
       noValidate
     >
       <Input
@@ -41,7 +47,6 @@ const AddGroupForm: FC<IAddGroupForm> = ({ id, onSubmit, onButtonClick }) => {
         value={values.addGroup ? values.addGroup.value : ''}
         error={values.addGroup ? values.addGroup.error : ''}
         onChange={onChange}
-        pattern="[А-ЯЁ]{4}\-\d\d\-\d\d"
       />
       <Button type="submit" onClick={onButtonClick}>
         Добавить
