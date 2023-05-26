@@ -2,14 +2,11 @@ import React, { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './index.module.scss';
-
-const subjects = [
-  { id: 1, title: 'Алгоритмы' },
-  { id: 2, title: 'Структуры данных' },
-];
+import { useAppSelector } from '../../store/hooks';
 
 const Subjects: FC = () => {
   const navigate = useNavigate();
+  const { subjects } = useAppSelector((state) => state.auth.user.group);
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -28,7 +25,7 @@ const Subjects: FC = () => {
             to=""
             className={styles.name}
           >
-            {subject.title}
+            {subject.name}
           </Link>
         </li>
       ))}
