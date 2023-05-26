@@ -17,4 +17,5 @@ export const API_ROUTES = {
   signup: 'signup',
   signin: 'signin',
   signout: 'signout',
+  user: 'users/me',
 };

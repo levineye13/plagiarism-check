@@ -1,5 +1,5 @@
 import Api from './api';
-import { IUser } from '../interfaces';
+import { IGroup, IUser } from '../interfaces';
 import { IApiUser, TApiAnswer } from './types';
 import { HTTP_METHODS, HEADERS, API_ROUTES, API_BASE_URL } from './constants';
 
@@ -38,7 +38,7 @@ class UserApi extends Api {
   public logout = async (): Promise<TApiAnswer | never> => {
     const res: Response = await fetch(`${this.baseUrl}/${API_ROUTES.signout}`, {
       method: HTTP_METHODS.head,
-      headers: HEADERS,
+      headers: this.headers,
       credentials: 'include',
     });
 
@@ -46,18 +46,37 @@ class UserApi extends Api {
     return data;
   };
 
-  // public getUser = async (): Promise<IUser | never> => {
-  //   const res: Response = await fetch(`${this.baseUrl}${ApiEndpoints.User}`, {
-  //     method: HTTP_METHODS.get,
-  //     headers: {
-  //       HEADERS,
-  //       authorization: `${this.options.schemaType} ${Cookie.get('access')}`,
-  //     },
-  //   });
+  public getUser = async (): Promise<
+    | {
+        id: number;
+        email: string;
+        name: string;
+        group: {
+          id: number;
+          name: string;
+          subjects: { id: number; name: string };
+        };
+      }
+    | never
+  > => {
+    const res: Response = await fetch(`${this.baseUrl}/${API_ROUTES.user}`, {
+      method: HTTP_METHODS.get,
+      headers: this.headers,
+      credentials: 'include',
+    });
 
-  //   const data = await this.checkResponce<IUser>(res);
-  //   return data;
-  // };
+    const data = await this.checkResponce<{
+      id: number;
+      email: string;
+      name: string;
+      group: {
+        id: number;
+        name: string;
+        subjects: { id: number; name: string };
+      };
+    }>(res);
+    return data;
+  };
 }
 
 const apiUser = new UserApi(API_BASE_URL, HEADERS);

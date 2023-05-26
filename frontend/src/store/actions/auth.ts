@@ -1,6 +1,6 @@
 import { TAppThunk, TAppDispatch } from '../types';
 
-import { REGISTER, LOGIN, LOGOUT } from '../action-types';
+import { REGISTER, LOGIN, LOGOUT, SET_USER } from '../action-types';
 import { api } from '../../utils/api/';
 import { IUser } from '../../utils/interfaces';
 
@@ -18,7 +18,21 @@ interface ILogout {
   readonly type: typeof LOGOUT;
 }
 
-export type TAuth = IRegister | ILogin | ILogout;
+interface ISetUser {
+  readonly type: typeof SET_USER;
+  readonly payload: {
+    id: number;
+    email: string;
+    name: string;
+    group: {
+      id: number;
+      name: string;
+      subjects: { id: number; name: string };
+    };
+  };
+}
+
+export type TAuth = IRegister | ILogin | ILogout | ISetUser;
 
 export const register: TAppThunk =
   ({ email, login, group, password }) =>
@@ -57,6 +71,16 @@ export const logout: TAppThunk = () => async (dispatch: TAppDispatch) => {
     await api.user.logout();
 
     dispatch({ type: LOGOUT });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getMe: TAppThunk = () => async (dispatch: TAppDispatch) => {
+  try {
+    const user = await api.user.getUser();
+
+    dispatch({ type: SET_USER, payload: user });
   } catch (e) {
     console.error(e);
   }

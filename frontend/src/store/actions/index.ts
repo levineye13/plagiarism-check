@@ -8,7 +8,7 @@ export type { TTasks } from './tasks';
 export type { TGroup } from './group';
 export type { TSubject } from './subject';
 
-export { register, login, logout } from './auth';
+export { register, login, logout, getMe } from './auth';
 export { openMenu, closeMenu } from './menu';
 export { setTheme, setLanguage } from './editor';
 export {

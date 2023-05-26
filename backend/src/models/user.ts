@@ -3,6 +3,11 @@ import {
   DataTypes,
   Optional,
   BelongsToSetAssociationMixin,
+  Association,
+  NonAttribute,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
 } from 'sequelize';
 
 import { sequelize } from '../db';
@@ -11,17 +16,28 @@ import { IUser } from '../utils/interfaces';
 import { Role } from '../utils/constants';
 import Group from './group';
 
-class User
-  extends Model<IUser, Optional<IUser, 'id' | 'role'>>
-  implements IUser
-{
-  public id!: number;
+// class User
+//   extends Model<IUser, Optional<IUser, 'id' | 'role'>>
+//   implements IUser
+// {
+class User extends Model<
+  InferAttributes<User, { omit: 'group' }>,
+  InferCreationAttributes<User, { omit: 'group' }>
+> {
+  public id!: CreationOptional<number>;
   public role!: TRole;
   public email!: string;
   public name!: string;
   public password!: string;
-  public group!: string;
+  public groupName!: string;
+
   public setGroup!: BelongsToSetAssociationMixin<Group, number>;
+
+  public group?: NonAttribute<Group>;
+
+  public static associations: {
+    group: Association<User, Group>;
+  };
 }
 
 User.init(
@@ -51,7 +67,7 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    group: {
+    groupName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

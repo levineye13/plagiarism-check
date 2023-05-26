@@ -17,12 +17,18 @@ export interface IGroup {
   readonly creatorId: number;
 }
 
+export interface ISubject {
+  readonly id: number;
+  readonly name: string;
+  readonly creatorId: number;
+}
+
 export interface ITask {
   readonly id: number;
   readonly description: string;
   readonly text: string;
+  readonly language: string;
   readonly creatorId: number;
-  readonly subjectId: number;
 }
 
 export interface ILoginData {
@@ -53,8 +59,6 @@ export interface IGroupRequest extends Request {
   readonly body: {
     readonly id: number;
     readonly name: string;
-    readonly creatorId: number;
-    readonly subjectId?: number;
   };
   user?: {
     id?: number;
@@ -66,6 +70,7 @@ export interface ISubjectRequest extends Request {
   readonly body: {
     readonly id: number;
     readonly name: string;
+    readonly groups?: Array<string>;
   };
   user?: {
     id?: number;
@@ -78,8 +83,8 @@ export interface ITaskRequest extends Request {
     readonly id: number;
     readonly description: string;
     readonly text: string;
-    readonly creatorId: number;
-    readonly subjectId: number;
+    readonly language: string;
+    readonly courses?: string[];
   };
   user?: {
     id?: number;

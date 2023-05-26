@@ -44,7 +44,7 @@ class User {
         name,
         password: passwordHash,
         role,
-        group,
+        groupName: group,
       });
 
       if (groupInstance) {
@@ -58,12 +58,9 @@ class User {
         .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
         .cookie(Token.Access, access, getCookieOptions(Token.Access))
         .json({
-          success: true,
-          user: {
-            email: newUser.email,
-            name: newUser.name,
-            group: newUser.group,
-          },
+          email: newUser.email,
+          name: newUser.name,
+          group: newUser.group,
         });
     } catch (e) {
       next(e);
@@ -97,7 +94,7 @@ class User {
       }
 
       const groupInstance: GroupModel | null = await GroupModel.findOne({
-        where: { name: user.group },
+        where: { name: user.groupName },
       });
 
       if (groupInstance) {
@@ -110,7 +107,7 @@ class User {
         .status(200)
         .cookie(Token.Refresh, refresh, getCookieOptions(Token.Refresh))
         .cookie(Token.Access, access, getCookieOptions(Token.Access))
-        .send({ email: user.email, group: user.group, name: user.name });
+        .json({ email: user.email, group: user.group, name: user.name });
     } catch (e) {
       next(e);
     }
@@ -153,26 +150,40 @@ class User {
   ): Promise<void> => {
     const { user } = req;
 
-    if (user === undefined || user.id === undefined) {
-      throw new Unauthorized();
-    }
-
-    const id = user.id;
-
     try {
-      const user: UserModel | null = await UserModel.findByPk(id, {
-        include: [
-          { model: SubjectModel },
-          { model: GroupModel },
-          { model: TaskModel },
-        ],
+      if (user === undefined || user.id === undefined) {
+        throw new Unauthorized();
+      }
+
+      const id = user.id;
+
+      const findUser: UserModel | null = await UserModel.findByPk(id, {
+        include: [{ association: 'group' }],
       });
 
-      if (user === null) {
+      if (findUser === null) {
         throw new NotFound();
       }
 
-      res.status(200).json(user);
+      const group = await GroupModel.findOne({
+        where: { name: findUser.groupName },
+        include: { association: 'subjects' },
+      });
+
+      if (group === null) {
+        throw new NotFound();
+      }
+
+      res.status(200).json({
+        id: findUser.id,
+        email: findUser.email,
+        name: findUser.name,
+        group: {
+          id: group.id,
+          name: group.name,
+          subjects: group.subjects,
+        },
+      });
     } catch (e) {
       next(e);
     }
