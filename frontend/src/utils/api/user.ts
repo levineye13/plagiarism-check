@@ -2,6 +2,7 @@ import Api from './api';
 import { IGroup, IUser } from '../interfaces';
 import { IApiUser, TApiAnswer } from './types';
 import { HTTP_METHODS, HEADERS, API_ROUTES, API_BASE_URL } from './constants';
+import { TUser } from '../../store/reducers/auth';
 
 class UserApi extends Api {
   public constructor(baseUrl: string, headers: { [key: string]: string } = {}) {
@@ -46,35 +47,14 @@ class UserApi extends Api {
     return data;
   };
 
-  public getUser = async (): Promise<
-    | {
-        id: number;
-        email: string;
-        name: string;
-        group: {
-          id: number;
-          name: string;
-          subjects: { id: number; name: string };
-        };
-      }
-    | never
-  > => {
+  public getUser = async (): Promise<TUser | never> => {
     const res: Response = await fetch(`${this.baseUrl}/${API_ROUTES.user}`, {
       method: HTTP_METHODS.get,
       headers: this.headers,
       credentials: 'include',
     });
 
-    const data = await this.checkResponce<{
-      id: number;
-      email: string;
-      name: string;
-      group: {
-        id: number;
-        name: string;
-        subjects: { id: number; name: string };
-      };
-    }>(res);
+    const data = await this.checkResponce<TUser>(res);
     return data;
   };
 }

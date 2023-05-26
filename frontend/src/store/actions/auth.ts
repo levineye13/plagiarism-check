@@ -3,6 +3,7 @@ import { TAppThunk, TAppDispatch } from '../types';
 import { REGISTER, LOGIN, LOGOUT, SET_USER } from '../action-types';
 import { api } from '../../utils/api/';
 import { IUser } from '../../utils/interfaces';
+import { TUser } from '../reducers/auth';
 
 interface IRegister {
   readonly type: typeof REGISTER;
@@ -20,16 +21,7 @@ interface ILogout {
 
 interface ISetUser {
   readonly type: typeof SET_USER;
-  readonly payload: {
-    id: number;
-    email: string;
-    name: string;
-    group: {
-      id: number;
-      name: string;
-      subjects: { id: number; name: string };
-    };
-  };
+  readonly payload: TUser;
 }
 
 export type TAuth = IRegister | ILogin | ILogout | ISetUser;

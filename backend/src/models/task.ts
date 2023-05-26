@@ -7,6 +7,7 @@ class Task extends Model<ITask, Optional<ITask, 'id'>> implements ITask {
   public id!: number;
   public description!: string;
   public text!: string;
+  public language!: string;
   public creatorId!: number;
 }
 
@@ -20,9 +21,14 @@ Task.init(
     description: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     text: {
       type: DataTypes.STRING,
+    },
+    language: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     creatorId: {
       type: DataTypes.INTEGER,

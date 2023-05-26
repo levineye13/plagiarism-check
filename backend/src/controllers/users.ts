@@ -158,19 +158,10 @@ class User {
       const id = user.id;
 
       const findUser: UserModel | null = await UserModel.findByPk(id, {
-        include: [{ association: 'group' }],
+        include: { all: true, nested: true },
       });
 
       if (findUser === null) {
-        throw new NotFound();
-      }
-
-      const group = await GroupModel.findOne({
-        where: { name: findUser.groupName },
-        include: { association: 'subjects' },
-      });
-
-      if (group === null) {
         throw new NotFound();
       }
 
@@ -179,9 +170,9 @@ class User {
         email: findUser.email,
         name: findUser.name,
         group: {
-          id: group.id,
-          name: group.name,
-          subjects: group.subjects,
+          id: findUser.group?.id,
+          name: findUser.group?.name,
+          subjects: findUser.group?.subjects,
         },
       });
     } catch (e) {

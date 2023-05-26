@@ -4,16 +4,27 @@ import {
   DataTypes,
   CreationOptional,
   InferCreationAttributes,
+  NonAttribute,
+  Association,
 } from 'sequelize';
 
 import { sequelize } from '../db';
+import Task from './task';
 
 class Subject extends Model<
-  InferAttributes<Subject>,
-  InferCreationAttributes<Subject>
+  InferAttributes<Subject, { omit: 'tasks' }>,
+  InferCreationAttributes<Subject, { omit: 'tasks' }>
 > {
   declare id: CreationOptional<number>;
   declare name: string;
+  declare creatorId: number;
+  public addTask!: (task: Task) => void;
+
+  public tasks?: NonAttribute<Task[]>;
+
+  public static associations: {
+    tasks: Association<Subject, Task>;
+  };
 }
 
 Subject.init(
@@ -28,6 +39,9 @@ Subject.init(
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+    },
+    creatorId: {
+      type: DataTypes.INTEGER,
     },
   },
   {
