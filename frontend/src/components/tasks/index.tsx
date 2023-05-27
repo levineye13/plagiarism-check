@@ -3,31 +3,13 @@ import { useLocation } from 'react-router-dom';
 
 import Task from '../task';
 import styles from './index.module.scss';
+import { ITask } from '../../utils/interfaces';
 
-const tasks = [
-  {
-    id: 1,
-    subject: 'Алгоритмы',
-    title: 'Лабораторная 1',
-    description: 'Пузырьковая сортировка',
-    text: 'Вы должны написать алгоритм пузырьковой сортировки при преподавателе не более чем за 30 секунд',
-  },
-  {
-    id: 2,
-    subject: 'Алгоритмы',
-    title: 'Лабораторная 2',
-    text: 'Необходимо написать программу, которая будет сортировать .....',
-  },
-  {
-    id: 3,
-    subject: 'Структуры данных',
-    title: 'Лабораторная 3',
-    description: 'Очередь',
-    text: 'Реализуйте структуру данных "Очередь" с помощью односвязного списка',
-  },
-];
+interface ITasks {
+  readonly tasks: Array<ITask>;
+}
 
-const Tasks: FC = () => {
+const Tasks: FC<ITasks> = ({ tasks }) => {
   const { state } = useLocation();
 
   return (
@@ -37,8 +19,8 @@ const Tasks: FC = () => {
           <Task
             taskId={task.id}
             subjectId={state?.subjectId || null}
-            title={task.title}
             description={task.description}
+            language={task.language}
           >
             {task.text}
           </Task>

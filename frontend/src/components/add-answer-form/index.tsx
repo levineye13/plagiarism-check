@@ -7,11 +7,12 @@ import { THEME } from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import styles from './index.module.scss';
 import Select from '../select';
-import { setLanguage, setTheme } from '../../store/actions';
-import { TLanguage, TTheme } from '../../utils/types';
+import { setTheme } from '../../store/actions';
+import { TTheme } from '../../utils/types';
 
 const AddAnswerForm: FC = () => {
-  const { theme, language } = useAppSelector((store) => store.editor);
+  const { theme } = useAppSelector((state) => state.editor);
+  const { language } = useAppSelector((state) => state.task);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();

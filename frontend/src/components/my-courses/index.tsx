@@ -12,7 +12,7 @@ const MyCourses: FC = () => {
       <li className={styles.title}>Мои курсы:</li>
       {subjects &&
         subjects.map((subject) => (
-          <li className={styles.item}>
+          <li className={styles.item} key={subject.id}>
             <p className={styles.paragraph}>{subject.name}</p>
           </li>
         ))}

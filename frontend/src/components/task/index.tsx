@@ -10,17 +10,17 @@ import { setTask } from '../../store/actions/task';
 interface ITask {
   readonly taskId: number;
   readonly subjectId: number | null;
-  readonly title: string;
+  readonly description: string;
   readonly children: string;
-  readonly description?: string;
+  readonly language: string;
 }
 
 const Task: FCWithChildren<ITask> = ({
   taskId,
   subjectId,
-  title,
   children,
-  description = '',
+  description,
+  language,
 }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -29,7 +29,7 @@ const Task: FCWithChildren<ITask> = ({
   const tasks = ROUTES.tasks;
 
   const handleClick = (): void => {
-    dispatch(setTask(title, children, description));
+    dispatch(setTask(taskId, description, children, language));
 
     if (pathname.includes(tasks)) {
       navigate(`${pathname}/${taskId}`);
@@ -40,7 +40,6 @@ const Task: FCWithChildren<ITask> = ({
 
   return (
     <article className={styles.article} onClick={handleClick}>
-      <h3 className={styles.title}>{title}</h3>
       <p className={styles.description}>{description}</p>
       <p className={styles.area}>{children}</p>
     </article>
