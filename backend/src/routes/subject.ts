@@ -6,6 +6,8 @@ import { Path, Role } from '../utils/constants';
 
 const router = Router();
 
+router.get(`${Path.subjects}/owner`, Subject.getMySubjects);
+router.get(Path.subject, Subject.getById);
 router.get(Path.subjects, Subject.getAll);
 router.post(Path.subjects, role([Role.Admin, Role.Moderator]), Subject.create);
 router.delete(

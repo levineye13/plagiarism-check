@@ -35,3 +35,4 @@ export {
 } from './form';
 export { getAllGroups, getAllGroupsOwner, createGroup } from './group';
 export { getAllSubjects, getAllSubjectsOwner, createSubject } from './subject';
+export { createAnswer, getAllAnswers } from './answer';

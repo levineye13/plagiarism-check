@@ -2,15 +2,17 @@ import { TTask } from '../actions/task';
 import { TASK_SET, TASK_SET_TITLE } from '../action-types';
 
 interface IInitialTask {
-  readonly title: string;
-  readonly text: string;
+  readonly id: number;
   readonly description: string;
+  readonly text: string;
+  readonly language: string;
 }
 
 const initialTask: IInitialTask = {
-  title: '',
+  id: -1,
   text: '',
   description: '',
+  language: '',
 };
 
 export const taskReducer = (
@@ -23,15 +25,10 @@ export const taskReducer = (
     case TASK_SET:
       return {
         ...state,
-        title: payload.title,
+        id: payload.id,
         text: payload.text,
-        description: payload.description || '',
-      };
-
-    case TASK_SET_TITLE:
-      return {
-        ...state,
-        title: payload.title,
+        description: payload.description,
+        language: payload.language,
       };
 
     default:

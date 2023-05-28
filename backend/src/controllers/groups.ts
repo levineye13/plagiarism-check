@@ -60,7 +60,6 @@ class Group {
       });
 
       res.status(201).json({
-        success: true,
         id: newGroup.id,
         name: newGroup.name,
       });

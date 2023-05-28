@@ -1,4 +1,4 @@
-export { REGISTER, LOGIN, LOGOUT } from './auth';
+export { REGISTER, LOGIN, LOGOUT, SET_USER } from './auth';
 export { MENU_OPEN, MENU_CLOSE } from './menu';
 export { SET_THEME, SET_LANGUAGE } from './editor';
 export {
@@ -30,3 +30,4 @@ export {
   GET_ALL_SUBJECT_OWNER,
 } from './subject';
 export { CREATE_GROUP, GET_ALL_GROUP, GET_ALL_GROUP_OWNER } from './group';
+export { CREATE_ANSWER, GET_ALL_ANSWERS } from './answer';

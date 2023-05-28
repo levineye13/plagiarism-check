@@ -3,9 +3,10 @@ import { TASK_SET, TASK_SET_TITLE } from '../action-types';
 interface ISetTask {
   readonly type: typeof TASK_SET;
   readonly payload: {
-    title: string;
-    description?: string;
+    id: number;
+    description: string;
     text: string;
+    language: string;
   };
 }
 
@@ -19,15 +20,17 @@ interface ISetTitle {
 export type TTask = ISetTask | ISetTitle;
 
 export const setTask = (
-  title: string,
+  id: number,
+  description: string,
   text: string,
-  description?: string
+  language: string
 ): ISetTask => ({
   type: TASK_SET,
   payload: {
-    title,
+    id,
     description,
     text,
+    language,
   },
 });
 

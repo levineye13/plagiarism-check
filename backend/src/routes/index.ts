@@ -4,6 +4,7 @@ import userRouter from './users';
 import groupRouter from './group';
 import subjectRouter from './subject';
 import taskRouter from './task';
+import answerRouter from './answer';
 import { Path } from '../utils/constants';
 import User from '../controllers/users';
 import { auth } from '../middlewares';
@@ -17,5 +18,6 @@ router.use(userRouter);
 router.use(groupRouter);
 router.use(subjectRouter);
 router.use(taskRouter);
+router.use(answerRouter);
 
 export default router;

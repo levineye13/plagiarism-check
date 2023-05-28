@@ -55,6 +55,18 @@ export interface IRequest extends Request {
   };
 }
 
+export interface IAnswerRequest extends Request {
+  readonly body: {
+    readonly name: string;
+    readonly taskId: number;
+    readonly code: string;
+  };
+  user?: {
+    id?: number;
+    role?: TRole;
+  };
+}
+
 export interface IGroupRequest extends Request {
   readonly body: {
     readonly id: number;

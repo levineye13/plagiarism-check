@@ -1,49 +1,98 @@
 import { NextFunction, Response } from 'express';
-import { BadRequest, NotFound, Unauthorized } from '../errors';
+import { Op } from 'sequelize';
 
-import { Task as TaskModel } from '../models';
+import { BadRequest, Conflict, NotFound, Unauthorized } from '../errors';
+import { Subject, Task as TaskModel } from '../models';
 import { ITaskRequest } from '../utils/interfaces';
 
-class Group {
+class Task {
   public static getAll = async (
     req: ITaskRequest,
     res: Response,
     next: NextFunction
   ) => {
     try {
-      const groups: TaskModel[] = await TaskModel.findAll();
+      const task: TaskModel[] = await TaskModel.findAll();
 
-      if (groups.length === 0) {
+      if (task.length === 0) {
         res.status(200).json({
           success: true,
-          subjects: [],
+          task: [],
           text: 'Задачи пока что отсутствуют',
         });
       } else {
-        res.status(200).json({ success: true, groups });
+        res.status(200).json({ success: true, task });
       }
     } catch (e) {
       next(e);
     }
   };
 
-  public static getGroupTasks = async (
+  public static getMyTasks = async (
     req: ITaskRequest,
     res: Response,
     next: NextFunction
   ) => {
-    try {
-      const groups: TaskModel[] = await TaskModel.findAll();
+    const { user } = req;
 
-      if (groups.length === 0) {
-        res.status(200).json({
-          success: true,
-          subjects: [],
-          text: 'Задачи пока что отсутствуют',
-        });
-      } else {
-        res.status(200).json({ success: true, groups });
+    try {
+      if (!user || !user.id) {
+        throw new Unauthorized();
       }
+
+      const tasks: TaskModel[] | null = await TaskModel.findAll({
+        where: { creatorId: user.id },
+      });
+
+      if (!tasks) {
+        throw new NotFound();
+      }
+
+      res.status(200).json(tasks);
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  public static getSubjectTasks = async (
+    req: ITaskRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
+    // const { subjectId } = req.body;
+    // try {
+    //   const task: TaskModel[] = await TaskModel.findAll({
+    //     where: { subjectId: subjectId },
+    //   });
+    //   if (task.length === 0) {
+    //     res.status(200).json({
+    //       success: true,
+    //       task: [],
+    //       text: 'Задачи пока что отсутствуют',
+    //     });
+    //   } else {
+    //     res.status(200).json({ success: true, task });
+    //   }
+    // } catch (e) {
+    //   next(e);
+    // }
+  };
+
+  public static getById = async (
+    req: ITaskRequest,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.body;
+
+    try {
+      const task: TaskModel | null = await TaskModel.findByPk(id);
+
+      if (!task) {
+        throw new NotFound();
+      }
+
+      res.status(200).json(task);
     } catch (e) {
       next(e);
     }
@@ -54,23 +103,50 @@ class Group {
     res: Response,
     next: NextFunction
   ) => {
-    const { description, text, creatorId } = req.body;
+    const { description, text, language, courses } = req.body;
+    const { user } = req;
 
     try {
+      if (user === undefined || user.id === undefined) {
+        throw new Unauthorized();
+      }
+
+      const isTask: TaskModel | null = await TaskModel.findOne({
+        where: { description },
+      });
+
+      if (isTask) {
+        throw new Conflict();
+      }
+
+      if (!courses || courses.length <= 0) {
+        throw new BadRequest();
+      }
+
       const newTask: TaskModel = await TaskModel.create({
         description,
         text,
-        creatorId,
+        language,
+        creatorId: user.id,
+      });
+
+      const courseInstances: Subject[] = await Subject.findAll({
+        where: {
+          name: {
+            [Op.in]: [...courses],
+          },
+        },
+      });
+
+      courseInstances.forEach(async (couseInstance) => {
+        await couseInstance.addTask(newTask);
       });
 
       res.status(201).json({
-        success: true,
-        task: {
-          id: newTask.id,
-          description: newTask.description,
-          text: newTask.text,
-          creatorId: newTask.creatorId,
-        },
+        id: newTask.id,
+        description: newTask.description,
+        language: newTask.language,
+        text: newTask.text,
       });
     } catch (e) {
       next(e);
@@ -96,10 +172,12 @@ class Group {
       }
 
       await task.destroy();
+
+      res.status(200).json({ success: true });
     } catch (e) {
       next(e);
     }
   };
 }
 
-export default Group;
+export default Task;

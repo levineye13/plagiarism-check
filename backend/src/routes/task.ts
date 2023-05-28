@@ -6,8 +6,10 @@ import { Path, Role } from '../utils/constants';
 
 const router = Router();
 
-router.get(Path.subjects, Task.getAll);
-router.post(Path.subjects, role([Role.Admin, Role.Moderator]), Task.create);
-router.delete(Path.subjects, role([Role.Admin, Role.Moderator]), Task.delete);
+router.get(`${Path.tasks}/owner`, Task.getMyTasks);
+router.get(Path.task, Task.getById);
+router.get(Path.tasks, Task.getAll);
+router.post(Path.tasks, role([Role.Admin, Role.Moderator]), Task.create);
+router.delete(Path.tasks, role([Role.Admin, Role.Moderator]), Task.delete);
 
 export default router;

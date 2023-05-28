@@ -16,7 +16,9 @@ export enum Path {
   subjects = '/subjects',
   subject = '/subjects/:id',
   tasks = '/tasks',
-  task = 'tasks/:id',
+  task = '/tasks/:id',
+  answers = '/answers',
+  answer = '/answers/:id',
 }
 
 export enum Role {

@@ -1,7 +1,6 @@
 import {
   Model,
   DataTypes,
-  Optional,
   BelongsToSetAssociationMixin,
   Association,
   NonAttribute,
@@ -12,14 +11,9 @@ import {
 
 import { sequelize } from '../db';
 import { TRole } from '../utils/types';
-import { IUser } from '../utils/interfaces';
 import { Role } from '../utils/constants';
 import Group from './group';
 
-// class User
-//   extends Model<IUser, Optional<IUser, 'id' | 'role'>>
-//   implements IUser
-// {
 class User extends Model<
   InferAttributes<User, { omit: 'group' }>,
   InferCreationAttributes<User, { omit: 'group' }>
