@@ -6,7 +6,7 @@ interface IMenuState {
 }
 
 const menuInitialState: IMenuState = {
-  isOpen: false,
+  isOpen: true,
 };
 
 export const menuReducer = (

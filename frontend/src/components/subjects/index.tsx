@@ -18,17 +18,18 @@ const Subjects: FC = () => {
 
   return (
     <ul className={styles.list}>
-      {subjects.map((subject) => (
-        <li className={styles.item} key={subject.id}>
-          <Link
-            onClick={(e) => handleClick(e, subject.id)}
-            to=""
-            className={styles.name}
-          >
-            {subject.name}
-          </Link>
-        </li>
-      ))}
+      {subjects &&
+        subjects.map((subject) => (
+          <li className={styles.item} key={subject.id}>
+            <Link
+              onClick={(e) => handleClick(e, subject.id)}
+              to=""
+              className={styles.name}
+            >
+              {subject.name}
+            </Link>
+          </li>
+        ))}
     </ul>
   );
 };

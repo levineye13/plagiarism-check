@@ -9,7 +9,7 @@ const Groups: FC = () => {
   return (
     <section className={styles.section}>
       <Title style={{ marginBottom: 30 }}>Лабораторная 1</Title>
-      <GroupList path={ROUTES.groups} />
+      {/* <GroupList path={ROUTES.groups} /> */}
     </section>
   );
 };

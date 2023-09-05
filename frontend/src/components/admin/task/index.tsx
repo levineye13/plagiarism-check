@@ -9,16 +9,16 @@ import { useLocation } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants';
 
 const Task: FC = () => {
-  const { title, text, description } = useAppSelector((state) => state.task);
+  const { text, description } = useAppSelector((state) => state.task);
   const { pathname } = useLocation();
 
   return (
     <section className={styles.section}>
       <Back />
-      <Title>{title}</Title>
+      <Title>{description}</Title>
       <p className={styles.description}>{description}</p>
       <p className={styles.text}>{text}</p>
-      <GroupList path={`${pathname}/${ROUTES.groups}`} />
+      {/* <GroupList path={`${pathname}/${ROUTES.groups}`} /> */}
     </section>
   );
 };

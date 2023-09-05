@@ -26,29 +26,6 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { modalOpen, modalSetForm, modalSetQuestion } from '../../store/actions';
 import { setTasks } from '../../store/actions';
 
-const tasks = [
-  {
-    id: 1,
-    subject: 'Алгоритмы',
-    title: 'Лабораторная 1',
-    description: 'Пузырьковая сортировка',
-    text: 'Вы должны написать алгоритм пузырьковой сортировки при преподавателе не более чем за 30 секунд',
-  },
-  {
-    id: 2,
-    subject: 'Алгоритмы',
-    title: 'Лабораторная 2',
-    text: 'Необходимо написать программу, которая будет сортировать .....',
-  },
-  {
-    id: 3,
-    subject: 'Структуры данных',
-    title: 'Лабораторная 3',
-    description: 'Очередь',
-    text: 'Реализуйте структуру данных "Очередь" с помощью односвязного списка',
-  },
-];
-
 const App: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -61,9 +38,9 @@ const App: FC = () => {
     dispatch(modalOpen());
   };
 
-  useEffect(() => {
-    dispatch(setTasks(tasks));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setTasks(tasks));
+  // }, []);
 
   return (
     <div className={styles.page}>
